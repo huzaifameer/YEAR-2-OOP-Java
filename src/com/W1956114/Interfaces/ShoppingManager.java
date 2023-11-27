@@ -1,5 +1,7 @@
 package com.W1956114.Interfaces;
 
-public interface ShoppingManager {
+import com.W1956114.Super.Product;
+
+public interface ShoppingManager extends Product {
 
 }
