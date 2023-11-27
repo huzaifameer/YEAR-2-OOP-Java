@@ -1,6 +1,6 @@
 package com.W1956114.SubClasses;
 
-public class Clothing {
+public class Clothing{
     private String clothSize;
     private String clothColor;
 

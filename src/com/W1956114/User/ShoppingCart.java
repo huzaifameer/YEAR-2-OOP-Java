@@ -11,7 +11,7 @@ public class ShoppingCart {
         productsList.add(product);
         System.out.println(product.getProductName() + " added to the cart.");
     }
-
+    /*this part should be edited later*/
     public void removeAProduct(String productID) {/*here the id should be an input value this is temp.*/
         for (Product product : productsList) {
             if (product.getProductName().equals(productID)) {
