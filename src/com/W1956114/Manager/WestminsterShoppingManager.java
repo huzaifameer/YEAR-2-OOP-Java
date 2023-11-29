@@ -11,6 +11,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
     @Override
     public void addAProduct(Product product) {
         Scanner input=new Scanner(System.in);
+        /*to add a product the valid product ID and the name should be given as input datas*/
         while (true){
 
         }
