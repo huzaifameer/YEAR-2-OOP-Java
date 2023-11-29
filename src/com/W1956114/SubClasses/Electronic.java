@@ -1,13 +1,16 @@
 package com.W1956114.SubClasses;
 
-public class Electronic {
+import com.W1956114.Super.Product;
+
+public class Electronic extends Product {
     private String brand;
     private int warrantyDays;
 
     public Electronic() {
     }
 
-    public Electronic(String brand, int warrantyDays) {
+    public Electronic(String productID, String productName, int availableQuantity, double productPrice, String brand, int warrantyDays) {
+        super(productID,productName,availableQuantity,productPrice);
         this.brand = brand;
         this.warrantyDays = warrantyDays;
     }
@@ -27,4 +30,15 @@ public class Electronic {
     public void setWarrantyDays(int warrantyDays) {
         this.warrantyDays = warrantyDays;
     }
+
+    /*An extra method for no reason*/
+    @Override
+    public void displayInfo() {
+        System.out.println("Electronics - " + getProductName() + " by " + brand);
+        System.out.println("ID: " + getProductID());
+        System.out.println("Price: $" + getProductPrice());
+        System.out.println("Warranty Period: " + getWarrantyDays() + " months");
+        System.out.println("Available Items: " + getAvailableQuantity());
+    }
+    /*An extra method for no reason*/
 }

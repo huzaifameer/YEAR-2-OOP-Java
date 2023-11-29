@@ -47,4 +47,9 @@ public abstract class Product {
     public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
+
+    /*An extra method added here for no reason*/
+    public abstract void displayInfo();
+    /*An extra method added here for no reason*/
+
 }
