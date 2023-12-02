@@ -3,16 +3,22 @@ package com.W1956114.Manager;
 import com.W1956114.Super.Product;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class WestminsterShoppingManager extends JFrame implements ShoppingManager{
+    private JLabel labelText;
     public WestminsterShoppingManager(){
         setSize(600,500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+        labelText=new JLabel("Westminster Shopping System");
+        labelText.setFont(new Font("",2,30));
+        labelText.setHorizontalAlignment(SwingConstants.CENTER);
+        add("North",labelText);
     }
     private final ArrayList<Product> productsMainList = new ArrayList<>();
     @Override
