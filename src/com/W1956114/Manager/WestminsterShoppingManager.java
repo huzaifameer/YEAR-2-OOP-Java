@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class WestminsterShoppingManager extends JFrame implements ShoppingManager{
     public WestminsterShoppingManager(){
-        setSize(400,600);
+        setSize(400,500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
