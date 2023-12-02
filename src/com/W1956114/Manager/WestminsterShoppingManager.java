@@ -2,11 +2,18 @@ package com.W1956114.Manager;
 
 import com.W1956114.Super.Product;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class WestminsterShoppingManager implements ShoppingManager{
+public class WestminsterShoppingManager extends JFrame implements ShoppingManager{
+    public WestminsterShoppingManager(){
+        setSize(400,600);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
     private final ArrayList<Product> productsMainList = new ArrayList<>();
     @Override
     public void addAProduct(Product product) {
@@ -37,7 +44,6 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void displayAProducts() {
-
         for (Product product : productsMainList) {
             product.displayInfo();
             System.out.println("------------------------------");
