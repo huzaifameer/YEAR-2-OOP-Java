@@ -10,20 +10,27 @@ import java.util.Scanner;
 
 
 public class WestminsterShoppingManager extends JFrame implements ShoppingManager{
-    private JLabel labelText;
+    private JLabel labelHeadingText;
+    private JLabel labelSubHeadingText;
+    private JPanel panelTop;
     public WestminsterShoppingManager(){
-        setSize(600,500);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        labelText=new JLabel("Westminster Shopping System");
-        labelText.setFont(new Font("",2,30));
-        labelText.setHorizontalAlignment(SwingConstants.CENTER);
-        add("North",labelText);
+        addAProduct();
+
     }
     private final ArrayList<Product> productsMainList = new ArrayList<>();
     @Override
-    public void addAProduct(Product product) {
+    public void addAProduct() {
+        JFrame addProductWindow=new JFrame("Adding a Product");
+        addProductWindow.setSize(500,400);
+        labelHeadingText=new JLabel("Westminster Shopping System");
+        labelHeadingText.setFont(new Font("",2,30));
+        labelHeadingText.setHorizontalAlignment(SwingConstants.CENTER);
+        addProductWindow.add("North",labelHeadingText);
+        labelSubHeadingText=new JLabel("Add a Product");
+        labelSubHeadingText.setFont(new Font("",2,24));
+        addProductWindow.add("North",labelSubHeadingText);
+        addProductWindow.setVisible(true);
+
         Scanner input=new Scanner(System.in);
         /*to add a product the valid product ID and the name should be given as input datas*/
         while (true){
