@@ -5,6 +5,7 @@ import com.W1956114.Super.Product;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -26,7 +27,13 @@ public class WestminsterShoppingManager extends JFrame implements ShoppingManage
         Scanner input=new Scanner(System.in);
         /*to add a product the valid product ID and the name should be given as input datas*/
         while (true){
-
+            try{
+                System.out.println("Type of the product (E/C) ? ");
+                String productType=input.nextLine();
+            }catch (InputMismatchException e){
+                e.printStackTrace();
+            }
+            break;
         }
         /*if (productsMainList.size() < 50) {
             productsMainList.add(product);
