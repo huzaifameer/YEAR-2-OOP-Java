@@ -7,7 +7,7 @@ public interface ShoppingManager{
 
     void deleteAProduct(String productId);
 
-    void displayAProducts();
+    void displayProducts();
 
     void saveToAFile(String fileName);
 

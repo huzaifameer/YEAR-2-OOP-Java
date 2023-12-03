@@ -4,6 +4,7 @@ import com.W1956114.SubClasses.Clothing;
 import com.W1956114.Super.Product;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -25,15 +26,18 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 case "e": case "E":
                     System.out.println("Input details for Electronic products");
                     getElectronicItem();
+                    displayProducts();
                     break;
                 case "c": case "C":
                     System.out.println("Input details for Clothing products");
                     getClothingItem();
+                    displayProducts();
                     break;
                 default:
                     System.out.println("Wrong input please enter a correct option !");
                     continue;
             }
+
             break;
         }while (true);
 
@@ -58,8 +62,9 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     @Override
-    public void displayAProducts() {
+    public void displayProducts() {
         for (Product product : productsMainList) {
+            System.out.println("------------------------------");
             product.displayInfo();
             System.out.println("------------------------------");
         }
@@ -85,6 +90,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
         }*/
     }
 
+
     private void getElectronicItem(){
         do {
             getProductDetails();
@@ -93,11 +99,19 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     }
     private void getClothingItem(){
+        Scanner input=new Scanner(System.in);
         do {
-            getProductDetails();
+            ArrayList<Object> productDetailsList= (ArrayList<Object>) getProductDetails();
+            System.out.print("Enter the size (S,M,L,XL,XXL,XXXl) : ");
+            String clothSize=input.next();
+            System.out.print("Enter the color of the cloth       :");
+            String clothColor=input.next();
+            Product clothingProduct=new Clothing((String) productDetailsList.get(0), (String) productDetailsList.get(1), (Integer) productDetailsList.get(2), (Double) productDetailsList.get(3),clothSize,clothColor);
+            productsMainList.add(clothingProduct);
+            break;
         }while (true);
     }
-    private void getProductDetails(){
+    private Object getProductDetails(){
         Scanner input =new Scanner(System.in);
 
         do {
@@ -105,13 +119,19 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
             System.out.print("Enter product name       : ");
             String productName=input.next();
+
             System.out.print("Enter available quantity : ");
             int availableQuantity= input.nextInt();
+
             System.out.print("Enter unit price         : ");
             double unitPrice= input.nextDouble();
-            Product product=new Clothing(validProductID,productName,availableQuantity,unitPrice,null,null);
-            productsMainList.add(product);
-            break;
+            ArrayList<Object> tempProductList=new ArrayList<>();
+            tempProductList.add(validProductID);
+            tempProductList.add(productName);
+            tempProductList.add(availableQuantity);
+            tempProductList.add(unitPrice);
+            /*List<Object> tempProductList = new ArrayList<>(List.of(validProductID, productName, availableQuantity, unitPrice));*/
+            return tempProductList;
         }while (true);
 
     }

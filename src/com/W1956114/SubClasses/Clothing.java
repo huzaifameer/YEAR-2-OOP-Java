@@ -40,4 +40,5 @@ public class Clothing extends Product {
         System.out.println("Available Items: " + getAvailableQuantity());
     }
     /*An extra method for no reason*/
+
 }
