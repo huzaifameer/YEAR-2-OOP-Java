@@ -97,6 +97,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
             System.out.println("+-----------------------------------------+");
             System.out.println("|          Manager Control Panel          |");
             System.out.println("+-----------------------------------------");
+            System.out.println("[ 1 ]");
             break;
         }
     }

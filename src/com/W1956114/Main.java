@@ -46,7 +46,6 @@ public class Main{
             case 0:
                 System.exit(0);//Exit from the program
             case 1:
-                System.out.println("Manager Control Panel");
                 WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
                 westminsterShoppingManager.selectOption();
                 break;
@@ -54,6 +53,10 @@ public class Main{
                 System.out.println("User Panel");
                 break;
         }
+    }
+    private static boolean loginManager(){
+
+        return false;
     }
 
 }
