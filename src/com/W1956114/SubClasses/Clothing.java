@@ -38,7 +38,7 @@ public class Clothing extends Product {
         System.out.println("Size: " + getClothSize());
         System.out.println("Color: " + getClothColor());
         System.out.println("Available Items: " + getAvailableQuantity());*/
-        System.out.printf("%-10s%-15s%-10s%-10s%-10s%-15s%n", getProductID(),getProductName(), "$ "+getProductPrice(), getAvailableQuantity(), getClothSize(), getClothColor());
+        System.out.printf("%-10s%-15s%-10s%-10s%-20s%-20s%n", getProductID(),getProductName(), "$ "+getProductPrice(), getAvailableQuantity(),"Size - " +getClothSize(), "Color - "+getClothColor()+" |-Clothing");
     }
     /*An extra method for no reason*/
 

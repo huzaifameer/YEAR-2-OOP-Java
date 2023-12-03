@@ -40,7 +40,7 @@ public class Electronic extends Product {
         System.out.println("Warranty Period: " + getWarrantyDays() + " years");
         System.out.println("Available Items: " + getAvailableQuantity());*/
 
-        System.out.printf("%-10s%-15s%-10s%-10s%-10s%n", getProductID(), getProductName() + " by " + brand, "$ "+getProductPrice(), getAvailableQuantity(),getWarrantyDays() + " years - Electronic");
+        System.out.printf("%-10s%-15s%-10s%-10s%-20s%n", getProductID(), getProductName() + " by " + brand, "$ "+getProductPrice(), getAvailableQuantity(),"Warranty - "+getWarrantyDays() + " years  |- Electronic");
     }
     /*An extra method for no reason*/
 }

@@ -20,36 +20,30 @@ public class WestminsterShoppingManager implements ShoppingManager{
         String productType;
         /*to add a product the valid product ID and the name should be given as input datas*/
         do{
-            while (true){
-                System.out.print("Type of the product (E/C) ? ");
-                productType=input.next();
-                break;
-            }
-            switch (productType){
-                case "e": case "E":
-                    System.out.println("Input details for Electronic products");
-                    getElectronicItem();
-                    displayProducts();
+            if (productsMainList.size()<50){
+                while (true){
+                    System.out.print("Type of the product (E/C) ? ");
+                    productType=input.next();
                     break;
-                case "c": case "C":
-                    System.out.println("Input details for Clothing products");
-                    getClothingItem();
-                    displayProducts();
-                    break;
-                default:
-                    System.out.println("Wrong input please enter a correct option !");
-                    continue;
+                }
+                switch (productType){
+                    case "e": case "E":
+                        System.out.println("Input details for Electronic products");
+                        getElectronicItem();
+                        break;
+                    case "c": case "C":
+                        System.out.println("Input details for Clothing products");
+                        getClothingItem();
+                        break;
+                    default:
+                        System.out.println("Wrong input please enter a correct option !");
+                        continue;
+                }
+            }else{
+                System.out.println("Cannot add more products. Maximum limit reached.");
             }
-
             break;
         }while (true);
-
-        /*if (productsMainList.size() < 50) {
-            productsMainList.add(product);
-            System.out.println("Product added successfully.");
-        } else {
-            System.out.println("Cannot add more products. Maximum limit reached.");
-        }*/
     }
 
     @Override
@@ -66,11 +60,13 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void displayProducts() {
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        System.out.printf("%-10s%-15s%-10s%-10s%n", "ID", "Name", "Price", "Available");
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         for (Product product : productsMainList) {
             product.displayInfo();
         }
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
 
     @Override
