@@ -26,9 +26,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
             switch (productType){
                 case "e": case "E":
                     System.out.println("Input details for Electronic products");
+                    getElectronicItem();
                     break;
                 case "c": case "C":
                     System.out.println("Input details for Clothing products");
+                    getClothingItem();
                     break;
                 default:
                     System.out.println("Wrong input please enter a correct option !");
@@ -85,5 +87,10 @@ public class WestminsterShoppingManager implements ShoppingManager{
         }*/
     }
 
+    private void getElectronicItem(){
 
+    }
+    private void getClothingItem(){
+
+    }
 }
