@@ -21,13 +21,21 @@ public class Main extends JFrame {
         headingLabel=new JLabel("Welcome to the Shopping System");
         headingLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headingLabel.setFont(new Font("",2,30));
-        subHeadingLabel=new JLabel("Select an option");
+        subHeadingLabel=new JLabel("Select an option to proceed");
         subHeadingLabel.setFont(new Font("",2,20));
         JPanel panelTop=new JPanel(new GridLayout(2,1));
         panelTop.add(headingLabel);
         panelTop.add(subHeadingLabel);
         mainDisplay.add("North",panelTop);
 
+        JPanel panelButton=new JPanel(new GridLayout(1,2));
+        userButton=new JButton("User Login");
+        userButton.setFont(new Font("",1,23));
+        managerButton=new JButton("Manager Login");
+        managerButton.setFont(new Font("",1,23));
+        panelButton.add(userButton);
+        panelButton.add(managerButton);
+        mainDisplay.add("Center",panelButton);
 
         mainDisplay.setVisible(true);
     }
