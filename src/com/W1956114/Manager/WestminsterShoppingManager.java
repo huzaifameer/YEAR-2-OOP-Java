@@ -1,6 +1,7 @@
 package com.W1956114.Manager;
 
 import com.W1956114.SubClasses.Clothing;
+import com.W1956114.SubClasses.Electronic;
 import com.W1956114.Super.Product;
 
 import java.util.ArrayList;
@@ -100,15 +101,18 @@ public class WestminsterShoppingManager implements ShoppingManager{
             String elecProductBrand=input.next();
 
             System.out.print("Enter the warranty period [in years] : ");
+            int warrantyPeriod;
             while (true){
                 try{
-                    int warrantyPeriod= Integer.parseInt(input.next());
+                    warrantyPeriod= Integer.parseInt(input.next());
                     break;
                 }catch (NumberFormatException | InputMismatchException e){
                     System.out.println("Input an Integer type value !");
                     System.out.print("\nEnter the warranty period [in years] : ");
                 }
             }
+            Product electronicProduct=new Electronic((String) productDetailsList.get(0), (String) productDetailsList.get(1), (Integer) productDetailsList.get(2), (Double) productDetailsList.get(3),elecProductBrand,warrantyPeriod);
+            productsMainList.add(electronicProduct);
             break;
         }while (true);
 
