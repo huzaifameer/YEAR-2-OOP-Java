@@ -88,9 +88,28 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     private void getElectronicItem(){
-
+        getValidID();
     }
     private void getClothingItem(){
 
     }
+    private void getValidID(){
+        Scanner inputID=new Scanner(System.in);
+        do {
+            System.out.print("Enter an ID: ");
+            String enteredID = inputID.nextLine();
+
+            // Validate the entered ID
+            if (!validateID(enteredID)) {
+                System.out.println("Invalid ID! Please try again !");
+                continue;
+            }
+            break;
+        }while (true);
+    }
+    private boolean validateID(String id){
+        // Two uppercase letters followed by five digits
+        return id.matches("^[A-Z]{2}\\d{5}$");
+    }
+
 }
