@@ -1,11 +1,9 @@
 package com.W1956114.Manager;
 
+import com.W1956114.SubClasses.Clothing;
 import com.W1956114.Super.Product;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -88,28 +86,65 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     private void getElectronicItem(){
-        getValidID();
-    }
-    private void getClothingItem(){
+        do {
+            getProductDetails();
+            break;
+        }while (true);
 
     }
-    private void getValidID(){
+    private void getClothingItem(){
+        do {
+            getProductDetails();
+        }while (true);
+    }
+    private void getProductDetails(){
+        Scanner input =new Scanner(System.in);
+
+        do {
+            String validProductID=getValidID();
+
+            System.out.print("Enter product name       : ");
+            String productName=input.next();
+            System.out.print("Enter available quantity : ");
+            int availableQuantity= input.nextInt();
+            System.out.print("Enter unit price         : ");
+            double unitPrice= input.nextDouble();
+            Product product=new Clothing(validProductID,productName,availableQuantity,unitPrice,null,null);
+            productsMainList.add(product);
+            break;
+        }while (true);
+
+    }
+    private String getValidID(){
         Scanner inputID=new Scanner(System.in);
         do {
             System.out.print("Enter an ID: ");
-            String enteredID = inputID.nextLine();
+            String productID = inputID.nextLine();
 
             // Validate the entered ID
-            if (!validateID(enteredID)) {
+            if (!validateID(productID)) {
                 System.out.println("Invalid ID! Please try again !");
                 continue;
+            } else if (isDuplicateID(productID)) {
+                System.out.println("**. Product ID already exists.Try another ID number.");
+                continue;
+            }else {
+                System.out.println("** Product ID has been validated successfully. **");
             }
-            break;
+            return productID;
         }while (true);
     }
     private boolean validateID(String id){
         // Two uppercase letters "PC" followed by 3 digits
         return id.matches("^[P,C]{2}\\d{3}$");
+    }
+    private boolean isDuplicateID(String id) {
+        for (Product productDetail :productsMainList) {
+            if (productDetail.getProductID() != null && productDetail.getProductID().equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
