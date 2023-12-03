@@ -4,6 +4,7 @@ import com.W1956114.SubClasses.Clothing;
 import com.W1956114.Super.Product;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -92,8 +93,22 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
 
     private void getElectronicItem(){
+        Scanner input=new Scanner(System.in);
         do {
-            getProductDetails();
+            ArrayList<Object> productDetailsList= (ArrayList<Object>) getProductDetails();
+            System.out.print("Enter the brand of the product       : ");
+            String elecProductBrand=input.next();
+
+            System.out.print("Enter the warranty period [in years] : ");
+            while (true){
+                try{
+                    int warrantyPeriod= Integer.parseInt(input.next());
+                    break;
+                }catch (NumberFormatException | InputMismatchException e){
+                    System.out.println("Input an Integer type value !");
+                    System.out.print("\nEnter the warranty period [in years] : ");
+                }
+            }
             break;
         }while (true);
 
@@ -124,7 +139,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
         do {
             String validProductID=getValidID();
-
+            System.out.println("+----------Enter Valid Product Details----------+");
             System.out.print("Enter product name       : ");
             String productName=input.next();
 
