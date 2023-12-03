@@ -104,6 +104,14 @@ public class WestminsterShoppingManager implements ShoppingManager{
             ArrayList<Object> productDetailsList= (ArrayList<Object>) getProductDetails();
             System.out.print("Enter the size (S,M,L,XL,XXL,XXXl) : ");
             String clothSize=input.next();
+            switch (clothSize){
+                case "S": case "M": case "XL": case "XXL": case "XXXl":
+                    System.out.println("Selected size : "+clothSize);
+                break;
+                default:
+                    System.out.println("Wrong size. Try with a valid input.");
+                    continue;
+            }
             System.out.print("Enter the color of the cloth       :");
             String clothColor=input.next();
             Product clothingProduct=new Clothing((String) productDetailsList.get(0), (String) productDetailsList.get(1), (Integer) productDetailsList.get(2), (Double) productDetailsList.get(3),clothSize,clothColor);
