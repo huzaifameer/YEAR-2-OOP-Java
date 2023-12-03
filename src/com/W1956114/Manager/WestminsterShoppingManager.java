@@ -96,9 +96,10 @@ public class WestminsterShoppingManager implements ShoppingManager{
     private void getElectronicItem(){
         Scanner input=new Scanner(System.in);
         do {
+            System.out.println("+----------Enter Valid Electronic Product Details----------+");
             ArrayList<Object> productDetailsList= (ArrayList<Object>) getProductDetails();
             System.out.print("Enter the brand of the product       : ");
-            String elecProductBrand=input.next();
+            String elecronicProductBrand=input.next();
 
             System.out.print("Enter the warranty period [in years] : ");
             int warrantyPeriod;
@@ -107,11 +108,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
                     warrantyPeriod= Integer.parseInt(input.next());
                     break;
                 }catch (NumberFormatException | InputMismatchException e){
-                    System.out.println("Input an Integer type value !");
-                    System.out.print("\nEnter the warranty period [in years] : ");
+                    System.out.println("*** -> Input an Integer type value !");
+                    System.out.print("Enter the warranty period [in years] : ");
                 }
             }
-            Product electronicProduct=new Electronic((String) productDetailsList.get(0), (String) productDetailsList.get(1), (Integer) productDetailsList.get(2), (Double) productDetailsList.get(3),elecProductBrand,warrantyPeriod);
+            Product electronicProduct=new Electronic((String) productDetailsList.get(0), (String) productDetailsList.get(1), (Integer) productDetailsList.get(2), (Double) productDetailsList.get(3),elecronicProductBrand,warrantyPeriod);
             productsMainList.add(electronicProduct);
             break;
         }while (true);
@@ -120,6 +121,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
     private void getClothingItem(){
         Scanner input=new Scanner(System.in);
         do {
+            System.out.println("+----------Enter Valid Clothing Product Details----------+");
             ArrayList<Object> productDetailsList= (ArrayList<Object>) getProductDetails();
             System.out.print("Enter the size (S,M,L,XL,XXL,XXXl) : ");
             String clothSize=input.next();
@@ -143,15 +145,34 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
         do {
             String validProductID=getValidID();
-            System.out.println("+----------Enter Valid Product Details----------+");
+
             System.out.print("Enter product name       : ");
             String productName=input.next();
 
             System.out.print("Enter available quantity : ");
-            int availableQuantity= input.nextInt();
+            int availableQuantity;
+            while (true){
+                try {
+                    availableQuantity= Integer.parseInt(input.next());
+                    break;
+                }catch (NumberFormatException | InputMismatchException e){
+                    System.out.println("*** -> Input an Integer type value !");
+                    System.out.print("Enter available quantity : ");
+                }
+            }
 
             System.out.print("Enter unit price         : ");
-            double unitPrice= input.nextDouble();
+            double unitPrice;
+            while (true){
+                try{
+                    unitPrice= Double.parseDouble(input.next());
+                    break;
+                }catch (NumberFormatException | InputMismatchException e){
+                    System.out.println("*** -> Input an Double type value !");
+                    System.out.print("Enter unit price         : ");
+                }
+            }
+
             ArrayList<Object> tempProductList=new ArrayList<>();
             tempProductList.add(validProductID);
             tempProductList.add(productName);
