@@ -108,8 +108,8 @@ public class WestminsterShoppingManager implements ShoppingManager{
         }while (true);
     }
     private boolean validateID(String id){
-        // Two uppercase letters followed by five digits
-        return id.matches("^[A-Z]{2}\\d{5}$");
+        // Two uppercase letters "PC" followed by 3 digits
+        return id.matches("^[P,C]{2}\\d{3}$");
     }
 
 }
