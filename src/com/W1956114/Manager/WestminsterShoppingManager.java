@@ -91,7 +91,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
             e.printStackTrace();
         }*/
     }
-    public void selectOption(){
+    public int getSelectOption(){
         Scanner inputOption=new Scanner(System.in);
         while (true){
             System.out.println("+-----------------------------------------+");
@@ -102,8 +102,26 @@ public class WestminsterShoppingManager implements ShoppingManager{
             System.out.println("[ 3 ] - Display Products");
             System.out.println("[ 4 ] - Save To a File");
             System.out.println("[ 5 ] - Read From a File");
+            System.out.println("[ 0 ] - Back to Home");
             System.out.println("+-----------------------------------------");
-            break;
+            System.out.print("Enter an Option to proceed : ");
+            int selectedOption;
+            while (true) {
+                try {
+                    selectedOption = Integer.parseInt(inputOption.nextLine());//this line will get an integer as an option
+                    break;//if the input is an integer it'll break the loop from here
+                } catch (NumberFormatException e) {
+                    System.out.println("**** It's not an option! Please try again..");
+                    System.out.println();
+                    System.out.print("Enter an Option to proceed : ");
+                }
+            }
+            if (selectedOption > 6 | selectedOption < 0) {
+                System.out.println("Wrong option selected! Please try again..");
+                System.out.println();
+                continue;
+            }
+            return selectedOption;
         }
     }
 
