@@ -9,29 +9,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
-public class WestminsterShoppingManager extends JFrame implements ShoppingManager{
-    private JLabel labelHeadingText;
-    private JLabel labelSubHeadingText;
+public class WestminsterShoppingManager implements ShoppingManager{
 
-    public WestminsterShoppingManager(){
-        /*displayHomeWindow();*/
-    }
     private final ArrayList<Product> productsMainList = new ArrayList<>();
     @Override
     public void addAProduct() {
-        JPanel panelTop=new JPanel(new GridLayout(2,1));
-        JFrame addProductWindow=new JFrame("Adding a Product");
-        addProductWindow.setSize(500,400);
-        labelHeadingText=new JLabel("Westminster Shopping System");
-        labelHeadingText.setFont(new Font("",2,30));
-        labelHeadingText.setHorizontalAlignment(SwingConstants.CENTER);
-        panelTop.add(labelHeadingText);
-        labelSubHeadingText=new JLabel("Add a Product");
-        labelSubHeadingText.setFont(new Font("",2,18));
-        panelTop.add(labelSubHeadingText);
-        addProductWindow.add("North",panelTop);
-        addProductWindow.setVisible(true);
-
         Scanner input=new Scanner(System.in);
         /*to add a product the valid product ID and the name should be given as input datas*/
         while (true){
@@ -91,10 +73,5 @@ public class WestminsterShoppingManager extends JFrame implements ShoppingManage
         }*/
     }
 
-    @Override
-    public void displayHomeWindow() {
-        JFrame homeFrame=new JFrame("Manager Panel");
-        homeFrame.setSize(500,300);
-        homeFrame.setVisible(true);
-    }
+
 }
