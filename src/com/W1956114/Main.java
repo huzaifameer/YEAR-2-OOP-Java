@@ -49,8 +49,10 @@ public class Main{
                 System.exit(0);//Exit from the program
             case 1:
                 WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
-                westminsterShoppingManager.selectOption();
-                break;
+                while (true){
+                    westminsterShoppingManager.selectOption();
+                }
+                /*break;*/
             case 2:
                 System.out.println("User Panel");
                 break;

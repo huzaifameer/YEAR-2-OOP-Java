@@ -66,11 +66,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void displayProducts() {
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         for (Product product : productsMainList) {
-            System.out.println("------------------------------");
             product.displayInfo();
-            System.out.println("------------------------------");
         }
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
 
     @Override
@@ -275,7 +275,19 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
     private boolean validateID(String id){
         // Two uppercase letters "PC" followed by 3 digits
-        return id.matches("^[P,C]{2}\\d{3}$");
+        if (id.length() == 5) {
+            String prefix = id.substring(0, 2);
+
+            if ("EP".equals(prefix) || "CP".equals(prefix)) {
+                String digits = id.substring(2);
+
+                if (digits.matches("\\d{3}")) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
     private boolean isDuplicateID(String id) {
         for (Product productDetail :productsMainList) {
