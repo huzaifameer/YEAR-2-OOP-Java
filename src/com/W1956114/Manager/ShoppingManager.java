@@ -5,11 +5,11 @@ import com.W1956114.Super.Product;
 public interface ShoppingManager{
     void addAProduct();
 
-    void deleteAProduct(String productId);
+    void deleteAProduct();
 
     void displayProducts();
 
-    void saveToAFile(String fileName);
+    void saveToAFile();
 
-    void readFromAFile(String fileName);
+    void readFromAFile();
 }

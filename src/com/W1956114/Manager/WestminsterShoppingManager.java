@@ -1,5 +1,6 @@
 package com.W1956114.Manager;
 
+import com.W1956114.Main;
 import com.W1956114.SubClasses.Clothing;
 import com.W1956114.SubClasses.Electronic;
 import com.W1956114.Super.Product;
@@ -52,15 +53,15 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     @Override
-    public void deleteAProduct(String productId) {
-        for (Product product : productsMainList) {
+    public void deleteAProduct() {
+        /*for (Product product : productsMainList) {
             if (product.getProductID().equals(productId)) {
                 productsMainList.remove(product);
                 System.out.println("Product deleted successfully.");
                 return;
             }
-        }
-        System.out.println("Product with ID " + productId + " not found.");
+        }*/
+        System.out.println("Product with ID not found.");
     }
 
     @Override
@@ -73,7 +74,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     @Override
-    public void saveToAFile(String fileName) {
+    public void saveToAFile() {
         /*try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
             outputStream.writeObject(productList);
             System.out.println("Products saved to file successfully.");
@@ -83,7 +84,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     @Override
-    public void readFromAFile(String fileName) {
+    public void readFromAFile() {
         /*try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
             productList = (List<Product>) inputStream.readObject();
             System.out.println("Products read from file successfully.");
@@ -91,7 +92,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
             e.printStackTrace();
         }*/
     }
-    public int getSelectOption(){
+    public int getSelectedOption(){
         Scanner inputOption=new Scanner(System.in);
         while (true){
             System.out.println("+-----------------------------------------+");
@@ -122,6 +123,28 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 continue;
             }
             return selectedOption;
+        }
+    }
+    public void selectOption(){
+        int passedOption = getSelectedOption();//This statement will assign the returning value from the getOption()
+        //Calling the switch-case
+        switch (passedOption) {
+            case 0:
+                Main.setOption();//Exit from the program
+            case 1:
+                addAProduct();
+                break;
+            case 2:
+                deleteAProduct();
+                break;
+            case 3:
+                displayProducts();
+                break;
+            case 4:
+                saveToAFile();
+                break;
+            case 5:
+                readFromAFile();
         }
     }
 

@@ -8,7 +8,9 @@ import java.util.Scanner;
 public class Main{
 
     public static void main(String[] args) {
-        setOption();
+        while (true){
+            setOption();
+        }
     }
     private static int getMainOption(){
         do {
