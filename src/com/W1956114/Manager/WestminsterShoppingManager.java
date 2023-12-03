@@ -97,7 +97,12 @@ public class WestminsterShoppingManager implements ShoppingManager{
             System.out.println("+-----------------------------------------+");
             System.out.println("|          Manager Control Panel          |");
             System.out.println("+-----------------------------------------");
-            System.out.println("[ 1 ]");
+            System.out.println("[ 1 ] - Add a Product");
+            System.out.println("[ 2 ] - Remove a Product");
+            System.out.println("[ 3 ] - Display Products");
+            System.out.println("[ 4 ] - Save To a File");
+            System.out.println("[ 5 ] - Read From a File");
+            System.out.println("+-----------------------------------------");
             break;
         }
     }
