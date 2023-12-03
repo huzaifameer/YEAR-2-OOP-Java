@@ -15,16 +15,28 @@ public class WestminsterShoppingManager implements ShoppingManager{
     @Override
     public void addAProduct() {
         Scanner input=new Scanner(System.in);
+        String productType;
         /*to add a product the valid product ID and the name should be given as input datas*/
-        while (true){
-            try{
+        do{
+            while (true){
                 System.out.print("Type of the product (E/C) ? ");
-                String productType=input.nextLine();
-            }catch (InputMismatchException e){
-                e.printStackTrace();
+                productType=input.next();
+                break;
+            }
+            switch (productType){
+                case "e": case "E":
+                    System.out.println("Input details for Electronic products");
+                    break;
+                case "c": case "C":
+                    System.out.println("Input details for Clothing products");
+                    break;
+                default:
+                    System.out.println("Wrong input please enter a correct option !");
+                    continue;
             }
             break;
-        }
+        }while (true);
+
         /*if (productsMainList.size() < 50) {
             productsMainList.add(product);
             System.out.println("Product added successfully.");

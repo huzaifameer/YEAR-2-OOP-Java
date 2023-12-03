@@ -15,6 +15,7 @@ public class Main extends JFrame {
     public static void main(String[] args) {
 
         WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
+        westminsterShoppingManager.addAProduct();
     }
 
 }
