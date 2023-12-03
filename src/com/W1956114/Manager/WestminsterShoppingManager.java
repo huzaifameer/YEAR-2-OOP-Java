@@ -14,8 +14,7 @@ public class WestminsterShoppingManager extends JFrame implements ShoppingManage
     private JLabel labelSubHeadingText;
 
     public WestminsterShoppingManager(){
-        addAProduct();
-
+        /*displayHomeWindow();*/
     }
     private final ArrayList<Product> productsMainList = new ArrayList<>();
     @Override
@@ -90,5 +89,12 @@ public class WestminsterShoppingManager extends JFrame implements ShoppingManage
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }*/
+    }
+
+    @Override
+    public void displayHomeWindow() {
+        JFrame homeFrame=new JFrame("Manager Panel");
+        homeFrame.setSize(500,300);
+        homeFrame.setVisible(true);
     }
 }

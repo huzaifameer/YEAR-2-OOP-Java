@@ -12,4 +12,5 @@ public interface ShoppingManager{
     void saveToAFile(String fileName);
 
     void readFromAFile(String fileName);
+    void displayHomeWindow();
 }

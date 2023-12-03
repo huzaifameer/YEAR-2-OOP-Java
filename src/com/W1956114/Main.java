@@ -4,6 +4,8 @@ import com.W1956114.Manager.WestminsterShoppingManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main extends JFrame {
     private static JLabel headingLabel;
@@ -15,8 +17,9 @@ public class Main extends JFrame {
         /*WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();*/
     }
     private static void setMainDisplay(){
+        /*Main User Interface in the beginning*/
         JFrame mainDisplay=new JFrame("Welcome Home");
-        mainDisplay.setSize(500,300);
+        mainDisplay.setSize(500,300);/*setting a size to the UI*/
 
         headingLabel=new JLabel("Welcome to the Shopping System");
         headingLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -36,6 +39,14 @@ public class Main extends JFrame {
         panelButton.add(userButton);
         panelButton.add(managerButton);
         mainDisplay.add("Center",panelButton);
+
+        managerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
+                westminsterShoppingManager.displayHomeWindow();
+            }
+        });
 
         mainDisplay.setVisible(true);
     }
