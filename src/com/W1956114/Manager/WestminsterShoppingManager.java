@@ -91,6 +91,15 @@ public class WestminsterShoppingManager implements ShoppingManager{
             e.printStackTrace();
         }*/
     }
+    public void selectOption(){
+        Scanner inputOption=new Scanner(System.in);
+        while (true){
+            System.out.println("+-----------------------------------------+");
+            System.out.println("|          Manager Control Panel          |");
+            System.out.println("+-----------------------------------------");
+            break;
+        }
+    }
 
 
     private void getElectronicItem(){
@@ -106,6 +115,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
             while (true){
                 try{
                     warrantyPeriod= Integer.parseInt(input.next());
+                    if (warrantyPeriod<=0){
+                        System.out.println("Enter a positive value.");
+                        System.out.print("Enter the warranty period [in years] : ");
+                        continue;
+                    }
                     break;
                 }catch (NumberFormatException | InputMismatchException e){
                     System.out.println("*** -> Input an Integer type value !");
@@ -154,6 +168,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
             while (true){
                 try {
                     availableQuantity= Integer.parseInt(input.next());
+                    if (availableQuantity<=0){
+                        System.out.println("Enter a positive value !");
+                        System.out.print("Enter available quantity : ");
+                        continue;
+                    }
                     break;
                 }catch (NumberFormatException | InputMismatchException e){
                     System.out.println("*** -> Input an Integer type value !");
@@ -166,6 +185,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
             while (true){
                 try{
                     unitPrice= Double.parseDouble(input.next());
+                    if (unitPrice<=0){
+                        System.out.println("Enter a positive value !");
+                        System.out.print("Enter unit price         : ");
+                        continue;
+                    }
                     break;
                 }catch (NumberFormatException | InputMismatchException e){
                     System.out.println("*** -> Input an Double type value !");
