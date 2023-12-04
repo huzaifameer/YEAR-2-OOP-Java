@@ -76,9 +76,30 @@ public class WestminsterShoppingManager implements ShoppingManager{
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         System.out.printf("%-10s%-20s%-10s%-10s%n", "ID", "Name", "Price", "Available");
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        /*this will display if the product list is empty*/
         if (productsMainList.isEmpty()){
             System.out.println("Please Add Products to display !");
         }
+        /*this will sort all the products using the last 3 numbers of the product ID*/
+        for (int i = 0; i < productsMainList.size() - 1; i++) {
+            for (int j = 0; j < productsMainList.size() - i - 1; j++) {
+                /*getting a product*/
+                Product productNum1 = productsMainList.get(j);
+                /*getting the next product in order*/
+                Product productNum2 = productsMainList.get(j + 1);
+
+                /*getting the both ID's and casting it into Integer type to sort*/
+                int idNum1 = Integer.parseInt(productNum1.getProductID().substring(2));
+                int idNum2 = Integer.parseInt(productNum2.getProductID().substring(2));
+
+                if (idNum1 > idNum2) {
+                    // Swapping the products if they are in the wrong order
+                    productsMainList.set(j, productNum2);
+                    productsMainList.set(j + 1, productNum1);
+                }
+            }
+        }
+        /*printing the sorted products*/
         for (Product product : productsMainList) {
             product.displayInfo();
         }
