@@ -47,9 +47,11 @@ public class Main{
                 }
                 break;
             case 2:
-                ShoppingCart shoppingCart=new ShoppingCart();
-                System.out.println("User Panel");
-                shoppingCart.addAProduct();
+                if (loginCustomer()){
+                    ShoppingCart shoppingCart=new ShoppingCart();
+                    System.out.println("User Panel");
+                    shoppingCart.addAProduct();
+                }
                 break;
         }
     }
@@ -86,7 +88,7 @@ public class Main{
             case 1:
                 System.out.print("Customer Username    : ");
                 String customerUsername=input.next();
-                System.out.println("Enter the Password : ");
+                System.out.print("Enter the Password : ");
                 String customerPassword=input.next();
                 for (User customer:commonUserList){
                     if (customer.getUserName().equals(customerUsername) && customer.getPassword().equals(customerPassword)){
@@ -95,8 +97,17 @@ public class Main{
                 }
                 break;
             case 2:
-
+                System.out.println("+----- Create your user account here -----+");
+                System.out.print("Enter a username : ");
+                String newUsername=input.next();
+                System.out.print("Enter a password : ");
+                String newPassword=input.next();
+                User newUser=new User(newUsername,newPassword);
+                commonUserList.add(newUser);
+                return true;
+            default:
         }
+        System.out.println("You have entered wrong information ! Please try again !\n");
         return false;
     }
 
