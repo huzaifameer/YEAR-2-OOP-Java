@@ -1,6 +1,7 @@
 package com.W1956114;
 
 import com.W1956114.Manager.WestminsterShoppingManager;
+import com.W1956114.User.ShoppingCart;
 import com.W1956114.User.User;
 
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ import java.util.Scanner;
 
 public class Main{
     private static final ArrayList<User> commonUserList=new ArrayList<>();
-    private static final String[] manager=new String[2];
 
     public static void main(String[] args) {
         while (true){
@@ -28,21 +28,7 @@ public class Main{
             Scanner inputMainOption=new Scanner(System.in);
             System.out.print("Enter an Option : ");
             int option;
-            while (true) {
-                try {
-                    option = Integer.parseInt(inputMainOption.nextLine());//this line will get an integer as an option
-                    break;//if the input is an integer it'll break the loop from here
-                } catch (NumberFormatException e) {
-                    System.out.println("**** It's not an option! Please try again..");
-                    System.out.println();
-                    System.out.print("Enter an Option : ");
-                }
-            }
-            if (option > 3 | option < 0) {
-                System.out.println("Wrong option selected! Please try again..");
-                System.out.println();
-                continue;
-            }
+            option = getOption(inputMainOption);
             return option;
         } while (true);
     }
@@ -61,7 +47,9 @@ public class Main{
                 }
                 break;
             case 2:
+                ShoppingCart shoppingCart=new ShoppingCart();
                 System.out.println("User Panel");
+                shoppingCart.addAProduct();
                 break;
         }
     }
@@ -83,6 +71,55 @@ public class Main{
         }
         System.out.println("You have entered wrong information ! Please try again !\n");
         return false;
+    }
+    private static boolean loginCustomer(){
+        Scanner input=new Scanner(System.in);
+        System.out.println("Login to Shop             - [1]");
+        System.out.println("Create an Account to shop - [2]");
+        System.out.print("Select an Option : ");
+        int option;
+        do {
+            option = getOption(input);
+            break;
+        }while (true);
+        switch (option){
+            case 1:
+                System.out.print("Customer Username    : ");
+                String customerUsername=input.next();
+                System.out.println("Enter the Password : ");
+                String customerPassword=input.next();
+                for (User customer:commonUserList){
+                    if (customer.getUserName().equals(customerUsername) && customer.getPassword().equals(customerPassword)){
+                        return true;
+                    }
+                }
+                break;
+            case 2:
+
+        }
+        return false;
+    }
+
+    private static int getOption(Scanner input) {
+        /*method to get a valid input in a specific range*/
+        /*reducing the code [stopping duplicating code lines]*/
+        int option;
+        while (true) {
+            try {
+                option = Integer.parseInt(input.nextLine());//this line will get an integer as an option
+                break;//if the input is an integer it'll break the loop from here
+            } catch (NumberFormatException e) {
+                System.out.println("**** It's not an option! Please try again..");
+                System.out.println();
+                System.out.print("Enter an Option : ");
+            }
+        }
+        if (option > 3 | option < 0) {
+            System.out.println("Wrong option selected! Please try again..");
+            System.out.println();
+            /*continue;*/
+        }
+        return option;
     }
 
 }

@@ -7,9 +7,8 @@ import java.util.ArrayList;
 public class ShoppingCart {
     private final ArrayList<Product> productsCartList = new ArrayList<>();
 
-    public void addAProduct(Product product) {
-        productsCartList.add(product);
-        System.out.println(product.getProductName() + " added to the cart.");
+    public void addAProduct() {
+        System.out.println("Adding a product");
     }
     /*this part should be edited later*/
     public void removeAProduct(String productID) {/*here the id should be an input value this is temp.*/

@@ -60,13 +60,16 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void displayProducts() {
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         System.out.printf("%-10s%-20s%-10s%-10s%n", "ID", "Name", "Price", "Available");
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        if (productsMainList.isEmpty()){
+            System.out.println("Please Add Products to display !");
+        }
         for (Product product : productsMainList) {
             product.displayInfo();
         }
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
 
     @Override
