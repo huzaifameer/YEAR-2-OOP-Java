@@ -5,6 +5,8 @@ import com.W1956114.SubClasses.Clothing;
 import com.W1956114.SubClasses.Electronic;
 import com.W1956114.Super.Product;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Objects;
@@ -73,6 +75,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void displayProducts() {
+        System.out.println();
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         System.out.printf("%-10s%-20s%-10s%-10s%n", "ID", "Name", "Price", "Available");
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
@@ -108,12 +111,20 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void saveToAFile() {
-        /*try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            outputStream.writeObject(productList);
-            System.out.println("Products saved to file successfully.");
+        //creating a variable to count the rows
+        try {
+            //creating the text file named "Theatre_Rows.txt"
+            FileWriter text_file_writer = new FileWriter("Product_Details.txt");
+            text_file_writer.write("All the added products are displayed below\n\n");//explanation for the bookings
+            for (Product product : productsMainList) {
+                text_file_writer.write(product.getProductID()+"\t"+product.getProductName()+"\n");
+            }
+            text_file_writer.close();//closing the text file after writing the data
+            System.out.println("All the data saved successfully !");//Displaying the message
         } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+            System.out.println(e.getMessage());
+            //if there's an error the error will display through the print statement
+        }
     }
 
     @Override
