@@ -117,20 +117,20 @@ public class WestminsterShoppingManager implements ShoppingManager{
             FileWriter productWriter = new FileWriter("Product_Details.txt");
             int row_Count=1;//creating a variable to count the products
             productWriter.write("*** All the added products are mentioned below ***\n\n");
-            for (Product product : productsMainList) {
+            for (Product productDetails : productsMainList) {
                 productWriter.write(row_Count+").\n");
                 productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-                productWriter.write("Product ID           : " + product.getProductID() + "\n");
-                productWriter.write("Product Name         : " + product.getProductName() + "\n");
-                productWriter.write("Available Quantity   : " + product.getAvailableQuantity() + "\n");
-                productWriter.write("Product Unit Price   : " +"$ "+product.getProductPrice() + "\n");
+                productWriter.write("Product ID           : " + productDetails.getProductID() + "\n");
+                productWriter.write("Product Name         : " + productDetails.getProductName() + "\n");
+                productWriter.write("Available Quantity   : " + productDetails.getAvailableQuantity() + "\n");
+                productWriter.write("Product Unit Price   : " +"$ "+productDetails.getProductPrice() + "\n");
 
-                if (product instanceof Electronic) {//special details of Electronic products
-                    Electronic electronicProduct = (Electronic) product;
+                if (productDetails instanceof Electronic) {//special details of Electronic products
+                    Electronic electronicProduct = (Electronic) productDetails;//productDetails is cast into Electronic
                     productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
                     productWriter.write("Warranty Period      : " + electronicProduct.getWarrantyDays() + " years\n");
-                } else if (product instanceof Clothing) {//special details of Clothing products
-                    Clothing clothingProduct = (Clothing) product;
+                } else if (productDetails instanceof Clothing) {//special details of Clothing products
+                    Clothing clothingProduct = (Clothing) productDetails;//productDetails is cast into Clothing
                     productWriter.write("Product Size         : " + clothingProduct.getClothSize() +"\n");
                     productWriter.write("Product Color        : " + clothingProduct.getClothColor() +"\n");
                 }
