@@ -32,14 +32,7 @@ public class Clothing extends Product {
     }
     @Override
     public void displayInfo() {
-        /*System.out.println("Clothing - " + getProductName());
-        System.out.println("ID: " + getProductID());
-        System.out.println("Price: $" + getProductPrice());
-        System.out.println("Size: " + getClothSize());
-        System.out.println("Color: " + getClothColor());
-        System.out.println("Available Items: " + getAvailableQuantity());*/
-        System.out.printf("%-10s%-15s%-10s%-10s%-20s%-20s%n", getProductID(),getProductName(), "$ "+getProductPrice(), getAvailableQuantity(),"Size - " +getClothSize(), "Color - "+getClothColor()+" |-Clothing");
+        System.out.printf("%-10s%-20s%-10s%-10s%-20s%-20s%n", getProductID(),getProductName(), "$ "+getProductPrice(), getAvailableQuantity(),"Size - " +getClothSize(), "Color - "+getClothColor()+" |-Clothing");
     }
-    /*An extra method for no reason*/
 
 }

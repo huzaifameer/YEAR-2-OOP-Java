@@ -61,7 +61,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
     @Override
     public void displayProducts() {
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-        System.out.printf("%-10s%-15s%-10s%-10s%n", "ID", "Name", "Price", "Available");
+        System.out.printf("%-10s%-20s%-10s%-10s%n", "ID", "Name", "Price", "Available");
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         for (Product product : productsMainList) {
             product.displayInfo();
@@ -184,7 +184,6 @@ public class WestminsterShoppingManager implements ShoppingManager{
             String clothSize=input.next();
             switch (clothSize){
                 case "S": case "M": case "XL": case "XXL": case "XXXl":
-                    System.out.println("Selected size : "+clothSize);
                 break;
                 default:
                     System.out.println("Wrong size. Try with a valid input.");
@@ -274,7 +273,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
         if (id.length() == 5) {
             String prefix = id.substring(0, 2);
 
-            if ("EP".equals(prefix) || "CP".equals(prefix)) {
+            if ("PC".equals(prefix)) {
                 String digits = id.substring(2);
 
                 if (digits.matches("\\d{3}")) {
