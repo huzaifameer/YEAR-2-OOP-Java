@@ -3,7 +3,6 @@ package com.W1956114;
 import com.W1956114.Manager.WestminsterShoppingManager;
 import com.W1956114.User.ShoppingCart;
 import com.W1956114.User.User;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,6 +15,7 @@ public class Main{
             setOption();
         }
     }
+
     private static int getMainOption(){
         do {
             System.out.println("----------------------------------------------------------");
@@ -110,7 +110,6 @@ public class Main{
         System.out.println("You have entered wrong information ! Please try again !\n");
         return false;
     }
-
     private static int getOption(Scanner input) {
         /*method to get a valid input in a specific range*/
         /*reducing the code [stopping duplicating code lines]*/
