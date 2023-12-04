@@ -48,14 +48,27 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void deleteAProduct() {
-        /*for (Product product : productsMainList) {
-            if (product.getProductID().equals(productId)) {
-                productsMainList.remove(product);
-                System.out.println("Product deleted successfully.");
-                return;
+        while (true) {
+            Scanner input = new Scanner(System.in);
+            System.out.println();
+            System.out.println("+--- Remove a existing product ---+");
+            System.out.print("Enter the Product Id to delete : ");
+            String productDeleteId = input.next();
+            boolean deleted = false;
+            for (Product product : productsMainList) {
+                if (product.getProductID().equals(productDeleteId)) {
+                    productsMainList.remove(product);
+                    deleted = true;
+                    break;
+                }
             }
-        }*/
-        System.out.println("Product with ID not found.");
+            if (deleted) {
+                System.out.println("Product id " + productDeleteId + " deleted successfully");
+            } else {
+                System.out.println("No matching product ID !");
+            }
+            break;
+        }
     }
 
     @Override
