@@ -1,11 +1,15 @@
 package com.W1956114;
 
 import com.W1956114.Manager.WestminsterShoppingManager;
+import com.W1956114.User.User;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Main{
+    private static final ArrayList<User> commonUserList=new ArrayList<>();
+    private static final String[] manager=new String[2];
 
     public static void main(String[] args) {
         while (true){
@@ -14,6 +18,7 @@ public class Main{
     }
     private static int getMainOption(){
         do {
+            System.out.println("----------------------------------------------------------");
             System.out.println("xxxxxxxx- Welcome to Westminster Shopping System -xxxxxxxx");
             System.out.println("----------------------------------------------------------");
             System.out.println("[ 1 ] -> Manager Control Panel");
@@ -49,17 +54,34 @@ public class Main{
                 System.exit(0);//Exit from the program
             case 1:
                 WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
-                while (true){
-                    westminsterShoppingManager.selectOption();
+                if (loginManager()){
+                    while (true){
+                        westminsterShoppingManager.selectOption();
+                    }
                 }
-                /*break;*/
+                break;
             case 2:
                 System.out.println("User Panel");
                 break;
         }
     }
     private static boolean loginManager(){
-
+        Scanner inputData=new Scanner(System.in);
+        System.out.println("x------Enter Valid Manager Credentials------x");
+        User manager1 = new User("Manager-1", "12345");
+        commonUserList.add(manager1);
+        User manager2 = new User("Manager-2", "12345");
+        commonUserList.add(manager2);
+        System.out.print("Input Manager Username : ");
+        String managerUserName=inputData.next();
+        System.out.print("Input The Password     : ");
+        String managerPassword=inputData.next();
+        for (User manager:commonUserList){
+            if (manager.getUserName().equals(managerUserName) && manager.getPassword().equals(managerPassword)){
+                return true;
+            }
+        }
+        System.out.println("You have entered wrong information ! Please try again !\n");
         return false;
     }
 

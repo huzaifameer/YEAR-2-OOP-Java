@@ -91,16 +91,17 @@ public class WestminsterShoppingManager implements ShoppingManager{
     public int getSelectedOption(){
         Scanner inputOption=new Scanner(System.in);
         while (true){
+            System.out.println();
             System.out.println("+-----------------------------------------+");
             System.out.println("|          Manager Control Panel          |");
-            System.out.println("+-----------------------------------------");
+            System.out.println("+-----------------------------------------+");
             System.out.println("[ 1 ] - Add a Product");
             System.out.println("[ 2 ] - Remove a Product");
             System.out.println("[ 3 ] - Display Products");
             System.out.println("[ 4 ] - Save To a File");
             System.out.println("[ 5 ] - Read From a File");
             System.out.println("[ 0 ] - Back to Home");
-            System.out.println("+-----------------------------------------");
+            System.out.println("+-----------------------------------------+");
             System.out.print("Enter an Option to proceed : ");
             int selectedOption;
             while (true) {
@@ -143,8 +144,6 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 readFromAFile();
         }
     }
-
-
     private void getElectronicItem(){
         Scanner input=new Scanner(System.in);
         do {
