@@ -5,6 +5,7 @@ import com.W1956114.SubClasses.Clothing;
 import com.W1956114.SubClasses.Electronic;
 import com.W1956114.Super.Product;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -111,24 +112,24 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void saveToAFile() {
-        //creating a variable to count the rows
         try {
-            //creating the text file named "Theatre_Rows.txt"
+            //creating the text file named "Product_Details.txt"
             FileWriter productWriter = new FileWriter("Product_Details.txt");
-            int row_Count=1;
+            int row_Count=1;//creating a variable to count the products
+            productWriter.write("*** All the added products are mentioned below ***\n\n");
             for (Product product : productsMainList) {
                 productWriter.write(row_Count+").\n");
                 productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
                 productWriter.write("Product ID           : " + product.getProductID() + "\n");
                 productWriter.write("Product Name         : " + product.getProductName() + "\n");
                 productWriter.write("Available Quantity   : " + product.getAvailableQuantity() + "\n");
-                productWriter.write("Product Unit Price   :  $" + product.getProductPrice() + "\n");
+                productWriter.write("Product Unit Price   : " +"$ "+product.getProductPrice() + "\n");
 
-                if (product instanceof Electronic) {
+                if (product instanceof Electronic) {//special details of Electronic products
                     Electronic electronicProduct = (Electronic) product;
                     productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
                     productWriter.write("Warranty Period      : " + electronicProduct.getWarrantyDays() + " years\n");
-                } else if (product instanceof Clothing) {
+                } else if (product instanceof Clothing) {//special details of Clothing products
                     Clothing clothingProduct = (Clothing) product;
                     productWriter.write("Product Size         : " + clothingProduct.getClothSize() +"\n");
                     productWriter.write("Product Color        : " + clothingProduct.getClothColor() +"\n");
@@ -146,12 +147,20 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void readFromAFile() {
-        /*try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
-            productList = (List<Product>) inputStream.readObject();
-            System.out.println("Products read from file successfully.");
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }*/
+        System.out.println();
+        try {
+            FileReader readProductTextFile = new FileReader("Product_Details.txt");//getting the file to read
+            int charactor = readProductTextFile.read();//assigning the first character to an int type variable
+            while(charactor!=-1){
+                //reading the file until the last character
+                System.out.print((char)charactor);//casting into char type
+                charactor=readProductTextFile.read();//passing to the next character
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            //if there's an error the error will display through the "sout" statement.
+        }
+        System.out.println();
     }
     public int getSelectedOption(){
         Scanner inputOption=new Scanner(System.in);
