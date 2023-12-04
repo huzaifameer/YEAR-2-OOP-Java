@@ -114,13 +114,30 @@ public class WestminsterShoppingManager implements ShoppingManager{
         //creating a variable to count the rows
         try {
             //creating the text file named "Theatre_Rows.txt"
-            FileWriter text_file_writer = new FileWriter("Product_Details.txt");
-            text_file_writer.write("All the added products are displayed below\n\n");//explanation for the bookings
+            FileWriter productWriter = new FileWriter("Product_Details.txt");
+            int row_Count=1;
             for (Product product : productsMainList) {
-                text_file_writer.write(product.getProductID()+"\t"+product.getProductName()+"\n");
+                productWriter.write(row_Count+").\n");
+                productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+                productWriter.write("Product ID           : " + product.getProductID() + "\n");
+                productWriter.write("Product Name         : " + product.getProductName() + "\n");
+                productWriter.write("Available Quantity   : " + product.getAvailableQuantity() + "\n");
+                productWriter.write("Product Unit Price   :  $" + product.getProductPrice() + "\n");
+
+                if (product instanceof Electronic) {
+                    Electronic electronicProduct = (Electronic) product;
+                    productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
+                    productWriter.write("Warranty Period      : " + electronicProduct.getWarrantyDays() + " years\n");
+                } else if (product instanceof Clothing) {
+                    Clothing clothingProduct = (Clothing) product;
+                    productWriter.write("Product Size         : " + clothingProduct.getClothSize() +"\n");
+                    productWriter.write("Product Color        : " + clothingProduct.getClothColor() +"\n");
+                }
+                productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+                productWriter.write("\n"); // Add a blank line between products
+                row_Count+=1;
             }
-            text_file_writer.close();//closing the text file after writing the data
-            System.out.println("All the data saved successfully !");//Displaying the message
+            productWriter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
             //if there's an error the error will display through the print statement
