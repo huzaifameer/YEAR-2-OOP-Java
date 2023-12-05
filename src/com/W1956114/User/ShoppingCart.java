@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 public class ShoppingCart extends JFrame {
     /*------------------------------------------------------------*/
-    private static JLabel labelTopLeft;
-    private static JComboBox<String> productTypeDropdown ;
-    private static JButton shoppingCartButton;
-    private static JTable productDataTable;
+    private JLabel labelTopLeft;
+    private JComboBox<String> productTypeDropdown ;
+    private JButton shoppingCartButton;
+    private JTable productDataTable;
     /*------------------------------------------------------------*/
     private final ArrayList<Product> productsCartList = new ArrayList<>();
     public ShoppingCart(){
