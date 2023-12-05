@@ -9,6 +9,13 @@ import java.util.Scanner;
 
 public class Main{
     private static final ArrayList<User> commonUserList=new ArrayList<>();
+    static {
+        // Adding manager's as users during program initialization
+        User manager1 = new User("Manager-1", "12345");
+        commonUserList.add(manager1);
+        User manager2 = new User("Manager-2", "12345");
+        commonUserList.add(manager2);
+    }
 
     public static void main(String[] args) {
         while (true){
@@ -62,10 +69,6 @@ public class Main{
     private static boolean loginManager(){
         Scanner inputData=new Scanner(System.in);
         System.out.println("x------Enter Valid Manager Credentials------x");
-        User manager1 = new User("Manager-1", "12345");
-        commonUserList.add(manager1);
-        User manager2 = new User("Manager-2", "12345");
-        commonUserList.add(manager2);
         System.out.print("Input Manager Username : ");
         String managerUserName=inputData.next();
         System.out.print("Input The Password     : ");
@@ -84,7 +87,7 @@ public class Main{
         System.out.println("Create an Account to shop - [2]");
         System.out.print("Select an Option : ");
         int option;
-        boolean validateOption;
+        boolean validateOption=false;
         do {
             option = getOption(input);
             break;
@@ -95,12 +98,21 @@ public class Main{
                 String customerUsername=input.next();
                 System.out.print("Enter the Password : ");
                 String customerPassword=input.next();
-                for (User customer:commonUserList){
+                /*for (User customer:commonUserList){
                     if (customer.getUserName().equals(customerUsername) && customer.getPassword().equals(customerPassword)){
                         validateOption= true;
                     }
                 }
-                validateOption= false;
+                validateOption= false;*/
+                for (User customer : commonUserList) {
+                    if (customer.getUserName().equals(customerUsername) && customer.getPassword().equals(customerPassword)) {
+                        validateOption = true;
+                        break; // Break out of the loop once valid credentials are found
+                    }
+                }
+                if (!validateOption) {
+                    System.out.println("Invalid username or password! Please try again.\n");
+                }
                 break;
             case 2:
                 System.out.println("+----- Create your user account here -----+");
