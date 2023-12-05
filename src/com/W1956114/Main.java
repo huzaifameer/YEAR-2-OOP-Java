@@ -54,6 +54,9 @@ public class Main{
                 }
                 System.out.println("Finished !");
                 break;
+            default:
+                setOption();
+                break;
         }
     }
     private static boolean loginManager(){
@@ -81,6 +84,7 @@ public class Main{
         System.out.println("Create an Account to shop - [2]");
         System.out.print("Select an Option : ");
         int option;
+        boolean validateOption;
         do {
             option = getOption(input);
             break;
@@ -93,10 +97,11 @@ public class Main{
                 String customerPassword=input.next();
                 for (User customer:commonUserList){
                     if (customer.getUserName().equals(customerUsername) && customer.getPassword().equals(customerPassword)){
-                        return true;
+                        validateOption= true;
                     }
                 }
-                return false;
+                validateOption= false;
+                break;
             case 2:
                 System.out.println("+----- Create your user account here -----+");
                 System.out.print("Enter a username : ");
@@ -105,11 +110,14 @@ public class Main{
                 String newPassword=input.next();
                 User newUser=new User(newUsername,newPassword);
                 commonUserList.add(newUser);
-                return true;
+                validateOption= true;
+                break;
             default:
+                System.out.println("You have entered wrong information ! Please try again !\n");
+                validateOption= false;
+                break;
         }
-        System.out.println("You have entered wrong information ! Please try again !\n");
-        return false;
+        return validateOption;
     }
     private static int getOption(Scanner input) {
         /*method to get a valid input in a specific range*/
