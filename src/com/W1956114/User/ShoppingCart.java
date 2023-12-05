@@ -81,7 +81,7 @@ public class ShoppingCart extends JFrame {
 
         productDataTable = new JTable(productModel);
         productDataTable.setSize(300,300);
-        //panelCenter.add(new JScrollPane(productDataTable), BorderLayout.CENTER);
+
         JTableHeader header = productDataTable.getTableHeader();
         header.setFont(new Font(header.getFont().getName(), Font.BOLD, header.getFont().getSize()));
         //panelCenter.add(Box.createRigidArea(new Dimension(20, 0)));
