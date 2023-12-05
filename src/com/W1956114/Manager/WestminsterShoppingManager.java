@@ -10,20 +10,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Objects;
 import java.util.Scanner;
 
 
 public class WestminsterShoppingManager implements ShoppingManager{
-
     private final ArrayList<Product> productsMainList = new ArrayList<>();
+
+
     @Override
     public void addAProduct() {
         Scanner input=new Scanner(System.in);
         String productType;
         /*to add a product the valid product ID and the name should be given as input datas*/
         do{
-            if (productsMainList.size()<50){
+            if (getProductsMainList().size()<50){
                 while (true){
                     System.out.print("Type of the product (E/C) ? ");
                     productType=input.next();
@@ -58,9 +58,9 @@ public class WestminsterShoppingManager implements ShoppingManager{
             System.out.print("Enter the Product Id to delete : ");
             String productDeleteId = input.next();
             boolean deleted = false;
-            for (Product product : productsMainList) {
+            for (Product product : getProductsMainList()) {
                 if (product.getProductID().equals(productDeleteId)) {
-                    productsMainList.remove(product);
+                    getProductsMainList().remove(product);
                     deleted = true;
                     break;
                 }
@@ -81,16 +81,16 @@ public class WestminsterShoppingManager implements ShoppingManager{
         System.out.printf("%-10s%-20s%-10s%-10s%n", "ID", "Name", "Price", "Available");
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         /*this will display if the product list is empty*/
-        if (productsMainList.isEmpty()){
+        if (getProductsMainList().isEmpty()){
             System.out.println("Please Add Products to display !");
         }
         /*this will sort all the products using the last 3 numbers of the product ID*/
-        for (int i = 0; i < productsMainList.size() - 1; i++) {
-            for (int j = 0; j < productsMainList.size() - i - 1; j++) {
+        for (int i = 0; i < getProductsMainList().size() - 1; i++) {
+            for (int j = 0; j < getProductsMainList().size() - i - 1; j++) {
                 /*getting a product*/
-                Product productNum1 = productsMainList.get(j);
+                Product productNum1 = getProductsMainList().get(j);
                 /*getting the next product in order*/
-                Product productNum2 = productsMainList.get(j + 1);
+                Product productNum2 = getProductsMainList().get(j + 1);
 
                 /*getting the both ID's and casting it into Integer type to sort*/
                 int idNum1 = Integer.parseInt(productNum1.getProductID().substring(2));
@@ -98,13 +98,13 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
                 if (idNum1 > idNum2) {
                     // Swapping the products if they are in the wrong order
-                    productsMainList.set(j, productNum2);
-                    productsMainList.set(j + 1, productNum1);
+                    getProductsMainList().set(j, productNum2);
+                    getProductsMainList().set(j + 1, productNum1);
                 }
             }
         }
         /*printing the sorted products*/
-        for (Product product : productsMainList) {
+        for (Product product : getProductsMainList()) {
             product.displayInfo();
         }
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
@@ -117,7 +117,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
             FileWriter productWriter = new FileWriter("Product_Details.txt");
             int row_Count=1;//creating a variable to count the products
             productWriter.write("*** All the added products are mentioned below ***\n\n");
-            for (Product productDetails : productsMainList) {
+            for (Product productDetails : getProductsMainList()) {
                 productWriter.write(row_Count+").\n");
                 productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
                 productWriter.write("Product ID           : " + productDetails.getProductID() + "\n");
@@ -202,6 +202,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
         switch (passedOption) {
             case 0:
                 Main.setOption();//Exit from the program
+                break;
             case 1:
                 addAProduct();
                 break;
@@ -216,6 +217,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 break;
             case 5:
                 readFromAFile();
+                break;
         }
     }
     private void getElectronicItem(){
@@ -243,7 +245,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 }
             }
             Product electronicProduct=new Electronic((String) productDetailsList.get(0), (String) productDetailsList.get(1), (Integer) productDetailsList.get(2), (Double) productDetailsList.get(3),elecronicProductBrand,warrantyPeriod);
-            productsMainList.add(electronicProduct);
+            getProductsMainList().add(electronicProduct);
             break;
         }while (true);
 
@@ -265,7 +267,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
             System.out.print("Enter the color of the cloth       :");
             String clothColor=input.next();
             Product clothingProduct=new Clothing((String) productDetailsList.get(0), (String) productDetailsList.get(1), (Integer) productDetailsList.get(2), (Double) productDetailsList.get(3),clothSize,clothColor);
-            productsMainList.add(clothingProduct);
+            getProductsMainList().add(clothingProduct);
             break;
         }while (true);
     }
@@ -358,7 +360,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
         return false;
     }
     private boolean isDuplicateID(String id) {
-        for (Product productDetail :productsMainList) {
+        for (Product productDetail : getProductsMainList()) {
             if (productDetail.getProductID() != null && productDetail.getProductID().equals(id)) {
                 return true;
             }
@@ -366,4 +368,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
         return false;
     }
 
+    public ArrayList<Product> getProductsMainList() {
+        return productsMainList;
+    }
 }

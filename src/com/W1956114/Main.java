@@ -38,6 +38,7 @@ public class Main{
         switch (option) {
             case 0:
                 System.exit(0);//Exit from the program
+                break;
             case 1:
                 WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
                 if (loginManager()){
@@ -50,8 +51,8 @@ public class Main{
                 if (loginCustomer()){
                     ShoppingCart shoppingCart=new ShoppingCart();
                     System.out.println("User Panel");
-                    shoppingCart.addAProduct();
                 }
+                System.out.println("Finished !");
                 break;
         }
     }
@@ -95,7 +96,7 @@ public class Main{
                         return true;
                     }
                 }
-                break;
+                return false;
             case 2:
                 System.out.println("+----- Create your user account here -----+");
                 System.out.print("Enter a username : ");

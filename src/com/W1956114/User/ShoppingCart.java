@@ -1,5 +1,6 @@
 package com.W1956114.User;
 
+import com.W1956114.Manager.WestminsterShoppingManager;
 import com.W1956114.Super.Product;
 
 import javax.swing.*;
@@ -70,9 +71,13 @@ public class ShoppingCart extends JFrame {
         productModel.addColumn("Info");
 
         // Adding some sample data
-        for (int i = 0; i < 43; i++) {
-            productModel.addRow(new Object[]{"Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1)});
+        WestminsterShoppingManager shoppingManager=new WestminsterShoppingManager();
+        for(Product product:shoppingManager.getProductsMainList()){
+            productModel.addRow(new Object[]{product.getProductID(),product.getProductName(),"Product Type",product.getProductPrice(),product.getAvailableQuantity()});
         }
+        /*for (int i = 0; i < 43; i++) {
+            productModel.addRow(new Object[]{"Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1)});
+        }*/
 
         productDataTable = new JTable(productModel);
         productDataTable.setSize(300,300);
@@ -96,7 +101,7 @@ public class ShoppingCart extends JFrame {
         panelBottom.add(selecetedTextLabel);
         shoppingCart.add("South",panelBottom);
 
-        shoppingCart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        /*shoppingCart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
         shoppingCart.setVisible(true);
     }
 
