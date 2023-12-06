@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ShoppingCart extends JFrame {
     /*------------------------------------------------------------*/
@@ -72,12 +73,9 @@ public class ShoppingCart extends JFrame {
 
         // Adding some sample data
         WestminsterShoppingManager shoppingManager=new WestminsterShoppingManager();
-        for(Product product:shoppingManager.getProductsMainList()){
-            productModel.addRow(new Object[]{product.getProductID(),product.getProductName(),"Product Type",product.getProductPrice(),product.getAvailableQuantity()});
-        }
-        /*for (int i = 0; i < 43; i++) {
+        for (int i = 0; i < 43; i++) {
             productModel.addRow(new Object[]{"Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1)});
-        }*/
+        }
 
         productDataTable = new JTable(productModel);
         productDataTable.setSize(300,300);
@@ -126,5 +124,9 @@ public class ShoppingCart extends JFrame {
             totalCost += product.getProductPrice();
         }
         return totalCost;
+    }
+    public void setAnOption(){
+        Scanner input=new Scanner(System.in);
+
     }
 }
