@@ -49,10 +49,14 @@ public class Main{
             case 1:
                 WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
                 if (loginManager()){
-                    while (true){
+                    do{
+                        westminsterShoppingManager.selectOption();
+                        return;
+                    }while (true);
+                    /*while (true){
                         westminsterShoppingManager.selectOption();
                         break;
-                    }
+                    }*/
                 }
                 break;
             case 2:
