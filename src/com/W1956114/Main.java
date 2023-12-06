@@ -56,8 +56,8 @@ public class Main{
                 break;
             case 2:
                 if (loginCustomer()){
-                    ShoppingCart shoppingCart=new ShoppingCart();
                     System.out.println("User Panel");
+                    break;
                 }
                 System.out.println("Finished !");
                 break;
