@@ -51,6 +51,7 @@ public class Main{
                 if (loginManager()){
                     while (true){
                         westminsterShoppingManager.selectOption();
+                        break;
                     }
                 }
                 break;
@@ -106,12 +107,9 @@ public class Main{
                 validateOption= false;*/
                 for (User customer : commonUserList) {
                     if (customer.getUserName().equals(customerUsername) && customer.getPassword().equals(customerPassword)) {
-                        validateOption = true;
-                        break; // Break out of the loop once valid credentials are found
+                        return true;
+                        //break; // Break out of the loop once valid credentials are found
                     }
-                }
-                if (!validateOption) {
-                    System.out.println("Invalid username or password! Please try again.\n");
                 }
                 break;
             case 2:
@@ -122,12 +120,12 @@ public class Main{
                 String newPassword=input.next();
                 User newUser=new User(newUsername,newPassword);
                 commonUserList.add(newUser);
-                validateOption= true;
-                break;
+                return true;
+                //break;
             default:
                 System.out.println("You have entered wrong information ! Please try again !\n");
-                validateOption= false;
-                break;
+                return false;
+                //break;
         }
         return validateOption;
     }
