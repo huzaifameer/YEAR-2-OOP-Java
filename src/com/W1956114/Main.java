@@ -55,6 +55,7 @@ public class Main{
                     }
                     break;
                 }
+                /*Attempt 1*/
                 /*while (true) {
                     if (loginManager()) {
                         westminsterShoppingManager.selectOption();
@@ -64,6 +65,7 @@ public class Main{
                         break;
                     }
                 }*/
+                /*Attempt 2*/
                 /*if (loginManager()){
                     do{
                         westminsterShoppingManager.selectOption();
