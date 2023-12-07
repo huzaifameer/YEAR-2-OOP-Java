@@ -48,12 +48,22 @@ public class Main{
                 break;
             case 1:
                 WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
+
                 while (true){
                     if (loginManager()) {
                         westminsterShoppingManager.selectOption();
                     }
                     break;
                 }
+                /*while (true) {
+                    if (loginManager()) {
+                        westminsterShoppingManager.selectOption();
+                    } else {
+                        System.out.println("Wrong login option !");
+                        // If login fails, break out of the loop
+                        break;
+                    }
+                }*/
                 /*if (loginManager()){
                     do{
                         westminsterShoppingManager.selectOption();
