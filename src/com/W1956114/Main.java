@@ -49,12 +49,12 @@ public class Main{
             case 1:
                 WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
 
-                while (true){
+                /*while (true){
                     if (loginManager()) {
                         westminsterShoppingManager.selectOption();
                     }
                     break;
-                }
+                }*/
                 /*Attempt 1*/
                 /*while (true) {
                     if (loginManager()) {
@@ -66,16 +66,15 @@ public class Main{
                     }
                 }*/
                 /*Attempt 2*/
-                /*if (loginManager()){
-                    do{
+                if (loginManager()){
+                    /*do{
                         westminsterShoppingManager.selectOption();
                         return;
-                    }while (true);
-                    *//*while (true){
+                    }while (true);*/
+                    while (true){
                         westminsterShoppingManager.selectOption();
-                        break;
-                    }*//*
-                }*/
+                    }
+                }
                 break;
             case 2:
                 if (loginCustomer()){

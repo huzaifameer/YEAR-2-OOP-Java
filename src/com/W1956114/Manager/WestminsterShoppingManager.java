@@ -130,10 +130,12 @@ public class WestminsterShoppingManager implements ShoppingManager{
                     Electronic electronicProduct = (Electronic) productDetails;//productDetails is cast into Electronic
                     productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
                     productWriter.write("Warranty Period      : " + electronicProduct.getWarrantyDays() + " years\n");
+                    productWriter.write("This is a Electronic product");
                 } else if (productDetails instanceof Clothing) {//special details of Clothing products
                     Clothing clothingProduct = (Clothing) productDetails;//productDetails is cast into Clothing
                     productWriter.write("Product Size         : " + clothingProduct.getClothSize() +"\n");
                     productWriter.write("Product Color        : " + clothingProduct.getClothColor() +"\n");
+                    productWriter.write("This is a Clothing product");
                 }
                 productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
                 productWriter.write("\n"); // Add a blank line between products
