@@ -79,6 +79,7 @@ public class Main{
             case 2:
                 if (loginCustomer()){
                     System.out.println("User Panel");
+                    ShoppingCart westminsterShoppingManager1=new ShoppingCart();
                     break;
                 }
                 System.out.println("Finished !");

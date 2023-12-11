@@ -13,10 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ShoppingCart extends JFrame {
-    /*------------------------------------------------------------*/
-    private JLabel labelTopLeft;
-    private JComboBox<String> productTypeDropdown ;
-    private JButton shoppingCartButton;
+    private final JComboBox<String> productTypeDropdown ;
     private JTable productDataTable;
     /*------------------------------------------------------------*/
     private final ArrayList<Product> productsCartList = new ArrayList<>();
@@ -28,7 +25,8 @@ public class ShoppingCart extends JFrame {
         //JPanel panelTop=new JPanel(new GridLayout(1,4));
         //---creating the left top label with the text
         JPanel panelTop = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 20));
-        labelTopLeft = new JLabel("Select Product Category  ");
+        /*------------------------------------------------------------*/
+        JLabel labelTopLeft = new JLabel("Select Product Category  ");
         panelTop.add(labelTopLeft);
 
         //Setting up the drop down menu with 3 items
@@ -48,7 +46,7 @@ public class ShoppingCart extends JFrame {
         });
         panelTop.add(productTypeDropdown);
 
-        shoppingCartButton=new JButton("Shopping Cart");
+        JButton shoppingCartButton = new JButton("Shopping Cart");
         JLabel gap=new JLabel();
         panelTop.add(gap);
         shoppingCartButton.setSize(200,40);
@@ -64,6 +62,8 @@ public class ShoppingCart extends JFrame {
 
         // Creating a sample table model with 5 columns
         DefaultTableModel productModel = new DefaultTableModel();
+        // Set row height
+        productDataTable.setRowHeight(25);
 
         productModel.addColumn("Product ID");
         productModel.addColumn("Name");
