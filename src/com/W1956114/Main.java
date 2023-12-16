@@ -9,12 +9,13 @@ import java.util.Scanner;
 
 public class Main{
     private static final ArrayList<User> commonUserList=new ArrayList<>();
+    private static final ArrayList<User> managerUserList=new ArrayList<>();
     static {
         // Adding manager's as users during program initialization
         User manager1 = new User("Manager-1", "12345");
-        commonUserList.add(manager1);
+        managerUserList.add(manager1);
         User manager2 = new User("Manager-2", "12345");
-        commonUserList.add(manager2);
+        managerUserList.add(manager2);
     }
 
     public static void main(String[] args) {
@@ -49,29 +50,8 @@ public class Main{
             case 1:
                 WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
 
-                /*while (true){
-                    if (loginManager()) {
-                        westminsterShoppingManager.selectOption();
-                    }
-                    break;
-                }*/
-                /*Attempt 1*/
-                /*while (true) {
-                    if (loginManager()) {
-                        westminsterShoppingManager.selectOption();
-                    } else {
-                        System.out.println("Wrong login option !");
-                        // If login fails, break out of the loop
-                        break;
-                    }
-                }*/
-                /*Attempt 2*/
                 if (loginManager()){
-                    /*do{
-                        westminsterShoppingManager.selectOption();
-                        return;
-                    }while (true);*/
-                    while (true){
+                    while (true) {
                         westminsterShoppingManager.selectOption();
                     }
                 }
@@ -79,8 +59,8 @@ public class Main{
             case 2:
                 if (loginCustomer()){
                     System.out.println("User Panel");
-                    ShoppingCart westminsterShoppingManager1=new ShoppingCart();
-                    //break;
+                    ShoppingCart systemUser=new ShoppingCart();
+                    break;
                 }
                 System.out.println("Finished !");
                 break;
@@ -96,7 +76,7 @@ public class Main{
         String managerUserName=inputData.next();
         System.out.print("Input The Password     : ");
         String managerPassword=inputData.next();
-        for (User manager:commonUserList){
+        for (User manager:managerUserList){
             if (manager.getUserName().equals(managerUserName) && manager.getPassword().equals(managerPassword)){
                 return true;
             }
@@ -121,16 +101,10 @@ public class Main{
                 String customerUsername=input.next();
                 System.out.print("Enter the Password : ");
                 String customerPassword=input.next();
-                /*for (User customer:commonUserList){
-                    if (customer.getUserName().equals(customerUsername) && customer.getPassword().equals(customerPassword)){
-                        validateOption= true;
-                    }
-                }
-                validateOption= false;*/
+
                 for (User customer : commonUserList) {
                     if (customer.getUserName().equals(customerUsername) && customer.getPassword().equals(customerPassword)) {
                         return true;
-                        //break; // Break out of the loop once valid credentials are found
                     }
                 }
                 break;

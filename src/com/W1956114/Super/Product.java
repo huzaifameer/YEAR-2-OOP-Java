@@ -5,17 +5,25 @@ public abstract class Product {
     protected String productName;
     protected int availableQuantity;
     protected double productPrice;
+    protected String productType;
 
     public Product() {
     }
 
-    public Product(String productID, String productName, int availableQuantity, double productPrice) {
+    public Product(String productType,String productID, String productName, int availableQuantity, double productPrice) {
+        this.productType=productType;
         this.productID = productID;
         this.productName = productName;
         this.availableQuantity = availableQuantity;
         this.productPrice = productPrice;
     }
 
+    public String getProductType(){
+        return productType;
+    }
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
     public String getProductID() {
         return productID;
     }

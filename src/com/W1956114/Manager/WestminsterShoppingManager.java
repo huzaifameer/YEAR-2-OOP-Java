@@ -15,7 +15,8 @@ import java.util.Scanner;
 
 
 public class WestminsterShoppingManager implements ShoppingManager{
-    private final ArrayList<Product> productsMainList = new ArrayList<>();
+
+    private static final ArrayList<Product> productsMainList = new ArrayList<>();
 
 
     @Override
@@ -247,7 +248,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
                     System.out.print("Enter the warranty period [in years] : ");
                 }
             }
-            Product electronicProduct=new Electronic((String) productDetailsList.get(0), (String) productDetailsList.get(1), (Integer) productDetailsList.get(2), (Double) productDetailsList.get(3),elecronicProductBrand,warrantyPeriod);
+            Product electronicProduct=new Electronic((String)productDetailsList.get(0),(String) productDetailsList.get(1), (String) productDetailsList.get(2), (Integer) productDetailsList.get(3), (Double) productDetailsList.get(4),elecronicProductBrand,warrantyPeriod);
             getProductsMainList().add(electronicProduct);
             break;
         }while (true);
@@ -269,7 +270,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
             }
             System.out.print("Enter the color of the cloth       :");
             String clothColor=input.next();
-            Product clothingProduct=new Clothing((String) productDetailsList.get(0), (String) productDetailsList.get(1), (Integer) productDetailsList.get(2), (Double) productDetailsList.get(3),clothSize,clothColor);
+            Product clothingProduct=new Clothing((String)productDetailsList.get(0),(String) productDetailsList.get(1), (String) productDetailsList.get(2), (Integer) productDetailsList.get(3), (Double) productDetailsList.get(4),clothSize,clothColor);
             getProductsMainList().add(clothingProduct);
             break;
         }while (true);

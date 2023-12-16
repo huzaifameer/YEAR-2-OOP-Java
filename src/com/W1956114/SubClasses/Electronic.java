@@ -9,8 +9,8 @@ public class Electronic extends Product {
     public Electronic() {
     }
 
-    public Electronic(String productID, String productName, int availableQuantity, double productPrice, String brand, int warrantyDays) {
-        super(productID,productName,availableQuantity,productPrice);
+    public Electronic(String productType,String productID, String productName, int availableQuantity, double productPrice, String brand, int warrantyDays) {
+        super(productType,productID,productName,availableQuantity,productPrice);
         this.brand = brand;
         this.warrantyDays = warrantyDays;
     }
