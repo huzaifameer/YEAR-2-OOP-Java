@@ -80,7 +80,7 @@ public class Main{
                 if (loginCustomer()){
                     System.out.println("User Panel");
                     ShoppingCart westminsterShoppingManager1=new ShoppingCart();
-                    break;
+                    //break;
                 }
                 System.out.println("Finished !");
                 break;

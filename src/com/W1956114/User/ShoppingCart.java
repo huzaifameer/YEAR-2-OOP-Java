@@ -63,7 +63,7 @@ public class ShoppingCart extends JFrame {
         // Creating a sample table model with 5 columns
         DefaultTableModel productModel = new DefaultTableModel();
         // Set row height
-        productDataTable.setRowHeight(25);
+        //productDataTable.setRowHeight(25);
 
         productModel.addColumn("Product ID");
         productModel.addColumn("Name");
