@@ -1,6 +1,8 @@
 package com.W1956114.User;
 
 import com.W1956114.Manager.WestminsterShoppingManager;
+import com.W1956114.SubClasses.Clothing;
+import com.W1956114.SubClasses.Electronic;
 import com.W1956114.Super.Product;
 
 import javax.swing.*;
@@ -29,7 +31,7 @@ public class ShoppingCart extends JFrame {
         JLabel labelTopLeft = new JLabel("Select Product Category  ");
         panelTop.add(labelTopLeft);
 
-        //Setting up the drop down menu with 3 items
+        //Setting up the drop-down menu with 3 items
         String[] productTypes = {"Clothing", "Electronic", "All"};
 
         productTypeDropdown = new JComboBox<>(productTypes);
@@ -63,7 +65,6 @@ public class ShoppingCart extends JFrame {
         // Creating a sample table model with 5 columns
         DefaultTableModel productModel = new DefaultTableModel();
         // Set row height
-        //productDataTable.setRowHeight(25);
 
         productModel.addColumn("Product ID");
         productModel.addColumn("Name");
@@ -73,12 +74,34 @@ public class ShoppingCart extends JFrame {
 
         // Adding some sample data
         WestminsterShoppingManager shoppingManager=new WestminsterShoppingManager();
-        /*for (int i = 0; i < 43; i++) {
-            productModel.addRow(new Object[]{"Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1)});
-        }*/
+
         //setting the product's data into the table
-        for(Product data: shoppingManager.getProductsMainList()){
-            productModel.addRow(new Object[]{data.getProductID(),data.getProductName(),data.getProductType(),data.getProductPrice(),data.getAvailableQuantity()});
+        for(Product rowData: shoppingManager.getProductsMainList()){
+
+            //code line to get the extra details
+            String additionalDetails="";
+            if (rowData.getProductType().equals("Electronic")){
+                Electronic electronic= (Electronic) rowData;
+                additionalDetails="Brand: "+electronic.getBrand()+" Warranty: "+electronic.getWarrantyDays();
+            }else {
+                Clothing clothing= (Clothing) rowData;
+                additionalDetails="Size: "+clothing.getClothSize()+" Color: "+clothing.getClothColor();
+            }
+
+            Object[] dataRowLine = {
+                    rowData.getProductID(),
+                    rowData.getProductName(),
+                    rowData.getProductType(),
+                    rowData.getProductPrice(),
+                    additionalDetails
+            };
+
+            //productModel.addRow(new Object[]{data.getProductID(),data.getProductName(),data.getProductType(),data.getProductPrice()});
+            /*if (data.getProductType().equals("Electronics")){
+                //Electronic electronic=new Electronic();
+                dataRowLine[4]=electronic.getBrand()+" "+electronic.getWarrantyDays();
+            }*/
+            productModel.addRow(dataRowLine);
         }
 
         productDataTable = new JTable(productModel);
