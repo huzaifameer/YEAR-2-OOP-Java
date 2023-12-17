@@ -6,6 +6,8 @@ import com.W1956114.SubClasses.Electronic;
 import com.W1956114.Super.Product;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
@@ -17,8 +19,9 @@ import java.util.Scanner;
 public class ShoppingCart extends JFrame {
     private final JComboBox<String> productTypeDropdown ;
     private JTable productDataTable;
+    private JLabel label1, label2, label3, label4, label5,label6,label7;
     /*------------------------------------------------------------*/
-    private final ArrayList<Product> productsCartList = new ArrayList<>();
+    //private final ArrayList<Product> productsCartList = new ArrayList<>();
     public ShoppingCart(){
         JFrame shoppingCart=new JFrame();
         shoppingCart.setSize(500,600);
@@ -77,40 +80,29 @@ public class ShoppingCart extends JFrame {
 
         //setting the product's data into the table
         for(Product rowData: shoppingManager.getProductsMainList()){
-
             //code line to get the extra details
-            String additionalDetails="";
+            String additionalDetails="";//creating and initializing a string typed variable to add the additional information
             if (rowData.getProductType().equals("Electronic")){
-                Electronic electronic= (Electronic) rowData;
+                Electronic electronic= (Electronic) rowData;//casting into Electronic type
                 additionalDetails="Brand: "+electronic.getBrand()+" Warranty: "+electronic.getWarrantyDays();
             }else {
-                Clothing clothing= (Clothing) rowData;
+                Clothing clothing= (Clothing) rowData;//casting into Clothing type
                 additionalDetails="Size: "+clothing.getClothSize()+" Color: "+clothing.getClothColor();
             }
-
-            Object[] dataRowLine = {
+            Object[] dataRowLine = {//creating an object type array to add all the values
                     rowData.getProductID(),
                     rowData.getProductName(),
                     rowData.getProductType(),
                     rowData.getProductPrice(),
                     additionalDetails
             };
-
-            //productModel.addRow(new Object[]{data.getProductID(),data.getProductName(),data.getProductType(),data.getProductPrice()});
-            /*if (data.getProductType().equals("Electronics")){
-                //Electronic electronic=new Electronic();
-                dataRowLine[4]=electronic.getBrand()+" "+electronic.getWarrantyDays();
-            }*/
             productModel.addRow(dataRowLine);
         }
-
         productDataTable = new JTable(productModel);
         productDataTable.setSize(300,300);
 
         JTableHeader header = productDataTable.getTableHeader();
         header.setFont(new Font(header.getFont().getName(), Font.BOLD, header.getFont().getSize()));
-        //panelCenter.add(Box.createRigidArea(new Dimension(20, 0)));
-        //panelCenter.add(new JSeparator(SwingConstants.HORIZONTAL));
         JScrollPane scrollPane = new JScrollPane(productDataTable);
         scrollPane.setSize(300,300);
 
@@ -119,41 +111,56 @@ public class ShoppingCart extends JFrame {
         shoppingCart.add("Center", panelCenter);
         //------------------------------------------------//
         JPanel panelBottom=new JPanel(new GridLayout(8,2));
-        int topPadding = 20;
-        int leftPadding = 15;
         panelBottom.setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 10));
         JLabel selecetedTextLabel=new JLabel("Selected Product Details");
+        selecetedTextLabel.setFont(new Font("",2,15));
         panelBottom.add(selecetedTextLabel);
+        label1=new JLabel("Product ID : ");
+        label2=new JLabel("Product Name : ");
+        label3=new JLabel("Product Category : ");
+        label4=new JLabel("Product Price :");
+        label5=new JLabel("Product Available Qua. : ");
+        label6=new JLabel("");
+        label7=new JLabel("");
+
+        panelBottom.add(label1);
+        panelBottom.add(label2);
+        panelBottom.add(label3);
+        panelBottom.add(label4);
+        panelBottom.add(label5);
+        panelBottom.add(label6);
+        panelBottom.add(label7);
+
+        // Add ListSelectionListener to detect row selection changes
+        productDataTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    displaySelectedRowDetails();
+                }
+            }
+        });
         shoppingCart.add("South",panelBottom);
 
         /*shoppingCart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
         shoppingCart.setVisible(true);
     }
-
-    public void addAProduct() {
-        System.out.println("Adding a product");
-    }
-    /*this part should be edited later*/
-    public void removeAProduct(String productID) {/*here the id should be an input value this is temp.*/
-        for (Product product : productsCartList) {
-            if (product.getProductName().equals(productID)) {
-                productsCartList.remove(product);
-                System.out.println(productID + " removed from the cart.");
-                return;
+    private void displaySelectedRowDetails() {
+        int selectedRowIndex = productDataTable.getSelectedRow();
+        if (selectedRowIndex != -1) {
+            // Get the data from the selected row
+            Object productID = productDataTable.getValueAt(selectedRowIndex, 0);
+            WestminsterShoppingManager wsm=new WestminsterShoppingManager();
+            for (Product product:wsm.getProductsMainList()){
+                if (productID.equals(product.getProductID())){
+                    label1.setText("Product ID : "+product.getProductID());
+                    label2.setText("Product Type : "+product.getProductType());
+                    label3.setText("Product Name : "+product.getProductName());
+                    label4.setText("Product Price : "+product.getProductPrice());
+                    label5.setText("Available Quantity : "+product.getAvailableQuantity());
+                }
             }
         }
-        System.out.println(productID + " not found in the cart.");
     }
 
-    public double calculateTheTotal() {
-        double totalCost = 0;
-        for (Product product : productsCartList) {
-            totalCost += product.getProductPrice();
-        }
-        return totalCost;
-    }
-    public void setAnOption(){
-        Scanner input=new Scanner(System.in);
-
-    }
 }
