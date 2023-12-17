@@ -33,6 +33,6 @@ public class Electronic extends Product {
 
     @Override
     public void displayInfo() {
-        System.out.printf("%-10s%-20s%-10s%-10s%-20s%n", getProductID(), getProductName() + " by " + brand, "$ "+getProductPrice(), getAvailableQuantity(),"Warranty - "+getWarrantyDays() + " years  |- Electronic");
+        System.out.printf("%-10s%-20s%-10s%-10s%-20s%n", getProductID(), getProductName() + " by " + brand, "$ "+getProductPrice(), getAvailableQuantity(),"Warranty - "+getWarrantyDays() + " months  |- Electronic");
     }
 }

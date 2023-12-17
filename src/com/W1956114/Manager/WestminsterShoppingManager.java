@@ -230,9 +230,9 @@ public class WestminsterShoppingManager implements ShoppingManager{
             System.out.println("+----------Enter Valid Electronic Product Details----------+");
             ArrayList<Object> productDetailsList= (ArrayList<Object>) getProductDetails();
             System.out.print("Enter the brand of the product       : ");
-            String elecronicProductBrand=input.next();
+            String electronicProductBrand=input.next();
 
-            System.out.print("Enter the warranty period [in years] : ");
+            System.out.print("Enter the warranty period [in months] : ");
             int warrantyPeriod;
             while (true){
                 try{
@@ -248,7 +248,13 @@ public class WestminsterShoppingManager implements ShoppingManager{
                     System.out.print("Enter the warranty period [in years] : ");
                 }
             }
-            Product electronicProduct=new Electronic((String)productDetailsList.get(0),(String) productDetailsList.get(1), (String) productDetailsList.get(2), (Integer) productDetailsList.get(3), (Double) productDetailsList.get(4),elecronicProductBrand,warrantyPeriod);
+            Product electronicProduct=new Electronic("Electronic",//For an electronic item
+                    (String) productDetailsList.get(0),
+                    (String) productDetailsList.get(1),
+                    (Integer) productDetailsList.get(2),
+                    (Double) productDetailsList.get(3),
+                    electronicProductBrand,
+                    warrantyPeriod);
             getProductsMainList().add(electronicProduct);
             break;
         }while (true);
@@ -270,8 +276,13 @@ public class WestminsterShoppingManager implements ShoppingManager{
             }
             System.out.print("Enter the color of the cloth       :");
             String clothColor=input.next();
-            Product clothingProduct=new Clothing((String)productDetailsList.get(0),(String) productDetailsList.get(1), (String) productDetailsList.get(2), (Integer) productDetailsList.get(3), (Double) productDetailsList.get(4),clothSize,clothColor);
-            getProductsMainList().add(clothingProduct);
+            Product clothingProduct=new Clothing("Clothing", // For all the clothing products
+                    (String) productDetailsList.get(0),
+                    (String) productDetailsList.get(1),
+                    (Integer) productDetailsList.get(2),
+                    (Double) productDetailsList.get(3),
+                    clothSize,
+                    clothColor);
             break;
         }while (true);
     }
