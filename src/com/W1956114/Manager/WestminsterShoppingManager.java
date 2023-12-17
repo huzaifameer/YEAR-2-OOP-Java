@@ -122,12 +122,22 @@ public class WestminsterShoppingManager implements ShoppingManager{
             for (Product productDetails : getProductsMainList()) {
                 productWriter.write(row_Count+").\n");
                 productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+                productWriter.write("Product Type         : " + productDetails.getProductType()+"\n");
                 productWriter.write("Product ID           : " + productDetails.getProductID() + "\n");
                 productWriter.write("Product Name         : " + productDetails.getProductName() + "\n");
                 productWriter.write("Available Quantity   : " + productDetails.getAvailableQuantity() + "\n");
                 productWriter.write("Product Unit Price   : " +"$ "+productDetails.getProductPrice() + "\n");
-
-                if (productDetails instanceof Electronic) {//special details of Electronic products
+                for (int i=0;i<getProductsMainList().size();i++) {
+                    if (getProductsMainList().get(i).getProductType().equals("Electronic")) {
+                        Electronic electronicProduct = (Electronic) productDetails;//productDetails is cast into Electronic
+                        productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
+                    } else if (getProductsMainList().get(i).getProductType().equals("Clothing")) {
+                        Clothing clothingProduct = (Clothing) productDetails;//productDetails is cast into Clothing
+                        productWriter.write("Product Size         : " + clothingProduct.getClothSize() +"\n");
+                        productWriter.write("Product Color        : " + clothingProduct.getClothColor() +"\n");
+                    }
+                }
+                /*if (productDetails instanceof Electronic) {//special details of Electronic products
                     Electronic electronicProduct = (Electronic) productDetails;//productDetails is cast into Electronic
                     productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
                     productWriter.write("Warranty Period      : " + electronicProduct.getWarrantyDays() + " years\n");
@@ -137,7 +147,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
                     productWriter.write("Product Size         : " + clothingProduct.getClothSize() +"\n");
                     productWriter.write("Product Color        : " + clothingProduct.getClothColor() +"\n");
                     productWriter.write("This is a Clothing product");
-                }
+                }*/
                 productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
                 productWriter.write("\n"); // Add a blank line between products
                 row_Count+=1;
@@ -283,6 +293,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
                     (Double) productDetailsList.get(3),
                     clothSize,
                     clothColor);
+            getProductsMainList().add(clothingProduct);
             break;
         }while (true);
     }
