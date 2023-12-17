@@ -158,7 +158,6 @@ public class WestminsterShoppingManager implements ShoppingManager{
             //if there's an error the error will display through the print statement
         }
     }
-
     @Override
     public void readFromAFile() {
         System.out.println();
@@ -268,7 +267,6 @@ public class WestminsterShoppingManager implements ShoppingManager{
             getProductsMainList().add(electronicProduct);
             break;
         }while (true);
-
     }
     private void getClothingItem(){
         Scanner input=new Scanner(System.in);
@@ -393,7 +391,6 @@ public class WestminsterShoppingManager implements ShoppingManager{
         }
         return false;
     }
-
     public ArrayList<Product> getProductsMainList() {
         return productsMainList;
     }
