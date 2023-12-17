@@ -172,6 +172,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
         }
         System.out.println();
     }
+    //----------------Extra defined methods------------------//
     public int getSelectedOption(){
         Scanner inputOption=new Scanner(System.in);
         while (true){
