@@ -73,8 +73,12 @@ public class ShoppingCart extends JFrame {
 
         // Adding some sample data
         WestminsterShoppingManager shoppingManager=new WestminsterShoppingManager();
-        for (int i = 0; i < 43; i++) {
+        /*for (int i = 0; i < 43; i++) {
             productModel.addRow(new Object[]{"Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1)});
+        }*/
+        //
+        for(Product data: shoppingManager.getProductsMainList()){
+            productModel.addRow(new Object[]{data.getProductID(),data.getProductName(),data.getProductType(),data.getProductPrice(),data.getAvailableQuantity()});
         }
 
         productDataTable = new JTable(productModel);
