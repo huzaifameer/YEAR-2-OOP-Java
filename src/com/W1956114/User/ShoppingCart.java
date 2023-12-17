@@ -76,7 +76,7 @@ public class ShoppingCart extends JFrame {
         /*for (int i = 0; i < 43; i++) {
             productModel.addRow(new Object[]{"Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1), "Data " + (i + 1)});
         }*/
-        //
+        //setting the product's data into the table
         for(Product data: shoppingManager.getProductsMainList()){
             productModel.addRow(new Object[]{data.getProductID(),data.getProductName(),data.getProductType(),data.getProductPrice(),data.getAvailableQuantity()});
         }
