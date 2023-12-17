@@ -126,27 +126,24 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 productWriter.write("Product ID           : " + productDetails.getProductID() + "\n");
                 productWriter.write("Product Name         : " + productDetails.getProductName() + "\n");
                 productWriter.write("Available Quantity   : " + productDetails.getAvailableQuantity() + "\n");
-                productWriter.write("Product Unit Price   : " +"$ "+productDetails.getProductPrice() + "\n");
-                for (int i=0;i<getProductsMainList().size();i++) {
-                    if (getProductsMainList().get(i).getProductType().equals("Electronic")) {
-                        Electronic electronicProduct = (Electronic) productDetails;//productDetails is cast into Electronic
-                        productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
-                    } else if (getProductsMainList().get(i).getProductType().equals("Clothing")) {
-                        Clothing clothingProduct = (Clothing) productDetails;//productDetails is cast into Clothing
-                        productWriter.write("Product Size         : " + clothingProduct.getClothSize() +"\n");
-                        productWriter.write("Product Color        : " + clothingProduct.getClothColor() +"\n");
-                    }
+                productWriter.write("Product Unit Price   : " +"€ "+productDetails.getProductPrice() + "\n");
+                if (productDetails.getProductType().equals("Electronic")) {
+                    Electronic electronicProduct = (Electronic) productDetails;
+                    productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
+                    productWriter.write("Warranty Period      : " + electronicProduct.getWarrantyDays() + " Months\n");
+                } else if (productDetails.getProductType().equals("Clothing")) {
+                    Clothing clothingProduct = (Clothing) productDetails;
+                    productWriter.write("Product Size         : " + clothingProduct.getClothSize() + "\n");
+                    productWriter.write("Product Color        : " + clothingProduct.getClothColor() + "\n");
                 }
                 /*if (productDetails instanceof Electronic) {//special details of Electronic products
                     Electronic electronicProduct = (Electronic) productDetails;//productDetails is cast into Electronic
                     productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
                     productWriter.write("Warranty Period      : " + electronicProduct.getWarrantyDays() + " years\n");
-                    productWriter.write("This is a Electronic product");
                 } else if (productDetails instanceof Clothing) {//special details of Clothing products
                     Clothing clothingProduct = (Clothing) productDetails;//productDetails is cast into Clothing
                     productWriter.write("Product Size         : " + clothingProduct.getClothSize() +"\n");
                     productWriter.write("Product Color        : " + clothingProduct.getClothColor() +"\n");
-                    productWriter.write("This is a Clothing product");
                 }*/
                 productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
                 productWriter.write("\n"); // Add a blank line between products
@@ -238,7 +235,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
         do {
             System.out.println("+----------Enter Valid Electronic Product Details----------+");
             ArrayList<Object> productDetailsList= (ArrayList<Object>) getProductDetails();
-            System.out.print("Enter the brand of the product       : ");
+            System.out.print("Enter the brand of the product        : ");
             String electronicProductBrand=input.next();
 
             System.out.print("Enter the warranty period [in months] : ");
