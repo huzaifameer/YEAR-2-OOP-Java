@@ -215,14 +215,14 @@ public class ShoppingCart extends JFrame {
         tableSorter.setRowFilter(rowFilter);
     }
     private void openShoppingCartPanel() {
-        // Create a new JFrame for the shopping cart
-        JFrame shoppingCartFrame = new JFrame("Shopping Cart");
-        shoppingCartFrame.setSize(500, 500);
+        // Creating a new JFrame for the shopping cart to display the added products
+        JFrame shoppingCartGUI = new JFrame("Shopping Cart");
+        shoppingCartGUI.setSize(500, 500);
 
         // You can customize the shopping cart GUI here
 
-        // Display the shopping cart GUI
-        shoppingCartFrame.setVisible(true);
+        // Display the products cart
+        shoppingCartGUI.setVisible(true);
     }
 
 }
