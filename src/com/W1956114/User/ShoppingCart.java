@@ -58,6 +58,13 @@ public class ShoppingCart extends JFrame {
         JLabel gapLabel1=new JLabel();
         panelTop.add(gapLabel1);
         shoppingCartButton.setSize(200,40);
+        shoppingCartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Opening the UI for the shopping cart
+                openShoppingCartPanel();
+            }
+        });
         panelTop.add(shoppingCartButton);
 
         shoppingCart.add("North",panelTop);
@@ -138,12 +145,9 @@ public class ShoppingCart extends JFrame {
         panelBottom.add(label7);
 
         // Add ListSelectionListener to detect row selection changes
-        productDataTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    displaySelectedRowDetails();
-                }
+        productDataTable.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                displaySelectedRowDetails();
             }
         });
         JLabel gapLabel2=new JLabel();
@@ -209,6 +213,16 @@ public class ShoppingCart extends JFrame {
             }
         };
         tableSorter.setRowFilter(rowFilter);
+    }
+    private void openShoppingCartPanel() {
+        // Create a new JFrame for the shopping cart
+        JFrame shoppingCartFrame = new JFrame("Shopping Cart");
+        shoppingCartFrame.setSize(500, 500);
+
+        // You can customize the shopping cart GUI here
+
+        // Display the shopping cart GUI
+        shoppingCartFrame.setVisible(true);
     }
 
 }
