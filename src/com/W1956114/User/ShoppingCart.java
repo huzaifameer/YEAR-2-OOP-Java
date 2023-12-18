@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 public class ShoppingCart extends JFrame {
     private final JComboBox<String> productTypeDropdown ;
     private JTable productDataTable;
+    private JButton addToCart;
     private static TableRowSorter<DefaultTableModel> tableSorter;
     private JLabel label1, label2, label3, label4, label5,label6,label7;
 
@@ -26,7 +27,7 @@ public class ShoppingCart extends JFrame {
     //private final ArrayList<Product> productsCartList = new ArrayList<>();
     public ShoppingCart(){
         JFrame shoppingCart=new JFrame();
-        shoppingCart.setSize(500,600);
+        shoppingCart.setSize(500,650);
 
         shoppingCart.setTitle("Westminster Shopping Center");
         //JPanel panelTop=new JPanel(new GridLayout(1,4));
@@ -54,8 +55,8 @@ public class ShoppingCart extends JFrame {
         panelTop.add(productTypeDropdown);
 
         JButton shoppingCartButton = new JButton("Shopping Cart");
-        JLabel gap=new JLabel();
-        panelTop.add(gap);
+        JLabel gapLabel1=new JLabel();
+        panelTop.add(gapLabel1);
         shoppingCartButton.setSize(200,40);
         panelTop.add(shoppingCartButton);
 
@@ -115,7 +116,7 @@ public class ShoppingCart extends JFrame {
 
         shoppingCart.add("Center", panelCenter);
         //------------------------------------------------//
-        JPanel panelBottom=new JPanel(new GridLayout(8,2));
+        JPanel panelBottom=new JPanel(new GridLayout(10,1));
         panelBottom.setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 10));
         JLabel selecetedTextLabel=new JLabel("Selected Product Details");
         selecetedTextLabel.setFont(new Font("",2,15));
@@ -145,6 +146,19 @@ public class ShoppingCart extends JFrame {
                 }
             }
         });
+        JLabel gapLabel2=new JLabel();
+        panelBottom.add(gapLabel2);
+        JPanel panelBottomButton=new JPanel(new GridLayout(1,3));
+        JLabel leftLabel=new JLabel();
+        panelBottomButton.add(leftLabel);
+        addToCart=new JButton("Add to Shopping Cart");
+        addToCart.setMinimumSize(new Dimension(150, 30));
+        panelBottomButton.add(addToCart);
+        JLabel rightLabel=new JLabel();
+        panelBottomButton.add(rightLabel);
+        //addToCart.setSize(100,50);
+
+        panelBottom.add("South",panelBottomButton);
         shoppingCart.add("South",panelBottom);
 
         /*shoppingCart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
@@ -184,20 +198,16 @@ public class ShoppingCart extends JFrame {
                 if ("All".equals(selectedProductType)) {
                     return true; // Show all rows
                 }
-
                 String category = (String) entry.getValue(2); // Assuming category is at index 2
                 if ("Electronic".equals(selectedProductType)) {
                     return "Electronic".equals(category);
                 } else if ("Clothing".equals(selectedProductType)) {
                     return "Clothing".equals(category);
                 } else {
-
                     return false;
                 }
             }
         };
-
-        // Apply the filter
         tableSorter.setRowFilter(rowFilter);
     }
 
