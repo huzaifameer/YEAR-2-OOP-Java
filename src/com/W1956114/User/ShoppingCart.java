@@ -10,16 +10,18 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class ShoppingCart extends JFrame {
     private final JComboBox<String> productTypeDropdown ;
     private JTable productDataTable;
+    private static TableRowSorter<DefaultTableModel> tableSorter;
     private JLabel label1, label2, label3, label4, label5,label6,label7;
+
     /*------------------------------------------------------------*/
     //private final ArrayList<Product> productsCartList = new ArrayList<>();
     public ShoppingCart(){
@@ -44,9 +46,9 @@ public class ShoppingCart extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Get the selected product type from the dropdown
-                String selectedProductType = (String) productTypeDropdown.getSelectedItem();
-                // Perform actions based on the selected product type
-                System.out.println("Selected Product Type: " + selectedProductType);
+                String selectedType = (String) productTypeDropdown.getSelectedItem();
+                filteringTheTable(selectedType);
+
             }
         });
         panelTop.add(productTypeDropdown);
@@ -66,14 +68,14 @@ public class ShoppingCart extends JFrame {
         panelCenter.setBorder(BorderFactory.createEmptyBorder(0, horizontalPadding, 0, horizontalPadding));
 
         // Creating a sample table model with 5 columns
-        DefaultTableModel productModel = new DefaultTableModel();
+        DefaultTableModel productTableModel = new DefaultTableModel();
         // Set row height
 
-        productModel.addColumn("Product ID");
-        productModel.addColumn("Name");
-        productModel.addColumn("Category");
-        productModel.addColumn("Price ($)");
-        productModel.addColumn("Info");
+        productTableModel.addColumn("Product ID");
+        productTableModel.addColumn("Name");
+        productTableModel.addColumn("Category");
+        productTableModel.addColumn("Price ($)");
+        productTableModel.addColumn("Info");
 
         // Adding some sample data
         WestminsterShoppingManager shoppingManager=new WestminsterShoppingManager();
@@ -96,9 +98,9 @@ public class ShoppingCart extends JFrame {
                     rowData.getProductPrice(),
                     additionalDetails
             };
-            productModel.addRow(dataRowLine);
+            productTableModel.addRow(dataRowLine);
         }
-        productDataTable = new JTable(productModel);
+        productDataTable = new JTable(productTableModel);
         productDataTable.setSize(300,300);
 
         JTableHeader header = productDataTable.getTableHeader();
@@ -108,6 +110,9 @@ public class ShoppingCart extends JFrame {
 
         panelCenter.add(scrollPane, BorderLayout.CENTER);
 
+        tableSorter = new TableRowSorter<>(productTableModel);
+        productDataTable.setRowSorter(tableSorter);
+
         shoppingCart.add("Center", panelCenter);
         //------------------------------------------------//
         JPanel panelBottom=new JPanel(new GridLayout(8,2));
@@ -115,13 +120,13 @@ public class ShoppingCart extends JFrame {
         JLabel selecetedTextLabel=new JLabel("Selected Product Details");
         selecetedTextLabel.setFont(new Font("",2,15));
         panelBottom.add(selecetedTextLabel);
-        label1=new JLabel("Product ID : ");
-        label2=new JLabel("Product Name : ");
-        label3=new JLabel("Product Category : ");
-        label4=new JLabel("Product Price :");
-        label5=new JLabel("Product Available Qua. : ");
-        label6=new JLabel("");
-        label7=new JLabel("");
+        label1=new JLabel(" ");
+        label2=new JLabel(" ");
+        label3=new JLabel(" ");
+        label4=new JLabel(" ");
+        label5=new JLabel(" ");
+        label6=new JLabel(" ");
+        label7=new JLabel(" ");
 
         panelBottom.add(label1);
         panelBottom.add(label2);
@@ -156,11 +161,44 @@ public class ShoppingCart extends JFrame {
                     label1.setText("Product ID : "+product.getProductID());
                     label2.setText("Product Type : "+product.getProductType());
                     label3.setText("Product Name : "+product.getProductName());
-                    label4.setText("Product Price : "+product.getProductPrice());
+                    label4.setText("Product Price : $ "+product.getProductPrice());
                     label5.setText("Available Quantity : "+product.getAvailableQuantity());
+                    if (product.getProductType().equals("Electronic")){
+                        Electronic electronic=(Electronic)product;
+                        label6.setText("Product Brand : "+electronic.getBrand());
+                        label7.setText("Warranty Period : "+electronic.getWarrantyDays()+" Months");
+                    }else{
+                        Clothing clothing=(Clothing)product;
+                        label6.setText("Product Size : "+clothing.getClothSize());
+                        label7.setText("Product Color : "+clothing.getClothColor());
+                    }
                 }
             }
         }
+    }
+    private void filteringTheTable(String selectedProductType) {
+        RowFilter<DefaultTableModel, Object> rowFilter = new RowFilter<DefaultTableModel, Object>() {
+            @Override
+            public boolean include(Entry<? extends DefaultTableModel, ? extends Object> entry) {
+                // Customize the filtering logic based on the selected product type
+                if ("All".equals(selectedProductType)) {
+                    return true; // Show all rows
+                }
+
+                String category = (String) entry.getValue(2); // Assuming category is at index 2
+                if ("Electronic".equals(selectedProductType)) {
+                    return "Electronic".equals(category);
+                } else if ("Clothing".equals(selectedProductType)) {
+                    return "Clothing".equals(category);
+                } else {
+
+                    return false;
+                }
+            }
+        };
+
+        // Apply the filter
+        tableSorter.setRowFilter(rowFilter);
     }
 
 }
