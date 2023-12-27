@@ -206,7 +206,7 @@ public class ShoppingCart extends JFrame {
             public boolean include(Entry<? extends DefaultTableModel, ? extends Object> entry) {
                 // Customize the filtering logic based on the selected product type
                 if ("All".equals(selectedProductType)) {
-                    return true; // Show all rows
+                    return true; // Displaying all rows when the "All" option selected
                 }
                 String category = (String) entry.getValue(2); // Assuming category is at index 2
                 if ("Electronic".equals(selectedProductType)) {
