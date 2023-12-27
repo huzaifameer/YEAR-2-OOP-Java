@@ -32,10 +32,10 @@ public class ShoppingCart extends JFrame {
     /*------------------------------------------------------------*/
     //private final ArrayList<Product> productsCartList = new ArrayList<>();
     public ShoppingCart(){
-        JFrame shoppingCart=new JFrame();
-        shoppingCart.setSize(500,650);
+        JFrame westminsterShoppingCenter=new JFrame();
+        westminsterShoppingCenter.setSize(500,650);
 
-        shoppingCart.setTitle("Westminster Shopping Center");
+        westminsterShoppingCenter.setTitle("Westminster Shopping Center");
         //JPanel panelTop=new JPanel(new GridLayout(1,4));
         //---creating the left top label with the text
         JPanel panelTop = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 20));
@@ -73,7 +73,7 @@ public class ShoppingCart extends JFrame {
         });
         panelTop.add(shoppingCartButton);
 
-        shoppingCart.add("North",panelTop);
+        westminsterShoppingCenter.add("North",panelTop);
         //---------------------------------------------//
         // Center panel with JTable
         JPanel panelCenter = new JPanel(new BorderLayout());
@@ -127,7 +127,7 @@ public class ShoppingCart extends JFrame {
         tableSorter = new TableRowSorter<>(productTableModel);
         productDataTable.setRowSorter(tableSorter);
 
-        shoppingCart.add("Center", panelCenter);
+        westminsterShoppingCenter.add("Center", panelCenter);
         //------------------------------------------------//
         JPanel panelBottom=new JPanel(new GridLayout(10,1));
         panelBottom.setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 10));
@@ -169,11 +169,10 @@ public class ShoppingCart extends JFrame {
         //addToCart.setSize(100,50);
 
         panelBottom.add("South",panelBottomButton);
-        shoppingCart.add("South",panelBottom);
+        westminsterShoppingCenter.add("South",panelBottom);
 
-        shoppingCart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*shoppingCart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
-        shoppingCart.setVisible(true);
+        westminsterShoppingCenter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        westminsterShoppingCenter.setVisible(true);
     }
     private void displaySelectedRowDetails() {
         int selectedRowIndex = productDataTable.getSelectedRow();
