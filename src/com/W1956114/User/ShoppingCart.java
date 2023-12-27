@@ -171,6 +171,7 @@ public class ShoppingCart extends JFrame {
         panelBottom.add("South",panelBottomButton);
         shoppingCart.add("South",panelBottom);
 
+        shoppingCart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*shoppingCart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
         shoppingCart.setVisible(true);
     }
@@ -227,8 +228,10 @@ public class ShoppingCart extends JFrame {
 
         // You can customize the shopping cart GUI here
 
+        shoppingCartGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Display the products cart
         shoppingCartGUI.setVisible(true);
+
     }
 
 }
