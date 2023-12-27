@@ -225,7 +225,8 @@ public class ShoppingCart extends JFrame {
         JFrame shoppingCartGUI = new JFrame("Shopping Cart");
         shoppingCartGUI.setSize(500, 500);
 
-        // You can customize the shopping cart GUI here
+        JPanel mainPanel=new JPanel(new GridLayout(2,1));
+        shoppingCartGUI.add(mainPanel);
 
         shoppingCartGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Display the products cart
