@@ -18,10 +18,16 @@ import java.awt.event.ActionListener;
 
 public class ShoppingCart extends JFrame {
     private final JComboBox<String> productTypeDropdown ;
-    private JTable productDataTable;
+    private final JTable productDataTable;
     private JButton addToCart;
     private static TableRowSorter<DefaultTableModel> tableSorter;
-    private JLabel label1, label2, label3, label4, label5,label6,label7;
+    private final JLabel label1;
+    private final JLabel label2;
+    private final JLabel label3;
+    private final JLabel label4;
+    private final JLabel label5;
+    private final JLabel label6;
+    private final JLabel label7;
 
     /*------------------------------------------------------------*/
     //private final ArrayList<Product> productsCartList = new ArrayList<>();
