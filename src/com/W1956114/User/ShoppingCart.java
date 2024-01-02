@@ -35,6 +35,7 @@ public class ShoppingCart extends JFrame {
     private final JLabel dataExtraLabel1=new JLabel("");
     private final JLabel dataExtraLabel2=new JLabel("");
     private final JLabel dataPriceLabel=new JLabel("");
+    private final WestminsterShoppingManager shoppingManager=new WestminsterShoppingManager();
 
     /*------------------------------------------------------------*/
     //private final ArrayList<Product> productsCartList = new ArrayList<>();
@@ -251,6 +252,7 @@ public class ShoppingCart extends JFrame {
 
         /*-------------------------------*/
         addToCart.addActionListener(new ActionListener() {
+            WestminsterShoppingManager wsm2=new WestminsterShoppingManager();
             @Override
             public void actionPerformed(ActionEvent e) {
                 String productDetails = dataIDLabel.getText() + " " + dataNameLabel.getText()+" "+dataExtraLabel1.getText()+" "+dataExtraLabel2.getText();
@@ -258,7 +260,7 @@ public class ShoppingCart extends JFrame {
                 double productPrice = Double.parseDouble(dataPriceLabel.getText()); // Assuming you have a JTextField for price
                 // Adding a new row to the table
                 int checkExistingRowIndex = findTheProductIndex(productDetails);//checking the existing product in the table
-                if (checkExistingRowIndex != -1) {
+                /*if (checkExistingRowIndex != -1) {
                     // adding product already exists in the cart, so update quantity and price
                     int currentProductQuantity = (int) shoppingCartModel.getValueAt(checkExistingRowIndex, 1);
                     double currentProductPrice = (double) shoppingCartModel.getValueAt(checkExistingRowIndex, 2);
@@ -269,12 +271,57 @@ public class ShoppingCart extends JFrame {
                     // if the adding product does not exist, this line will add a new row to the table
                     Object[] newData = {productDetails, productQuantity, productPrice};
                     shoppingCartModel.addRow(newData);
+                }*/
+                String productID=dataIDLabel.getText();
+                // Check if the product exists in the system
+                Product selectedProduct=null;
+                for (Product prod:wsm2.getProductsMainList()){
+                    if (productID.equals(prod.getProductID())){
+                        selectedProduct = prod;
+                    }
                 }
+
+
+                if (checkExistingRowIndex != -1 && selectedProduct != null && selectedProduct.getAvailableQuantity() > 0) {
+                    // Product already exists in the cart, update quantity and price
+                    int currentProductQuantity = (int) shoppingCartModel.getValueAt(checkExistingRowIndex, 1);
+                    double currentProductPrice = (double) shoppingCartModel.getValueAt(checkExistingRowIndex, 2);
+
+                    // Check if available quantity is sufficient in the system
+                    if (selectedProduct.getAvailableQuantity() >= (currentProductQuantity + productQuantity)) {
+                        shoppingCartModel.setValueAt(currentProductQuantity + productQuantity, checkExistingRowIndex, 1);
+                        shoppingCartModel.setValueAt(currentProductPrice + productPrice, checkExistingRowIndex, 2);
+
+                        // Update available quantity in the system
+                        selectedProduct.setAvailableQuantity(selectedProduct.getAvailableQuantity() - productQuantity);
+
+                        // Update the label in the UI
+                        label5.setText("Available Quantity : " + selectedProduct.getAvailableQuantity());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Insufficient available quantity in the system.");
+                    }
+                } else {
+                    // when the Product does not exist in the cart, this line will add a new row to the table
+                    if (selectedProduct != null && selectedProduct.getAvailableQuantity() >= productQuantity) {
+                        Object[] newData = {productDetails, productQuantity, productPrice};
+                        shoppingCartModel.addRow(newData);
+
+                        // Updating the available quantity in the system
+                        selectedProduct.setAvailableQuantity(selectedProduct.getAvailableQuantity() - productQuantity);
+
+                        // Updating the label in the GUI
+                        label5.setText("Available Quantity : " + selectedProduct.getAvailableQuantity());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Product not found or insufficient available quantity in the system.");
+                    }
+                }
+
+
             }
         });
         /*-------------------------------*/
 
-        shoppingCartUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        shoppingCartUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         // Display the products cart
         shoppingCartUI.setVisible(true);
 
