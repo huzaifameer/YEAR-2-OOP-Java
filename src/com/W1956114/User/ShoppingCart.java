@@ -21,6 +21,7 @@ public class ShoppingCart extends JFrame {
     private final JTable productDataTable;
     private JButton addToCart;
     private static TableRowSorter<DefaultTableModel> tableModelSorter;
+    private static DefaultTableModel shoppingCartModel;
     private final JLabel label1;
     private final JLabel label2;
     private final JLabel label3;
@@ -28,6 +29,12 @@ public class ShoppingCart extends JFrame {
     private final JLabel label5;
     private final JLabel label6;
     private final JLabel label7;
+    private final JLabel dataTypeLabel=new JLabel("");
+    private final JLabel dataIDLabel=new JLabel("");
+    private final JLabel dataNameLabel=new JLabel("");
+    private final JLabel dataExtraLabel1=new JLabel("");
+    private final JLabel dataExtraLabel2=new JLabel("");
+    private final JLabel dataPriceLabel=new JLabel("");
 
     /*------------------------------------------------------------*/
     //private final ArrayList<Product> productsCartList = new ArrayList<>();
@@ -183,18 +190,26 @@ public class ShoppingCart extends JFrame {
             for (Product product:wsm.getProductsMainList()){
                 if (productID.equals(product.getProductID())){
                     label1.setText("Product ID : "+product.getProductID());
+                    dataIDLabel.setText(product.getProductID());
                     label2.setText("Product Type : "+product.getProductType());
+                    dataTypeLabel.setText(product.getProductType());
                     label3.setText("Product Name : "+product.getProductName());
+                    dataNameLabel.setText(product.getProductName());
                     label4.setText("Product Price : $ "+product.getProductPrice());
+                    dataPriceLabel.setText(product.getProductPrice()+"");
                     label5.setText("Available Quantity : "+product.getAvailableQuantity());
                     if (product.getProductType().equals("Electronic")){
                         Electronic electronic=(Electronic)product;
                         label6.setText("Product Brand : "+electronic.getBrand());
+                        dataExtraLabel1.setText(electronic.getBrand());
                         label7.setText("Warranty Period : "+electronic.getWarrantyDays()+" Months");
+                        dataExtraLabel2.setText(electronic.getWarrantyDays()+" Months");
                     }else{
                         Clothing clothing=(Clothing)product;
                         label6.setText("Product Size : "+clothing.getClothSize());
+                        dataExtraLabel1.setText(clothing.getClothSize());
                         label7.setText("Product Color : "+clothing.getClothColor());
+                        dataExtraLabel2.setText(clothing.getClothColor());
                     }
                 }
             }
@@ -229,15 +244,48 @@ public class ShoppingCart extends JFrame {
         shoppingCartUI.add(mainPanel);
         String[] columnData = {"Product", "Quantity", "Price"};
 
-        DefaultTableModel shoppingModel=new DefaultTableModel(columnData,0);
-        JTable shoppingCartTable=new JTable(shoppingModel);
+        shoppingCartModel=new DefaultTableModel(columnData,0);
+        JTable shoppingCartTable=new JTable(shoppingCartModel);
         JScrollPane scrollPane=new JScrollPane(shoppingCartTable);
         mainPanel.add(scrollPane);
+
+        /*-------------------------------*/
+        addToCart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String productDetails = dataIDLabel.getText() + " " + dataNameLabel.getText()+" "+dataExtraLabel1.getText()+" "+dataExtraLabel2.getText();
+                int productQuantity = 1; // Assuming you have a JTextField for quantity
+                double productPrice = Double.parseDouble(dataPriceLabel.getText()); // Assuming you have a JTextField for price
+                // Adding a new row to the table
+                int checkExistingRowIndex = findTheProductIndex(productDetails);//checking the existing product in the table
+                if (checkExistingRowIndex != -1) {
+                    // adding product already exists in the cart, so update quantity and price
+                    int currentProductQuantity = (int) shoppingCartModel.getValueAt(checkExistingRowIndex, 1);
+                    double currentProductPrice = (double) shoppingCartModel.getValueAt(checkExistingRowIndex, 2);
+
+                    shoppingCartModel.setValueAt(currentProductQuantity + productQuantity, checkExistingRowIndex, 1);
+                    shoppingCartModel.setValueAt(currentProductPrice + productPrice, checkExistingRowIndex, 2);
+                } else {
+                    // if the adding product does not exist, this line will add a new row to the table
+                    Object[] newData = {productDetails, productQuantity, productPrice};
+                    shoppingCartModel.addRow(newData);
+                }
+            }
+        });
+        /*-------------------------------*/
 
         shoppingCartUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Display the products cart
         shoppingCartUI.setVisible(true);
 
+    }
+    private int findTheProductIndex(String productName) {
+        for (int i = 0; i < shoppingCartModel.getRowCount(); i++) {
+            if (productName.equals(shoppingCartModel.getValueAt(i, 0))) {
+                return i; //if the product found this will return the index of the value
+            }
+        }
+        return -1; // returns the value when the product not founded
     }
 
 }
