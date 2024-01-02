@@ -1,5 +1,6 @@
 package com.W1956114.User;
 
+import com.W1956114.Main;
 import com.W1956114.Manager.WestminsterShoppingManager;
 import com.W1956114.SubClasses.Clothing;
 import com.W1956114.SubClasses.Electronic;
@@ -38,6 +39,10 @@ public class ShoppingCart extends JFrame {
     private final JLabel dataExtraLabel1=new JLabel("");
     private final JLabel dataExtraLabel2=new JLabel("");
     private final JLabel dataPriceLabel=new JLabel("");
+    private final JLabel totalPriceLabel=new JLabel();
+    private final JLabel firstBuyDiscount=new JLabel();
+    private final JLabel sameCategoryDiscountLabel=new JLabel();
+    private final JLabel finalTotalLabel=new JLabel();
 
     /*------------------------------------------------------------*/
     public ShoppingCart(){
@@ -282,7 +287,18 @@ public class ShoppingCart extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String productDetails = dataIDLabel.getText() + " " + dataNameLabel.getText()+" "+dataExtraLabel1.getText()+" "+dataExtraLabel2.getText();
                 int productQuantity = 1; // Assuming you have a JTextField for quantity
-                double productPrice = Double.parseDouble(dataPriceLabel.getText()); // Assuming you have a JTextField for price
+                //double productPrice = Double.parseDouble(dataPriceLabel.getText()); // Assuming you have a JTextField for price
+                double productPrice;
+                try {
+                    productPrice = Double.parseDouble(dataPriceLabel.getText());
+                    // Rest of your code that uses productPrice
+                } catch (NumberFormatException error) {
+                    // Handle the exception, e.g., display an error message or log it
+                    JOptionPane.showMessageDialog(null, "No Products Selected !");
+                    // Optionally, set a default value or take appropriate action
+                    return; // or any default value
+                    // Rest of your code that uses productPrice
+                }
                 // Adding a new row to the table
                 int checkExistingRowIndex = findTheProductIndex(productDetails);//checking the existing product in the table
 
@@ -302,7 +318,7 @@ public class ShoppingCart extends JFrame {
                     double currentProductPrice = (double) shoppingCartModel.getValueAt(checkExistingRowIndex, 2);
 
                     // Check if available quantity is sufficient in the system
-                    if (selectedProduct.getAvailableQuantity() >= (currentProductQuantity + productQuantity)) {
+                    if (selectedProduct.getAvailableQuantity() >= 1) {
                         shoppingCartModel.setValueAt(currentProductQuantity + productQuantity, checkExistingRowIndex, 1);
                         shoppingCartModel.setValueAt(currentProductPrice + productPrice, checkExistingRowIndex, 2);
 
@@ -316,7 +332,7 @@ public class ShoppingCart extends JFrame {
                     }
                 } else {
                     // when the Product does not exist in the cart, this line will add a new row to the table
-                    if (selectedProduct != null && selectedProduct.getAvailableQuantity() >= productQuantity) {
+                    if (selectedProduct != null && selectedProduct.getAvailableQuantity() >= 1) {
                         Object[] newData = {productDetails, productQuantity, productPrice};
                         shoppingCartModel.addRow(newData);
 
@@ -326,14 +342,29 @@ public class ShoppingCart extends JFrame {
                         // Updating the label in the GUI
                         label5.setText("Available Quantity : " + selectedProduct.getAvailableQuantity());
                     } else {
-                        JOptionPane.showMessageDialog(null, "Product not found or insufficient available quantity in the system.");
+                        JOptionPane.showMessageDialog(null, "Insufficient available quantity in the system.");
                     }
                 }
-
+                // Calculate total value and update the label
+                double totalValue = calculateTotalPrice();
+                totalPriceLabel.setText("Total : $" + totalValue);
+                //first buy discount
+                firstBuyDiscount.setText("First Purchase Discount (10%) : ");
+                double discountSame=calculateTheDiscountSameProduct(totalValue);
+                sameCategoryDiscountLabel.setText("Three items in same category Discount (20%) : "+discountSame);
+                finalTotalLabel.setText("Final Total : "+(totalValue-discountSame));
 
             }
         });
         /*-------------------------------*/
+        /*total*/
+        JPanel shopCartDownPanel=new JPanel(new GridLayout(4,1));
+
+        shopCartDownPanel.add(totalPriceLabel);
+        shopCartDownPanel.add(sameCategoryDiscountLabel);
+        shopCartDownPanel.add(finalTotalLabel);
+        mainPanel.add(shopCartDownPanel);
+        /*total*/
 
         shoppingCartUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         // Display the products cart
@@ -347,6 +378,27 @@ public class ShoppingCart extends JFrame {
             }
         }
         return -1; // returns the value when the product not founded
+    }
+    // Add these methods to your ShoppingCart class
+    private double calculateTotalPrice() {
+        double totalValue = 0;
+        for (int i = 0; i < shoppingCartModel.getRowCount(); i++) {
+            //int quantity = (int) shoppingCartModel.getValueAt(i, 1);
+            double price = (double) shoppingCartModel.getValueAt(i, 2);
+            totalValue +=price;
+        }
+        return totalValue;
+    }
+
+    private double calculateTheDiscountSameProduct(double total){
+        double discountedValue=0;
+        for (int i = 0; i < shoppingCartModel.getRowCount(); i++) {
+            int quantity = (int) shoppingCartModel.getValueAt(i, 1);
+            if (quantity>=3){
+                discountedValue=Math.round(total*0.2);//this will roundup the decimal values
+            }
+        }
+        return discountedValue;
     }
 
 }
