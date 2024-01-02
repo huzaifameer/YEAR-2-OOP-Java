@@ -306,7 +306,7 @@ public class ShoppingCart extends JFrame {
                         shoppingCartModel.setValueAt(currentProductQuantity + productQuantity, checkExistingRowIndex, 1);
                         shoppingCartModel.setValueAt(currentProductPrice + productPrice, checkExistingRowIndex, 2);
 
-                        // Update available quantity in the system
+                        // Updates the available quantity in the system
                         selectedProduct.setAvailableQuantity(selectedProduct.getAvailableQuantity() - productQuantity);
 
                         // Update the label in the UI
