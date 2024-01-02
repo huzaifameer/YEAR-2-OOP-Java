@@ -20,7 +20,7 @@ public class ShoppingCart extends JFrame {
     private final JComboBox<String> productTypeDropdown ;
     private final JTable productDataTable;
     private JButton addToCart;
-    private static TableRowSorter<DefaultTableModel> tableSorter;
+    private static TableRowSorter<DefaultTableModel> tableModelSorter;
     private final JLabel label1;
     private final JLabel label2;
     private final JLabel label3;
@@ -124,8 +124,8 @@ public class ShoppingCart extends JFrame {
 
         panelCenter.add(scrollPane, BorderLayout.CENTER);
 
-        tableSorter = new TableRowSorter<>(productTableModel);
-        productDataTable.setRowSorter(tableSorter);
+        tableModelSorter = new TableRowSorter<>(productTableModel);
+        productDataTable.setRowSorter(tableModelSorter);
 
         westminsterShoppingCenter.add("Center", panelCenter);
         //------------------------------------------------//
@@ -203,7 +203,7 @@ public class ShoppingCart extends JFrame {
     private void filteringTheTable(String selectedProductType) {
         RowFilter<DefaultTableModel, Object> rowFilter = new RowFilter<DefaultTableModel, Object>() {
             @Override
-            public boolean include(Entry<? extends DefaultTableModel, ? extends Object> entry) {
+            public boolean include(Entry <? extends DefaultTableModel, ? extends Object> entry) {
                 // Customize the filtering logic based on the selected product type
                 if ("All".equals(selectedProductType)) {
                     return true; // Displaying all rows when the "All" option selected
@@ -218,19 +218,19 @@ public class ShoppingCart extends JFrame {
                 }
             }
         };
-        tableSorter.setRowFilter(rowFilter);
+        tableModelSorter.setRowFilter(rowFilter);
     }
     private void openShoppingCartPanel() {
         // Creating a new JFrame for the shopping cart to display the added products
-        JFrame shoppingCartGUI = new JFrame("Shopping Cart");
-        shoppingCartGUI.setSize(500, 500);
+        JFrame shoppingCartUI = new JFrame("Shopping Cart");
+        shoppingCartUI.setSize(500, 500);
 
         JPanel mainPanel=new JPanel(new GridLayout(2,1));
-        shoppingCartGUI.add(mainPanel);
+        shoppingCartUI.add(mainPanel);
 
-        shoppingCartGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        shoppingCartUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Display the products cart
-        shoppingCartGUI.setVisible(true);
+        shoppingCartUI.setVisible(true);
 
     }
 
