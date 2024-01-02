@@ -8,6 +8,7 @@ import com.W1956114.Super.Product;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
@@ -21,7 +22,8 @@ public class ShoppingCart extends JFrame {
     private final JTable productDataTable;
     private JButton addToCart;
     private static TableRowSorter<DefaultTableModel> tableModelSorter;
-    private static DefaultTableModel shoppingCartModel;
+    private static DefaultTableModel shoppingCartModel;// default table model for the shopping cart table
+    /*creating the list of labels to display the product's details start */
     private final JLabel label1;
     private final JLabel label2;
     private final JLabel label3;
@@ -29,16 +31,15 @@ public class ShoppingCart extends JFrame {
     private final JLabel label5;
     private final JLabel label6;
     private final JLabel label7;
+    /*creating the list of labels to display the product's details start */
     private final JLabel dataTypeLabel=new JLabel("");
     private final JLabel dataIDLabel=new JLabel("");
     private final JLabel dataNameLabel=new JLabel("");
     private final JLabel dataExtraLabel1=new JLabel("");
     private final JLabel dataExtraLabel2=new JLabel("");
     private final JLabel dataPriceLabel=new JLabel("");
-    private final WestminsterShoppingManager shoppingManager=new WestminsterShoppingManager();
 
     /*------------------------------------------------------------*/
-    //private final ArrayList<Product> productsCartList = new ArrayList<>();
     public ShoppingCart(){
         JFrame westminsterShoppingCenter=new JFrame();
         westminsterShoppingCenter.setSize(500,650);
@@ -101,6 +102,7 @@ public class ShoppingCart extends JFrame {
 
         // Adding some sample data
         WestminsterShoppingManager shoppingManager=new WestminsterShoppingManager();
+        productDataTable = new JTable(productTableModel);
 
         //setting the product's data into the table
         for(Product rowData: shoppingManager.getProductsMainList()){
@@ -121,14 +123,36 @@ public class ShoppingCart extends JFrame {
                     additionalDetails
             };
             productTableModel.addRow(dataRowLine);
+            /*---------------------------------*/
+            // Add a custom cell renderer to change the background color based on the available quantity
+            /*productDataTable.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                    // Assuming available quantity is in the 4th column (index 3)
+                    int availableQuantity = rowData.getAvailableQuantity();
+
+                    if (availableQuantity <= 3) {
+                        cellComponent.setBackground(Color.RED);
+                    } else {
+                        cellComponent.setBackground(table.getBackground());
+                        cellComponent.setForeground(table.getForeground());
+                    }
+
+                    return cellComponent;
+                }
+            });*/
+            /*---------------------------------*/
         }
-        productDataTable = new JTable(productTableModel);
+        /*productDataTable = new JTable(productTableModel);*/
         productDataTable.setSize(300,300);
 
         JTableHeader header = productDataTable.getTableHeader();
         header.setFont(new Font(header.getFont().getName(), Font.BOLD, header.getFont().getSize()));
         JScrollPane scrollPane = new JScrollPane(productDataTable);
         scrollPane.setSize(300,300);
+
 
         panelCenter.add(scrollPane, BorderLayout.CENTER);
 
@@ -176,10 +200,11 @@ public class ShoppingCart extends JFrame {
         panelBottomButton.add(rightLabel);
         //addToCart.setSize(100,50);
 
+
         panelBottom.add("South",panelBottomButton);
         westminsterShoppingCenter.add("South",panelBottom);
 
-        westminsterShoppingCenter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        westminsterShoppingCenter.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         westminsterShoppingCenter.setVisible(true);
     }
     private void displaySelectedRowDetails() {
@@ -260,20 +285,9 @@ public class ShoppingCart extends JFrame {
                 double productPrice = Double.parseDouble(dataPriceLabel.getText()); // Assuming you have a JTextField for price
                 // Adding a new row to the table
                 int checkExistingRowIndex = findTheProductIndex(productDetails);//checking the existing product in the table
-                /*if (checkExistingRowIndex != -1) {
-                    // adding product already exists in the cart, so update quantity and price
-                    int currentProductQuantity = (int) shoppingCartModel.getValueAt(checkExistingRowIndex, 1);
-                    double currentProductPrice = (double) shoppingCartModel.getValueAt(checkExistingRowIndex, 2);
 
-                    shoppingCartModel.setValueAt(currentProductQuantity + productQuantity, checkExistingRowIndex, 1);
-                    shoppingCartModel.setValueAt(currentProductPrice + productPrice, checkExistingRowIndex, 2);
-                } else {
-                    // if the adding product does not exist, this line will add a new row to the table
-                    Object[] newData = {productDetails, productQuantity, productPrice};
-                    shoppingCartModel.addRow(newData);
-                }*/
                 String productID=dataIDLabel.getText();
-                // Check if the product exists in the system
+                // Checking whether the product exists in the system
                 Product selectedProduct=null;
                 for (Product prod:wsm2.getProductsMainList()){
                     if (productID.equals(prod.getProductID())){
@@ -336,3 +350,5 @@ public class ShoppingCart extends JFrame {
     }
 
 }
+
+
