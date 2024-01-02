@@ -1,0 +1,12 @@
+*** All the added products are mentioned below ***
+
+1).
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Product ID           : PC001
+Product Name         : Iron
+Available Quantity   : 123
+Product Unit Price   : $ 23.0
+Product Brand        : Singer
+Warranty Period      : 1 years
+This is a Electronic productxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+

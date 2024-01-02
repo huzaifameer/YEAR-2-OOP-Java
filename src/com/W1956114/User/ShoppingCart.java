@@ -227,6 +227,12 @@ public class ShoppingCart extends JFrame {
 
         JPanel mainPanel=new JPanel(new GridLayout(2,1));
         shoppingCartUI.add(mainPanel);
+        String[] columnData = {"Product", "Quantity", "Price"};
+
+        DefaultTableModel shoppingModel=new DefaultTableModel(columnData,0);
+        JTable shoppingCartTable=new JTable(shoppingModel);
+        JScrollPane scrollPane=new JScrollPane(shoppingCartTable);
+        mainPanel.add(scrollPane);
 
         shoppingCartUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Display the products cart
