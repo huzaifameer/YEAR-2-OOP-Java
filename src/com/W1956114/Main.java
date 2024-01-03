@@ -44,10 +44,10 @@ public class Main{
     }
     public static void setOption() {
         int option = getMainOption();//This statement will assign the returning value from the getOption()
-        //Calling the switch-case
+        //Calling the switch-case to direct the system user
         switch (option) {
             case 0:
-                System.exit(0);//Exit from the program
+                System.exit(0);//option to exit from the program
                 break;
             case 1:
                 WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
