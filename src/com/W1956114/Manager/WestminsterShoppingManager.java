@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -18,38 +17,44 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     private static final ArrayList<Product> productsMainList = new ArrayList<>();//list for store the product data
 
+    //adding a product
     @Override
     public void addAProduct() {
         Scanner input=new Scanner(System.in);
         String productType;
-        /*to add a product the valid product ID and the name should be given as input datas*/
+        /*to add a product the valid product ID and the name should be given as input data's*/
         do{
-            if (getProductsMainList().size()<50){
+            if (getProductsMainList().size()<50){//only 50 products can be added
                 while (true){
+                    //getting the product type
                     System.out.print("Type of the product (E/C) ? ");
                     productType=input.next();
                     break;
                 }
+                //checking the product type and getting the according details
                 switch (productType){
                     case "e": case "E":
                         System.out.println("Input details for Electronic products");
-                        getElectronicItem();
+                        getElectronicItem();//getting  details for a electronic data
                         break;
                     case "c": case "C":
                         System.out.println("Input details for Clothing products");
-                        getClothingItem();
+                        getClothingItem();//getting details for a clothing data
                         break;
                     default:
+                        //message if a wrong option given
                         System.out.println("Wrong input please enter a correct option !");
                         continue;
                 }
             }else{
+                //message when the maximum limit exceeded
                 System.out.println("Cannot add more products. Maximum limit reached.");
             }
             break;
         }while (true);
     }
 
+    //deleting a product
     @Override
     public void deleteAProduct() {
         while (true) {
@@ -75,6 +80,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
         }
     }
 
+    //displaying product details
     @Override
     public void displayProducts() {
         System.out.println();
@@ -111,6 +117,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
 
+    //saving products in a text file
     @Override
     public void saveToAFile() {
         try {
@@ -154,6 +161,8 @@ public class WestminsterShoppingManager implements ShoppingManager{
             //if there's an error the error will display through the print statement
         }
     }
+
+    //reading the saved data from the text file
     @Override
     public void readFromAFile() {
         System.out.println();
@@ -171,7 +180,8 @@ public class WestminsterShoppingManager implements ShoppingManager{
         }
         System.out.println();
     }
-    //----------------Extra defined methods------------------//
+
+    //----------------Extra defined methods for the main methods------------------//
     public int getSelectedOption(){
         Scanner inputOption=new Scanner(System.in);
         while (true){
