@@ -8,24 +8,26 @@ import java.util.Scanner;
 
 
 public class Main{
-    private static final ArrayList<User> commonUserList=new ArrayList<>();
-    private static final ArrayList<User> managerUserList=new ArrayList<>();
+    private static final ArrayList<User> commonUserList=new ArrayList<>();//to store the data of the customers
+    private static final ArrayList<User> managerUserList=new ArrayList<>();//to store the data of the managers
     static {
-        // Adding manager's as users during program initialization
+        // Adding manager's data (username and password) for the list
         User manager1 = new User("Manager-1", "12345");
-        managerUserList.add(manager1);
+        managerUserList.add(manager1);//adding manager 1 to the list
         User manager2 = new User("Manager-2", "12345");
-        managerUserList.add(manager2);
+        managerUserList.add(manager2);//adding manager 2 to the list
     }
 
     public static void main(String[] args) {
-        while (true){
-            setOption();
+        while (true){//uses a while loop to loop infinitely
+            setOption();//calling up the main selection method to start the process
         }
     }
 
+    //The method to display the main selection panel
     private static int getMainOption(){
         do {
+            //printing the main display in the console
             System.out.println("----------------------------------------------------------");
             System.out.println("xxxxxxxx- Welcome to Westminster Shopping System -xxxxxxxx");
             System.out.println("----------------------------------------------------------");
@@ -34,10 +36,10 @@ public class Main{
             System.out.println("[ 0 ] -> Exit The System");
             System.out.println("----------------------------------------------------------");
             Scanner inputMainOption=new Scanner(System.in);
-            System.out.print("Enter an Option : ");
+            System.out.print("Enter an Option : "); //getting an option
             int option;
-            option = getOption(inputMainOption);
-            return option;
+            option = getOption(inputMainOption);//passing the input value to another method to validate it
+            return option;//returns the selected option
         } while (true);
     }
     public static void setOption() {
@@ -118,12 +120,10 @@ public class Main{
                 User newUser=new User(newUsername,newPassword);
                 commonUserList.add(newUser);
                 return true;
-                //break;
             default:
                 System.out.println("You have entered wrong information ! Please try again !\n");
                 setOption();
                 return false;
-                //break;
         }
         return false;
     }
