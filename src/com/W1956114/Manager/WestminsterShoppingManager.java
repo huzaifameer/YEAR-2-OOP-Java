@@ -61,18 +61,18 @@ public class WestminsterShoppingManager implements ShoppingManager{
             Scanner input = new Scanner(System.in);
             System.out.println();
             System.out.println("+--- Remove a existing product ---+");
-            System.out.print("Enter the Product Id to delete : ");
+            System.out.print("Enter the Product Id to delete : ");//getting the deleting products ID
             String productDeleteId = input.next();
-            boolean deleted = false;
+            boolean deleted = false;//checking the deletions status
             for (Product product : getProductsMainList()) {
                 if (product.getProductID().equals(productDeleteId)) {
-                    getProductsMainList().remove(product);
+                    getProductsMainList().remove(product);//removing the matching product from the list
                     deleted = true;
                     break;
                 }
             }
             if (deleted) {
-                System.out.println("Product id " + productDeleteId + " deleted successfully");
+                System.out.println("Product id " + productDeleteId + " deleted successfully");//success message
             } else {
                 System.out.println("No matching product ID !");
             }
@@ -126,13 +126,17 @@ public class WestminsterShoppingManager implements ShoppingManager{
             int row_Count=1;//creating a variable to count the products
             productWriter.write("*** All the added products are mentioned below ***\n\n");
             for (Product productDetails : getProductsMainList()) {
+                //writing all the data in the text file line by line
                 productWriter.write(row_Count+").\n");
-                productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
                 productWriter.write("Product Type         : " + productDetails.getProductType()+"\n");
+                productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
                 productWriter.write("Product ID           : " + productDetails.getProductID() + "\n");
                 productWriter.write("Product Name         : " + productDetails.getProductName() + "\n");
                 productWriter.write("Available Quantity   : " + productDetails.getAvailableQuantity() + "\n");
                 productWriter.write("Product Unit Price   : " +"€ "+productDetails.getProductPrice() + "\n");
+                //----------------------------------------------//
+
+                //checking the type of the product and adding the additional details for the text file
                 if (productDetails.getProductType().equals("Electronic")) {
                     Electronic electronicProduct = (Electronic) productDetails;
                     productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
@@ -142,20 +146,12 @@ public class WestminsterShoppingManager implements ShoppingManager{
                     productWriter.write("Product Size         : " + clothingProduct.getClothSize() + "\n");
                     productWriter.write("Product Color        : " + clothingProduct.getClothColor() + "\n");
                 }
-                /*if (productDetails instanceof Electronic) {//special details of Electronic products
-                    Electronic electronicProduct = (Electronic) productDetails;//productDetails is cast into Electronic
-                    productWriter.write("Product Brand        : " + electronicProduct.getBrand() + "\n");
-                    productWriter.write("Warranty Period      : " + electronicProduct.getWarrantyDays() + " years\n");
-                } else if (productDetails instanceof Clothing) {//special details of Clothing products
-                    Clothing clothingProduct = (Clothing) productDetails;//productDetails is cast into Clothing
-                    productWriter.write("Product Size         : " + clothingProduct.getClothSize() +"\n");
-                    productWriter.write("Product Color        : " + clothingProduct.getClothColor() +"\n");
-                }*/
+
                 productWriter.write("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
                 productWriter.write("\n"); // Add a blank line between products
                 row_Count+=1;
             }
-            productWriter.close();
+            productWriter.close();//closing the opened file
         } catch (IOException e) {
             System.out.println(e.getMessage());
             //if there's an error the error will display through the print statement
@@ -167,6 +163,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
     public void readFromAFile() {
         System.out.println();
         try {
+            //creating the file reader variable
             FileReader readProductTextFile = new FileReader("Product_Details.txt");//getting the file to read
             int charactor = readProductTextFile.read();//assigning the first character to an int type variable
             while(charactor!=-1){
@@ -374,15 +371,17 @@ public class WestminsterShoppingManager implements ShoppingManager{
             return productID;
         }while (true);
     }
+
+    //method to validate a fixed ID format
     private boolean validateID(String id){
         // Two uppercase letters "PC" followed by 3 digits
         if (id.length() == 5) {
             String prefix = id.substring(0, 2);
 
-            if ("PC".equals(prefix)) {
+            if ("PC".equals(prefix)) {//the starting value of the id
                 String digits = id.substring(2);
 
-                if (digits.matches("\\d{3}")) {
+                if (digits.matches("\\d{3}")) {//checking the last 3 index are numbers
                     return true;
                 }
             }
@@ -390,14 +389,19 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
         return false;
     }
+
+    //method to check the duplicate ID's
     private boolean isDuplicateID(String id) {
+        //checking throughout the list whether the ID is duplicated
         for (Product productDetail : getProductsMainList()) {
             if (productDetail.getProductID() != null && productDetail.getProductID().equals(id)) {
                 return true;
             }
         }
-        return false;
+        return false;//returns a boolean as the result
     }
+
+    //method to get the product list
     public ArrayList<Product> getProductsMainList() {
         return productsMainList;
     }
