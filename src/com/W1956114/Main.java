@@ -58,14 +58,15 @@ public class Main{
                 break;
             case 2:
                 if (loginCustomer()){
-                    System.out.println("User Panel");
-                    ShoppingCart systemUser=new ShoppingCart();
+                    System.out.println("User Logged In to the System Successfully !");
+                    new ShoppingCart();
+                    setOption();
                     break;
                 }
-                System.out.println("Finished !");
+                System.out.println("Wrong User Login Details ! Please try again !");
                 break;
             default:
-                setOption();
+                System.out.println("Try with the correct Option !");
                 break;
         }
     }
@@ -90,7 +91,7 @@ public class Main{
         System.out.println("Create an Account to shop - [2]");
         System.out.print("Select an Option : ");
         int option;
-        boolean validateOption=false;
+
         do {
             option = getOption(input);
             break;
@@ -120,10 +121,11 @@ public class Main{
                 //break;
             default:
                 System.out.println("You have entered wrong information ! Please try again !\n");
+                setOption();
                 return false;
                 //break;
         }
-        return validateOption;
+        return false;
     }
     private static int getOption(Scanner input) {
         /*method to get a valid input in a specific range*/
