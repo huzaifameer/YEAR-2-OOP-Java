@@ -2,11 +2,34 @@
 
 1).
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Product Type         : Electronic
 Product ID           : PC001
+Product Name         : Fridge
+Available Quantity   : 50
+Product Unit Price   : € 1100.0
+Product Brand        : Beko
+Warranty Period      : 24 Months
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+2).
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Product Type         : Electronic
+Product ID           : PC002
 Product Name         : Iron
-Available Quantity   : 123
-Product Unit Price   : $ 23.0
+Available Quantity   : 20
+Product Unit Price   : € 55.0
 Product Brand        : Singer
-Warranty Period      : 1 years
-This is a Electronic productxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Warranty Period      : 12 Months
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+3).
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Product Type         : Electronic
+Product ID           : PC004
+Product Name         : Fan
+Available Quantity   : 100
+Product Unit Price   : € 120.0
+Product Brand        : Usha
+Warranty Period      : 12 Months
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 

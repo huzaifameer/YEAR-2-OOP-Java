@@ -113,6 +113,7 @@ public class Main{
                 }
                 break;
             case 2:
+                //This part will add a new customer to the system
                 System.out.println("+----- Create your user account here -----+");
                 System.out.print("Enter a username : ");
                 String newUsername=input.next();

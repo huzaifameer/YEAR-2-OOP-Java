@@ -1,5 +1,6 @@
 package com.W1956114.User;
 
+import com.W1956114.CustomerHistory.CustomerHistory;
 import com.W1956114.Main;
 import com.W1956114.Manager.WestminsterShoppingManager;
 import com.W1956114.SubClasses.Clothing;
@@ -23,7 +24,7 @@ public class ShoppingCart extends JFrame {
     private final JTable productDataTable;
     private JButton addToCart;
     private static TableRowSorter<DefaultTableModel> tableModelSorter;
-    private static DefaultTableModel shoppingCartModel;// default table model for the shopping cart table
+    private DefaultTableModel shoppingCartModel;// default table model for the shopping cart table
     /*creating the list of labels to display the product's details start */
     private final JLabel label1;
     private final JLabel label2;
@@ -82,6 +83,10 @@ public class ShoppingCart extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Opening the UI for the shopping cart
+                totalPriceLabel.setText("");
+                firstBuyDiscount.setText("");
+                sameCategoryDiscountLabel.setText("");
+                finalTotalLabel.setText("");
                 openShoppingCartPanel();
             }
         });
@@ -128,29 +133,7 @@ public class ShoppingCart extends JFrame {
                     additionalDetails
             };
             productTableModel.addRow(dataRowLine);
-            /*---------------------------------*/
-            // Add a custom cell renderer to change the background color based on the available quantity
-            /*productDataTable.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
-                @Override
-                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                    Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-                    // Assuming available quantity is in the 4th column (index 3)
-                    int availableQuantity = rowData.getAvailableQuantity();
-
-                    if (availableQuantity <= 3) {
-                        cellComponent.setBackground(Color.RED);
-                    } else {
-                        cellComponent.setBackground(table.getBackground());
-                        cellComponent.setForeground(table.getForeground());
-                    }
-
-                    return cellComponent;
-                }
-            });*/
-            /*---------------------------------*/
         }
-        /*productDataTable = new JTable(productTableModel);*/
         productDataTable.setSize(300,300);
 
         JTableHeader header = productDataTable.getTableHeader();
@@ -285,6 +268,94 @@ public class ShoppingCart extends JFrame {
             WestminsterShoppingManager wsm2=new WestminsterShoppingManager();
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (shoppingCartUI.isVisible()){
+                    String productDetails = dataIDLabel.getText() + " " + dataNameLabel.getText() + " " + dataExtraLabel1.getText() + " " + dataExtraLabel2.getText();
+                    int productQuantity = 1; // Assuming you have a JTextField for quantity
+                    //double productPrice = Double.parseDouble(dataPriceLabel.getText()); // Assuming you have a JTextField for price
+                    double productPrice;
+                    try {
+                        productPrice = Double.parseDouble(dataPriceLabel.getText());
+                        // Rest of your code that uses productPrice
+                    } catch (NumberFormatException error) {
+                        // Handle the exception, e.g., display an error message or log it
+                        JOptionPane.showMessageDialog(null, "No Products Selected !");
+                        // Optionally, set a default value or take appropriate action
+                        return; // or any default value
+                        // Rest of your code that uses productPrice
+                    }
+                    // Adding a new row to the table
+                    int checkExistingRowIndex = findTheProductIndex(productDetails);//checking the existing product in the table
+
+                    String productID = dataIDLabel.getText();
+                    // Checking whether the product exists in the system
+                    Product selectedProduct = null;
+                    for (Product prod : wsm2.getProductsMainList()) {
+                        if (productID.equals(prod.getProductID())) {
+                            selectedProduct = prod;
+                        }
+                    }
+
+
+                    if (checkExistingRowIndex != -1 && selectedProduct != null && selectedProduct.getAvailableQuantity() > 0) {
+                        // Product already exists in the cart, update quantity and price
+                        int currentProductQuantity = (int) shoppingCartModel.getValueAt(checkExistingRowIndex, 1);
+                        double currentProductPrice = (double) shoppingCartModel.getValueAt(checkExistingRowIndex, 2);
+
+                        // Check if available quantity is sufficient in the system
+                        if (selectedProduct.getAvailableQuantity() >= 1) {
+                            shoppingCartModel.setValueAt(currentProductQuantity + productQuantity, checkExistingRowIndex, 1);
+                            shoppingCartModel.setValueAt(currentProductPrice + productPrice, checkExistingRowIndex, 2);
+
+                            // Updates the available quantity in the system
+                            selectedProduct.setAvailableQuantity(selectedProduct.getAvailableQuantity() - productQuantity);
+
+                            // Update the label in the UI
+                            label5.setText("Available Quantity : " + selectedProduct.getAvailableQuantity());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Insufficient available quantity in the system.");
+                        }
+                    } else {
+                        // when the Product does not exist in the cart, this line will add a new row to the table
+                        if (selectedProduct != null && selectedProduct.getAvailableQuantity() >= 1) {
+                            Object[] newData = {productDetails, productQuantity, productPrice};
+                            shoppingCartModel.addRow(newData);
+
+                            // Updating the available quantity in the system
+                            selectedProduct.setAvailableQuantity(selectedProduct.getAvailableQuantity() - productQuantity);
+
+                            // Updating the label in the GUI
+                            label5.setText("Available Quantity : " + selectedProduct.getAvailableQuantity());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Insufficient available quantity in the system.");
+                        }
+                    }
+                    // Calculate total value and update the label
+                    double totalValue = calculateTotalPrice();
+                    totalPriceLabel.setText("Total : $" + totalValue);
+                    //first buy discount
+                    // Add the purchased product details to the customer's purchase history
+                    CustomerHistory customer = new CustomerHistory();
+                    customer.addToPurchaseHistory(productDetails);
+
+                    // Check if it's the customer's first purchase and apply a 10% discount
+                    double firstPurchasedDiscount = 0;
+                    if (customer.isFirstPurchase()) {
+                        firstPurchasedDiscount = totalValue * 0.1;
+                        customer.setFirstPurchase(false); // Update customer's first purchase status after applying discount
+                    }
+                    firstBuyDiscount.setText("First Purchase Discount (10%) : -$ " + firstPurchasedDiscount);
+
+                    double discountSame = calculateTheDiscountSameProduct(totalValue);
+                    sameCategoryDiscountLabel.setText("Three items in same category Discount (20%) : -$ " + discountSame);
+                    finalTotalLabel.setText("Final Total : " + (totalValue - discountSame-firstPurchasedDiscount));
+
+                }
+            }
+        });
+        /*addToCart.addActionListener(new ActionListener() {
+            WestminsterShoppingManager wsm2=new WestminsterShoppingManager();
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 String productDetails = dataIDLabel.getText() + " " + dataNameLabel.getText()+" "+dataExtraLabel1.getText()+" "+dataExtraLabel2.getText();
                 int productQuantity = 1; // Assuming you have a JTextField for quantity
                 //double productPrice = Double.parseDouble(dataPriceLabel.getText()); // Assuming you have a JTextField for price
@@ -349,18 +420,30 @@ public class ShoppingCart extends JFrame {
                 double totalValue = calculateTotalPrice();
                 totalPriceLabel.setText("Total : $" + totalValue);
                 //first buy discount
-                firstBuyDiscount.setText("First Purchase Discount (10%) : ");
+                // Add the purchased product details to the customer's purchase history
+                CustomerHistory customer=new CustomerHistory();
+                customer.addToPurchaseHistory(productDetails);
+
+                // Check if it's the customer's first purchase and apply a 10% discount
+                double firstPurchaseDiscount=0;
+                if (customer.isFirstPurchase()) {
+                    firstPurchaseDiscount = totalValue * 0.1;
+                    customer.setFirstPurchase(false); // Update customer's first purchase status after applying discount
+                }
+                firstBuyDiscount.setText("First Purchase Discount (10%) : -$" + firstPurchaseDiscount);
+                //firstBuyDiscount.setText("First Purchase Discount (10%) : ");
                 double discountSame=calculateTheDiscountSameProduct(totalValue);
                 sameCategoryDiscountLabel.setText("Three items in same category Discount (20%) : "+discountSame);
                 finalTotalLabel.setText("Final Total : "+(totalValue-discountSame));
 
             }
-        });
+        });*/
         /*-------------------------------*/
         /*total*/
         JPanel shopCartDownPanel=new JPanel(new GridLayout(4,1));
 
         shopCartDownPanel.add(totalPriceLabel);
+        shopCartDownPanel.add(firstBuyDiscount);
         shopCartDownPanel.add(sameCategoryDiscountLabel);
         shopCartDownPanel.add(finalTotalLabel);
         mainPanel.add(shopCartDownPanel);
@@ -395,7 +478,7 @@ public class ShoppingCart extends JFrame {
         for (int i = 0; i < shoppingCartModel.getRowCount(); i++) {
             int quantity = (int) shoppingCartModel.getValueAt(i, 1);
             if (quantity>=3){
-                discountedValue=Math.round(total*0.2);//this will roundup the decimal values
+                discountedValue=(total*0.2);//this will roundup the decimal values
             }
         }
         return discountedValue;
