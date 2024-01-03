@@ -42,6 +42,8 @@ public class Main{
             return option;//returns the selected option
         } while (true);
     }
+
+    //method to get the above option
     public static void setOption() {
         int option = getMainOption();//This statement will assign the returning value from the getOption()
         //Calling the switch-case to direct the system user
@@ -60,36 +62,42 @@ public class Main{
                 }
                 break;
             case 2:
-                if (loginCustomer()){
+                if (loginCustomer()){//checking the customers availability in the list
                     System.out.println("User Logged In to the System Successfully !");
-                    new ShoppingCart();
+                    new ShoppingCart();//opens the GUI
                     setOption();
                     break;
                 }
                 System.out.println("Wrong User Login Details ! Please try again !");
                 break;
             default:
-                System.out.println("Try with the correct Option !");
+                System.out.println("Try with the correct Option !");//error message
                 break;
         }
     }
+
+    //method to validate the manager
     private static boolean loginManager(){
         Scanner inputData=new Scanner(System.in);
+        //getting valid manager credentials
         System.out.println("x------Enter Valid Manager Credentials------x");
         System.out.print("Input Manager Username : ");
         String managerUserName=inputData.next();
         System.out.print("Input The Password     : ");
         String managerPassword=inputData.next();
-        for (User manager:managerUserList){
+        for (User manager:managerUserList){//checking the manager list
             if (manager.getUserName().equals(managerUserName) && manager.getPassword().equals(managerPassword)){
                 return true;
             }
         }
-        System.out.println("You have entered wrong information ! Please try again !\n");
+        System.out.println("You have entered wrong information ! Please try again !\n");//error message
         return false;
     }
+
+    //method to validate the customer
     private static boolean loginCustomer(){
         Scanner input=new Scanner(System.in);
+        //getting an valid option
         System.out.println("Login to Shop             - [1]");
         System.out.println("Create an Account to shop - [2]");
         System.out.print("Select an Option : ");
@@ -119,11 +127,11 @@ public class Main{
                 String newUsername=input.next();
                 System.out.print("Enter a password : ");
                 String newPassword=input.next();
-                User newUser=new User(newUsername,newPassword);
-                commonUserList.add(newUser);
+                User newUser=new User(newUsername,newPassword);//sending through the User constructor
+                commonUserList.add(newUser);//adding the new customer to the list
                 return true;
             default:
-                System.out.println("You have entered wrong information ! Please try again !\n");
+                System.out.println("You have entered wrong information ! Please try again !\n");//error message
                 setOption();
                 return false;
         }

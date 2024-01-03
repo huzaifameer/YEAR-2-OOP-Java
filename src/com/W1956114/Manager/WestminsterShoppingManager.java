@@ -179,9 +179,12 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     //----------------Extra defined methods for the main methods------------------//
+
+    //method to get the selected valid option
     public int getSelectedOption(){
         Scanner inputOption=new Scanner(System.in);
         while (true){
+            //printing the manager panel
             System.out.println();
             System.out.println("+-----------------------------------------+");
             System.out.println("|          Manager Control Panel          |");
@@ -200,19 +203,23 @@ public class WestminsterShoppingManager implements ShoppingManager{
                     selectedOption = Integer.parseInt(inputOption.nextLine());//this line will get an integer as an option
                     break;//if the input is an integer it'll break the loop from here
                 } catch (NumberFormatException e) {
+                    //displaying the error message
                     System.out.println("**** It's not an option! Please try again..");
                     System.out.println();
                     System.out.print("Enter an Option to proceed : ");
                 }
             }
             if (selectedOption > 6 | selectedOption < 0) {
+                //checking the correct range of the options
                 System.out.println("Wrong option selected! Please try again..");
                 System.out.println();
                 continue;
             }
-            return selectedOption;
+            return selectedOption;//returning the valid option
         }
     }
+
+    //getting option method
     public void selectOption(){
         int passedOption = getSelectedOption();//This statement will assign the returning value from the getOption()
         //Calling the switch-case
@@ -221,47 +228,53 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 Main.setOption();//Exit from the program
                 break;
             case 1:
-                addAProduct();
+                addAProduct();//adding a product method
                 break;
             case 2:
-                deleteAProduct();
+                deleteAProduct();//deleting a product method
                 break;
             case 3:
-                displayProducts();
+                displayProducts();//displaying the sorted products method
                 break;
             case 4:
-                saveToAFile();
+                saveToAFile();//saving data to the file method
                 break;
             case 5:
-                readFromAFile();
+                readFromAFile();//reading the saved data method
                 break;
         }
     }
+
+    //method to get the extra details of an Electronic product
     private void getElectronicItem(){
         Scanner input=new Scanner(System.in);
         do {
             System.out.println("+----------Enter Valid Electronic Product Details----------+");
+            //creating a Object type cause there are varius type data
             ArrayList<Object> productDetailsList= (ArrayList<Object>) getProductDetails();
             System.out.print("Enter the brand of the product        : ");
             String electronicProductBrand=input.next();
 
-            System.out.print("Enter the warranty period [in months] : ");
+            System.out.print("Enter the warranty period [in months] : ");//getting the warranty period
             int warrantyPeriod;
             while (true){
                 try{
                     warrantyPeriod= Integer.parseInt(input.next());
-                    if (warrantyPeriod<=0){
+                    if (warrantyPeriod<=0){//checking the valid range
                         System.out.println("Enter a positive value.");
                         System.out.print("Enter the warranty period [in years] : ");
                         continue;
                     }
                     break;
                 }catch (NumberFormatException | InputMismatchException e){
+                    //handling the input type exception
+                    //error message
                     System.out.println("*** -> Input an Integer type value !");
                     System.out.print("Enter the warranty period [in years] : ");
                 }
             }
-            Product electronicProduct=new Electronic("Electronic",//For an electronic item
+            //adding the product details through the parameterized constructor
+            Product electronicProduct=new Electronic("Electronic",
                     (String) productDetailsList.get(0),
                     (String) productDetailsList.get(1),
                     (Integer) productDetailsList.get(2),
@@ -272,23 +285,27 @@ public class WestminsterShoppingManager implements ShoppingManager{
             break;
         }while (true);
     }
+
+    //method to get the extra details of a Clothing product
     private void getClothingItem(){
         Scanner input=new Scanner(System.in);
         do {
             System.out.println("+----------Enter Valid Clothing Product Details----------+");
+            //creating a Object type cause there are varius type data
             ArrayList<Object> productDetailsList= (ArrayList<Object>) getProductDetails();
-            System.out.print("Enter the size (S,M,L,XL,XXL,XXXl) : ");
+            System.out.print("Enter the size (S,M,L,XL,XXL,XXXl) : ");//getting the clothing product's size
             String clothSize=input.next();
             switch (clothSize){
                 case "S": case "M": case "XL": case "XXL": case "XXXl":
                 break;
                 default:
-                    System.out.println("Wrong size. Try with a valid input.");
+                    System.out.println("Wrong size. Try with a valid input.");//error message
                     continue;
             }
-            System.out.print("Enter the color of the cloth       :");
+            System.out.print("Enter the color of the cloth       :");//getting the color
             String clothColor=input.next();
-            Product clothingProduct=new Clothing("Clothing", // For all the clothing products
+            //adding the product details through the parameterized constructor
+            Product clothingProduct=new Clothing("Clothing",
                     (String) productDetailsList.get(0),
                     (String) productDetailsList.get(1),
                     (Integer) productDetailsList.get(2),
@@ -299,12 +316,15 @@ public class WestminsterShoppingManager implements ShoppingManager{
             break;
         }while (true);
     }
+
+    //method to get all the common details of a product
     private Object getProductDetails(){
         Scanner input =new Scanner(System.in);
 
         do {
-            String validProductID=getValidID();
+            String validProductID=getValidID();//calling the method to get the valid ID
 
+            //getting the products details and validating
             System.out.print("Enter product name       : ");
             String productName=input.next();
 
@@ -313,45 +333,50 @@ public class WestminsterShoppingManager implements ShoppingManager{
             while (true){
                 try {
                     availableQuantity= Integer.parseInt(input.next());
-                    if (availableQuantity<=0){
-                        System.out.println("Enter a positive value !");
+                    if (availableQuantity<=0){//range check
+                        System.out.println("Enter a positive value !");//error message
                         System.out.print("Enter available quantity : ");
                         continue;
                     }
                     break;
                 }catch (NumberFormatException | InputMismatchException e){
+                    //handling the exception
                     System.out.println("*** -> Input an Integer type value !");
                     System.out.print("Enter available quantity : ");
                 }
             }
 
-            System.out.print("Enter unit price         : ");
+            System.out.print("Enter unit price         : ");//getting the unit price
             double unitPrice;
             while (true){
-                try{
+                try{//using to handle the input and number format exception
                     unitPrice= Double.parseDouble(input.next());
-                    if (unitPrice<=0){
+                    if (unitPrice<=0){//range check
                         System.out.println("Enter a positive value !");
                         System.out.print("Enter unit price         : ");
                         continue;
                     }
                     break;
                 }catch (NumberFormatException | InputMismatchException e){
+                    //error message
                     System.out.println("*** -> Input an Double type value !");
                     System.out.print("Enter unit price         : ");
                 }
             }
-
+            //temp. array list to return all the details
             ArrayList<Object> tempProductList=new ArrayList<>();
+            //adding all the product to the temp. list
             tempProductList.add(validProductID);
             tempProductList.add(productName);
             tempProductList.add(availableQuantity);
             tempProductList.add(unitPrice);
-            /*List<Object> tempProductList = new ArrayList<>(List.of(validProductID, productName, availableQuantity, unitPrice));*/
+
             return tempProductList;
         }while (true);
 
     }
+
+    //method to get a valid formatted ID
     private String getValidID(){
         Scanner inputID=new Scanner(System.in);
         do {

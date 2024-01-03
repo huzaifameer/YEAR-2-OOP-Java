@@ -50,6 +50,7 @@ public class ShoppingCart extends JFrame {
     /*creating the list of labels for the shopping cart ending*/
 
     /*------------------------------------------------------------*/
+    //This will open the shopping cart GUI
     public ShoppingCart(){
         JFrame westminsterShoppingCenter=new JFrame();
         westminsterShoppingCenter.setSize(500,650);
@@ -245,6 +246,7 @@ public class ShoppingCart extends JFrame {
             }
         }
     }
+
     //method to filter the tables rows by the drop-down
     private void filteringTheTable(String selectedProductType) {
         // Creating a RowFilter to customize how the rows are being filtered in the table
@@ -269,6 +271,8 @@ public class ShoppingCart extends JFrame {
 
         tableModelSorter.setRowFilter(rowFilter);// Applying the created RowFilter to the TableRowSorter associated with the table
     }
+
+    //this method will open the shopping cart
     private void openShoppingCartPanel() {
         // Creating a new JFrame for the shopping cart to display the added products
         JFrame shoppingCartUI = new JFrame("Shopping Cart");
@@ -476,6 +480,7 @@ public class ShoppingCart extends JFrame {
         shoppingCartUI.setVisible(true);
 
     }
+
     //method to find the products index
     private int findTheProductIndex(String productName) {
         for (int i = 0; i < shoppingCartModel.getRowCount(); i++) {
@@ -485,6 +490,7 @@ public class ShoppingCart extends JFrame {
         }
         return -1; // returns the value when the product not founded
     }
+
     //method to calculate the total
     private double calculateTotalPrice() {
         double totalValue = 0;
@@ -496,6 +502,7 @@ public class ShoppingCart extends JFrame {
         }
         return totalValue;//returns the total
     }
+
     //method to calculate the discount value
     private double calculateTheDiscountSameProduct(double total){
         double discountedValue=0;//creating the variable to assign the discount
