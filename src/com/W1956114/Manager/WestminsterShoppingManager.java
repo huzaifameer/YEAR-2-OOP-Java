@@ -16,8 +16,7 @@ import java.util.Scanner;
 
 public class WestminsterShoppingManager implements ShoppingManager{
 
-    private static final ArrayList<Product> productsMainList = new ArrayList<>();
-
+    private static final ArrayList<Product> productsMainList = new ArrayList<>();//list for store the product data
 
     @Override
     public void addAProduct() {
