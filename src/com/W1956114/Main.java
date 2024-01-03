@@ -53,6 +53,7 @@ public class Main{
                 WestminsterShoppingManager westminsterShoppingManager=new WestminsterShoppingManager();
 
                 if (loginManager()){
+                    //checking the availability of the manager in the system
                     while (true) {
                         westminsterShoppingManager.selectOption();
                     }
