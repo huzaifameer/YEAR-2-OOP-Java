@@ -1,7 +1,5 @@
 package com.W1956114.User;
 
-import com.W1956114.CustomerHistory.CustomerHistory;
-import com.W1956114.Main;
 import com.W1956114.Manager.WestminsterShoppingManager;
 import com.W1956114.SubClasses.Clothing;
 import com.W1956114.SubClasses.Electronic;
@@ -9,9 +7,6 @@ import com.W1956114.Super.Product;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
