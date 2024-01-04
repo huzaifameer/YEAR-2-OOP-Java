@@ -340,7 +340,7 @@ public class ShoppingCart extends JFrame {
                             // Updates the available quantity in the system
                             selectedProduct.setAvailableQuantity(selectedProduct.getAvailableQuantity() - productQuantity);
 
-                            // Update the label in the UI
+                            // Update the label in the GUI
                             label5.setText("Available Quantity : " + selectedProduct.getAvailableQuantity());
                         } else {
                             JOptionPane.showMessageDialog(null, "Insufficient available quantity in the system.");
@@ -366,29 +366,21 @@ public class ShoppingCart extends JFrame {
                     // Add the purchased product details to the customer's purchase history
                     User currentUser = getCurrentUser(); // Add a method to get the current user (logged-in user)
                     if (currentUser != null) {
-                        currentUser.getCustomerHistory().addToPurchaseHistory(productDetails);
+                        //adding the product details to the list of purchase history
+                        currentUser.getCustomerHistory().addToPurchasedHistory(productDetails);
                     }
 
                     // Check if it's the customer's first purchase and apply a 10% discount
                     double firstPurchasedDiscount = 0;
+
                     //checking the availability of the user
-                    if (currentUser != null && currentUser.getCustomerHistory().isFirstPurchase()) {
+                    if (currentUser != null && currentUser.getCustomerHistory().isTheFirstPurchase()) {
                         firstPurchasedDiscount = totalValue * 0.1;//calculating the 10% discount
-                        currentUser.getCustomerHistory().setFirstPurchase(false);
-                        // Updating the customer's first purchase status after applying the discount
                     }
+                    currentUser.getCustomerHistory().setFirstPurchase(false);
+                    // Updating the customer's first purchase status after applying the discount
 
-                    /*// Add the purchased product details to the customer's purchase history
 
-                    CustomerHistory customer = new CustomerHistory();
-                    customer.addToPurchaseHistory(productDetails);
-
-                    // Check if it's the customer's first purchase and apply a 10% discount from the total value
-                    double firstPurchasedDiscount = 0;
-                    if (customer.isFirstPurchase()) {
-                        firstPurchasedDiscount = totalValue * 0.1;//calculating the discount
-                        customer.setFirstPurchase(false); // Updating the customer's first purchase status after applying the discount
-                    }*/
                     //setting the text for the discount value
                     firstBuyDiscount.setText("First Purchase Discount (10%) : -$ " + firstPurchasedDiscount);
 
@@ -399,11 +391,12 @@ public class ShoppingCart extends JFrame {
                 }
             }
         });
-
         /*-------------------------------*/
 
         JPanel shopCartDownPanel=new JPanel(new GridLayout(4,1));//creating a grid layout panel
+
         shopCartDownPanel.setBorder(new EmptyBorder(0,10,10,10));//adding a margin space
+
         //adding all the labels to the panel
         shopCartDownPanel.add(totalPriceLabel);
         shopCartDownPanel.add(firstBuyDiscount);

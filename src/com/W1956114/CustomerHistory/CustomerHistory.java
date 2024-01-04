@@ -16,7 +16,7 @@ public class CustomerHistory {
         return purchaseHistory;
     }
 
-    public boolean isFirstPurchase() {
+    public boolean isTheFirstPurchase() {
         return firstPurchase;
     }
 
@@ -24,7 +24,7 @@ public class CustomerHistory {
         this.firstPurchase = firstPurchase;
     }
 
-    public void addToPurchaseHistory(String productDetails) {
+    public void addToPurchasedHistory(String productDetails) {
         purchaseHistory.add(productDetails);
     }
 }
