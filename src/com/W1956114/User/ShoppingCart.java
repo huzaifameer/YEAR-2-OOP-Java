@@ -18,6 +18,8 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import static com.W1956114.Main.getCurrentUser;
 
@@ -362,32 +364,31 @@ public class ShoppingCart extends JFrame {
                     }
                     //this Calculates total value and update the label
                     double totalValue = calculateTotalPrice();
-                    totalPriceLabel.setText("Total : $" + totalValue);
-                    // Add the purchased product details to the customer's purchase history
+                    totalPriceLabel.setText("Total : $ " + totalValue);
+                    //-----------------------------------------------------------------------------------//
+                    // Adds the purchased product's details to the customer's purchase history list
                     User currentUser = getCurrentUser(); // Add a method to get the current user (logged-in user)
                     if (currentUser != null) {
                         //adding the product details to the list of purchase history
                         currentUser.getCustomerHistory().addToPurchasedHistory(productDetails);
                     }
 
-                    // Check if it's the customer's first purchase and apply a 10% discount
-                    double firstPurchasedDiscount = 0;
+                    // Creating a variable to save the discount amount
+                    double firstPurchasedDiscount = 0;//initializing it
 
                     //checking the availability of the user
                     if (currentUser != null && currentUser.getCustomerHistory().isTheFirstPurchase()) {
-                        firstPurchasedDiscount = totalValue * 0.1;//calculating the 10% discount
+                        firstPurchasedDiscount = totalValue * 0.1;//calculating the 10% discount for the total value
                     }
-                    currentUser.getCustomerHistory().setFirstPurchase(false);
-                    // Updating the customer's first purchase status after applying the discount
 
-
-                    //setting the text for the discount value
+                    //setting the text for the discount value in the label
                     firstBuyDiscount.setText("First Purchase Discount (10%) : -$ " + firstPurchasedDiscount);
+                    //-----------------------------------------------------------------------------------//
 
                     double discountSame = calculateTheDiscountSameProduct(totalValue);//calculating the discount through a method
                     //setting values for the labels
                     sameCategoryDiscountLabel.setText("Three items in same category Discount (20%) : -$ " + discountSame);
-                    finalTotalLabel.setText("Final Total : " + (totalValue - discountSame-firstPurchasedDiscount));
+                    finalTotalLabel.setText("Final Total : $ " + (totalValue - discountSame-firstPurchasedDiscount));
                 }
             }
         });
@@ -404,6 +405,23 @@ public class ShoppingCart extends JFrame {
         shopCartDownPanel.add(finalTotalLabel);
         //adding the sub panel to the main panel
         mainPanel.add(shopCartDownPanel);
+
+        /*----------------*/
+        // Adding a window listener to the shopping cart
+        //When the shopping cart window closed updates the customer's first purchase status after applying the discount
+        shoppingCartUI.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Setting the firstPurchase to false when the shopping cart is closed
+                User currentUser = getCurrentUser();//getting the current user
+
+                if (currentUser != null) {
+                    //checking the availability
+                    currentUser.getCustomerHistory().settingFirstPurchase(false);//setting the status into false
+                }
+            }
+        });
+        /*----------------*/
 
 
         shoppingCartUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

@@ -4,21 +4,21 @@
 Product Type         : Electronic
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Product ID           : PC001
-Product Name         : Fridge
-Available Quantity   : 120
-Product Unit Price   : € 1250.0
-Product Brand        : weeer
+Product Name         : qweer
+Available Quantity   : 12
+Product Unit Price   : € 120.0
+Product Brand        : ert
 Warranty Period      : 12 Months
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 2).
 Product Type         : Electronic
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Product ID           : PC004
-Product Name         : qwwwe
-Available Quantity   : 234
-Product Unit Price   : € 43.0
-Product Brand        : qww
-Warranty Period      : 18 Months
+Product ID           : PC010
+Product Name         : rtyuuu
+Available Quantity   : 25
+Product Unit Price   : € 1250.0
+Product Brand        : qw
+Warranty Period      : 24 Months
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 

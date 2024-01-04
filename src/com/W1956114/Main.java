@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 public class Main{
-    private static User currentUser;
+    private static User currentUser;//saving the current user
     private static final ArrayList<User> commonUserList=new ArrayList<>();//to store the data of the customers
     private static final ArrayList<User> managerUserList=new ArrayList<>();//to store the data of the managers
     static {
@@ -70,6 +70,7 @@ public class Main{
                     break;
                 }
                 System.out.println("Wrong User Login Details ! Please try again !");
+                setOption();
                 break;
             default:
                 System.out.println("Try with the correct Option !");//error message
@@ -164,12 +165,6 @@ public class Main{
     // Implement getCurrentUser() method
     public static User getCurrentUser() {
         return currentUser;
-    }
-
-    // Update logout or other relevant parts of your code to reset the currentUser when needed
-// For example, when a user logs out
-    private static void logout() {
-        currentUser = null;
     }
 
 }
