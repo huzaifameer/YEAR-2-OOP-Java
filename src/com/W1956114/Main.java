@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 
 public class Main{
+    private static User currentUser;
     private static final ArrayList<User> commonUserList=new ArrayList<>();//to store the data of the customers
     private static final ArrayList<User> managerUserList=new ArrayList<>();//to store the data of the managers
     static {
@@ -116,6 +117,7 @@ public class Main{
 
                 for (User customer : commonUserList) {
                     if (customer.getUserName().equals(customerUsername) && customer.getPassword().equals(customerPassword)) {
+                        currentUser = customer; // Set the current user to the variable
                         return true;
                     }
                 }
@@ -129,6 +131,7 @@ public class Main{
                 String newPassword=input.next();
                 User newUser=new User(newUsername,newPassword);//sending through the User constructor
                 commonUserList.add(newUser);//adding the new customer to the list
+                currentUser = newUser;
                 return true;
             default:
                 System.out.println("You have entered wrong information ! Please try again !\n");//error message
@@ -157,6 +160,16 @@ public class Main{
             /*continue;*/
         }
         return option;
+    }
+    // Implement getCurrentUser() method
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    // Update logout or other relevant parts of your code to reset the currentUser when needed
+// For example, when a user logs out
+    private static void logout() {
+        currentUser = null;
     }
 
 }

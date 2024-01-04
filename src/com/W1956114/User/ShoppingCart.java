@@ -19,6 +19,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static com.W1956114.Main.getCurrentUser;
+
 
 public class ShoppingCart extends JFrame {
     private final JComboBox<String> productTypeDropdown ;//drop down menu to filter the products by the types
@@ -293,18 +295,23 @@ public class ShoppingCart extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (shoppingCartUI.isVisible()){
+                    //setting the details for the 1st cell of the table
                     String productDetails = dataIDLabel.getText() + " " + dataNameLabel.getText() + " " + dataExtraLabel1.getText() + " " + dataExtraLabel2.getText();
-                    int productQuantity = 1; // Assuming you have a JTextField for quantity
-                    //double productPrice = Double.parseDouble(dataPriceLabel.getText()); // Assuming you have a JTextField for price
+                    int productQuantity = 1; // adding the quantity as 1
+
                     double productPrice;
+
                     try {
                         productPrice = Double.parseDouble(dataPriceLabel.getText());
-                        // getting the value from the table and casting it into a double
+                        // getting the value from the table and casting it into a double type
+
                     } catch (NumberFormatException error) {
+
                         // Handling the exception
                         JOptionPane.showMessageDialog(null, "No Products Selected !");
                         // displaying a message
                         return; //returning back
+
                     }
                     // Adding a new row to the table
                     int checkExistingRowIndex = findTheProductIndex(productDetails);//checking the product already is in the table
@@ -320,7 +327,7 @@ public class ShoppingCart extends JFrame {
 
 
                     if (checkExistingRowIndex != -1 && selectedProduct != null && selectedProduct.getAvailableQuantity() > 0) {
-                        // This part will run when the product exists, and it'll update the price and the quantity
+                        // This part will run when the product exists, and it'll update the price and the quantity in the cart table
                         //gets the current values in the labels and the system
                         int currentProductQuantity = (int) shoppingCartModel.getValueAt(checkExistingRowIndex, 1);
                         double currentProductPrice = (double) shoppingCartModel.getValueAt(checkExistingRowIndex, 2);
@@ -356,8 +363,22 @@ public class ShoppingCart extends JFrame {
                     //this Calculates total value and update the label
                     double totalValue = calculateTotalPrice();
                     totalPriceLabel.setText("Total : $" + totalValue);
-
                     // Add the purchased product details to the customer's purchase history
+                    User currentUser = getCurrentUser(); // Add a method to get the current user (logged-in user)
+                    if (currentUser != null) {
+                        currentUser.getCustomerHistory().addToPurchaseHistory(productDetails);
+                    }
+
+                    // Check if it's the customer's first purchase and apply a 10% discount
+                    double firstPurchasedDiscount = 0;
+                    //checking the availability of the user
+                    if (currentUser != null && currentUser.getCustomerHistory().isFirstPurchase()) {
+                        firstPurchasedDiscount = totalValue * 0.1;//calculating the 10% discount
+                        currentUser.getCustomerHistory().setFirstPurchase(false);
+                        // Updating the customer's first purchase status after applying the discount
+                    }
+
+                    /*// Add the purchased product details to the customer's purchase history
 
                     CustomerHistory customer = new CustomerHistory();
                     customer.addToPurchaseHistory(productDetails);
@@ -367,8 +388,9 @@ public class ShoppingCart extends JFrame {
                     if (customer.isFirstPurchase()) {
                         firstPurchasedDiscount = totalValue * 0.1;//calculating the discount
                         customer.setFirstPurchase(false); // Updating the customer's first purchase status after applying the discount
-                    }
-                    firstBuyDiscount.setText("First Purchase Discount (10%) : -$ " + firstPurchasedDiscount);//setting the text for the discount value
+                    }*/
+                    //setting the text for the discount value
+                    firstBuyDiscount.setText("First Purchase Discount (10%) : -$ " + firstPurchasedDiscount);
 
                     double discountSame = calculateTheDiscountSameProduct(totalValue);//calculating the discount through a method
                     //setting values for the labels
@@ -377,92 +399,7 @@ public class ShoppingCart extends JFrame {
                 }
             }
         });
-        /*addToCart.addActionListener(new ActionListener() {
-            WestminsterShoppingManager wsm2=new WestminsterShoppingManager();
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String productDetails = dataIDLabel.getText() + " " + dataNameLabel.getText()+" "+dataExtraLabel1.getText()+" "+dataExtraLabel2.getText();
-                int productQuantity = 1; // Assuming you have a JTextField for quantity
-                //double productPrice = Double.parseDouble(dataPriceLabel.getText()); // Assuming you have a JTextField for price
-                double productPrice;
-                try {
-                    productPrice = Double.parseDouble(dataPriceLabel.getText());
-                    // Rest of your code that uses productPrice
-                } catch (NumberFormatException error) {
-                    // Handle the exception, e.g., display an error message or log it
-                    JOptionPane.showMessageDialog(null, "No Products Selected !");
-                    // Optionally, set a default value or take appropriate action
-                    return; // or any default value
-                    // Rest of your code that uses productPrice
-                }
-                // Adding a new row to the table
-                int checkExistingRowIndex = findTheProductIndex(productDetails);//checking the existing product in the table
 
-                String productID=dataIDLabel.getText();
-                // Checking whether the product exists in the system
-                Product selectedProduct=null;
-                for (Product prod:wsm2.getProductsMainList()){
-                    if (productID.equals(prod.getProductID())){
-                        selectedProduct = prod;
-                    }
-                }
-
-
-                if (checkExistingRowIndex != -1 && selectedProduct != null && selectedProduct.getAvailableQuantity() > 0) {
-                    // Product already exists in the cart, update quantity and price
-                    int currentProductQuantity = (int) shoppingCartModel.getValueAt(checkExistingRowIndex, 1);
-                    double currentProductPrice = (double) shoppingCartModel.getValueAt(checkExistingRowIndex, 2);
-
-                    // Check if available quantity is sufficient in the system
-                    if (selectedProduct.getAvailableQuantity() >= 1) {
-                        shoppingCartModel.setValueAt(currentProductQuantity + productQuantity, checkExistingRowIndex, 1);
-                        shoppingCartModel.setValueAt(currentProductPrice + productPrice, checkExistingRowIndex, 2);
-
-                        // Updates the available quantity in the system
-                        selectedProduct.setAvailableQuantity(selectedProduct.getAvailableQuantity() - productQuantity);
-
-                        // Update the label in the UI
-                        label5.setText("Available Quantity : " + selectedProduct.getAvailableQuantity());
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Insufficient available quantity in the system.");
-                    }
-                } else {
-                    // when the Product does not exist in the cart, this line will add a new row to the table
-                    if (selectedProduct != null && selectedProduct.getAvailableQuantity() >= 1) {
-                        Object[] newData = {productDetails, productQuantity, productPrice};
-                        shoppingCartModel.addRow(newData);
-
-                        // Updating the available quantity in the system
-                        selectedProduct.setAvailableQuantity(selectedProduct.getAvailableQuantity() - productQuantity);
-
-                        // Updating the label in the GUI
-                        label5.setText("Available Quantity : " + selectedProduct.getAvailableQuantity());
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Insufficient available quantity in the system.");
-                    }
-                }
-                // Calculate total value and update the label
-                double totalValue = calculateTotalPrice();
-                totalPriceLabel.setText("Total : $" + totalValue);
-                //first buy discount
-                // Add the purchased product details to the customer's purchase history
-                CustomerHistory customer=new CustomerHistory();
-                customer.addToPurchaseHistory(productDetails);
-
-                // Check if it's the customer's first purchase and apply a 10% discount
-                double firstPurchaseDiscount=0;
-                if (customer.isFirstPurchase()) {
-                    firstPurchaseDiscount = totalValue * 0.1;
-                    customer.setFirstPurchase(false); // Update customer's first purchase status after applying discount
-                }
-                firstBuyDiscount.setText("First Purchase Discount (10%) : -$" + firstPurchaseDiscount);
-                //firstBuyDiscount.setText("First Purchase Discount (10%) : ");
-                double discountSame=calculateTheDiscountSameProduct(totalValue);
-                sameCategoryDiscountLabel.setText("Three items in same category Discount (20%) : "+discountSame);
-                finalTotalLabel.setText("Final Total : "+(totalValue-discountSame));
-
-            }
-        });*/
         /*-------------------------------*/
 
         JPanel shopCartDownPanel=new JPanel(new GridLayout(4,1));//creating a grid layout panel
