@@ -412,7 +412,7 @@ public class ShoppingCart extends JFrame {
         shoppingCartUI.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // Setting the firstPurchase to false when the shopping cart is closed
+                // Setting the firstPurchase status to false when the shopping cart is closed
                 User currentUser = getCurrentUser();//getting the current user
 
                 if (currentUser != null) {
