@@ -1,24 +1,24 @@
 *** All the added products are mentioned below ***
 
 1).
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Product Type         : Electronic
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Product ID           : PC001
 Product Name         : Fridge
-Available Quantity   : 100
+Available Quantity   : 120
 Product Unit Price   : € 1250.0
 Product Brand        : weeer
 Warranty Period      : 12 Months
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 2).
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Product Type         : Electronic
-Product ID           : PC002
-Product Name         : weed
-Available Quantity   : 125
-Product Unit Price   : € 50.0
-Product Brand        : ree
-Warranty Period      : 24 Months
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Product ID           : PC004
+Product Name         : qwwwe
+Available Quantity   : 234
+Product Unit Price   : € 43.0
+Product Brand        : qww
+Warranty Period      : 18 Months
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 

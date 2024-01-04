@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerHistory {
-    private List<String> purchaseHistory;
+    private final List<String> purchaseHistory;
     private boolean firstPurchase;
 
     public CustomerHistory() {

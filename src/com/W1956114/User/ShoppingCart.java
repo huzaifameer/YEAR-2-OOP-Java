@@ -289,7 +289,7 @@ public class ShoppingCart extends JFrame {
 
         /*-------------------------------*/
         addToCart.addActionListener(new ActionListener() {
-            WestminsterShoppingManager wsm2=new WestminsterShoppingManager();
+            final WestminsterShoppingManager wsm2=new WestminsterShoppingManager();
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (shoppingCartUI.isVisible()){
@@ -321,7 +321,7 @@ public class ShoppingCart extends JFrame {
 
                     if (checkExistingRowIndex != -1 && selectedProduct != null && selectedProduct.getAvailableQuantity() > 0) {
                         // This part will run when the product exists, and it'll update the price and the quantity
-                        //get's the current values in the labels and the system
+                        //gets the current values in the labels and the system
                         int currentProductQuantity = (int) shoppingCartModel.getValueAt(checkExistingRowIndex, 1);
                         double currentProductPrice = (double) shoppingCartModel.getValueAt(checkExistingRowIndex, 2);
 
@@ -358,6 +358,7 @@ public class ShoppingCart extends JFrame {
                     totalPriceLabel.setText("Total : $" + totalValue);
 
                     // Add the purchased product details to the customer's purchase history
+
                     CustomerHistory customer = new CustomerHistory();
                     customer.addToPurchaseHistory(productDetails);
 
