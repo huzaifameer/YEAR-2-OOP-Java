@@ -4,21 +4,10 @@
 Product Type         : Electronic
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Product ID           : PC001
-Product Name         : qweer
+Product Name         : weee
 Available Quantity   : 12
 Product Unit Price   : € 120.0
-Product Brand        : ert
+Product Brand        : ree
 Warranty Period      : 12 Months
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-2).
-Product Type         : Electronic
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Product ID           : PC010
-Product Name         : rtyuuu
-Available Quantity   : 25
-Product Unit Price   : € 1250.0
-Product Brand        : qw
-Warranty Period      : 24 Months
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 

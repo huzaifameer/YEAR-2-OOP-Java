@@ -151,6 +151,8 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 productWriter.write("\n"); // Add a blank line between products
                 row_Count+=1;
             }
+            //success message after writing data in the file
+            System.out.println("Data has been saved successfully in the text file !");
             productWriter.close();//closing the opened file
         } catch (IOException e) {
             System.out.println(e.getMessage());
