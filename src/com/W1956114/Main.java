@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class Main{
     private static User currentUser;//saving the current user
-    private static final ArrayList<User> commonUserList=new ArrayList<>();//to store the data of the customers
-    private static final ArrayList<User> managerUserList=new ArrayList<>();//to store the data of the managers
+    static final ArrayList<User> commonUserList=new ArrayList<>();//to store the data of the customers
+    static final ArrayList<User> managerUserList=new ArrayList<>();//to store the data of the managers
     static {
         // Adding manager's data (username and password) for the list
         User manager1 = new User("Manager-1", "12345");
@@ -79,10 +79,10 @@ public class Main{
     }
 
     //method to validate the manager
-    private static boolean loginManager(){
+    static boolean loginManager(){
         Scanner inputData=new Scanner(System.in);
         //getting valid manager credentials
-        System.out.println("x------Enter Valid Manager Credentials------x");
+        System.out.println("\nx------Enter Valid Manager Credentials------x");
         System.out.print("Input Manager Username : ");
         String managerUserName=inputData.next();
         System.out.print("Input The Password     : ");
@@ -97,7 +97,7 @@ public class Main{
     }
 
     //method to validate the customer
-    private static boolean loginCustomer(){
+    static boolean loginCustomer(){
         Scanner input=new Scanner(System.in);
         //getting an valid option
         System.out.println("Login to Shop             - [1]");
@@ -125,7 +125,7 @@ public class Main{
                 break;
             case 2:
                 //This part will add a new customer to the system
-                System.out.println("+----- Create your user account here -----+");
+                System.out.println("\n+----- Create your user account here -----+");
                 System.out.print("Enter a username : ");
                 String newUsername=input.next();
                 System.out.print("Enter a password : ");

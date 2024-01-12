@@ -379,7 +379,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     //method to get a valid formatted ID
-    private String getValidID(){
+    public String getValidID(){
         Scanner inputID=new Scanner(System.in);
         do {
             System.out.print("Enter an ID: ");
@@ -400,7 +400,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     //method to validate a fixed ID format
-    private boolean validateID(String id){
+    public boolean validateID(String id){
         // Two uppercase letters "PC" followed by 3 digits
         if (id.length() == 5) {
             String prefix = id.substring(0, 2);
@@ -418,7 +418,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     //method to check the duplicate ID's
-    private boolean isDuplicateID(String id) {
+    public boolean isDuplicateID(String id) {
         //checking throughout the list whether the ID is duplicated
         for (Product productDetail : getProductsMainList()) {
             if (productDetail.getProductID() != null && productDetail.getProductID().equals(id)) {

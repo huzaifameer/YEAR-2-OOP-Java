@@ -3,11 +3,22 @@
 1).
 Product Type         : Electronic
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Product ID           : PC003
-Product Name         : wttt
-Available Quantity   : 12
-Product Unit Price   : € 12.0
-Product Brand        : ree
-Warranty Period      : 18 Months
+Product ID           : PC123
+Product Name         : TestProduct
+Available Quantity   : 10
+Product Unit Price   : € 20.0
+Product Brand        : Brand
+Warranty Period      : 12 Months
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+2).
+Product Type         : Clothing
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Product ID           : PC124
+Product Name         : TestClothing
+Available Quantity   : 8
+Product Unit Price   : € 15.0
+Product Size         : L
+Product Color        : Red
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
