@@ -3,22 +3,22 @@
 1).
 Product Type         : Electronic
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Product ID           : PC123
-Product Name         : TestProduct
-Available Quantity   : 10
-Product Unit Price   : € 20.0
-Product Brand        : Brand
+Product ID           : PC001
+Product Name         : qwwwwww
+Available Quantity   : 125
+Product Unit Price   : € 50.0
+Product Brand        : qw
 Warranty Period      : 12 Months
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 2).
 Product Type         : Clothing
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Product ID           : PC124
-Product Name         : TestClothing
-Available Quantity   : 8
-Product Unit Price   : € 15.0
-Product Size         : L
-Product Color        : Red
+Product ID           : PC002
+Product Name         : ew
+Available Quantity   : 12
+Product Unit Price   : € 43.0
+Product Size         : S
+Product Color        : 2wwww
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 

@@ -298,8 +298,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
             System.out.print("Enter the size (S,M,L,XL,XXL,XXXl) : ");//getting the clothing product's size
             String clothSize=input.next();
             switch (clothSize){
-                case "S": case "M": case "XL": case "XXL": case "XXXl":
-                break;
+                case "S":break;
+                case "M":break;
+                case "XL":break;
+                case "XXL": break;
+                case "XXXL": break;
                 default:
                     System.out.println("Wrong size. Try with a valid input.");//error message
                     continue;
