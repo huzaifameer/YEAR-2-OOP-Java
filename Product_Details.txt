@@ -3,11 +3,11 @@
 1).
 Product Type         : Electronic
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Product ID           : PC001
-Product Name         : weee
+Product ID           : PC003
+Product Name         : wttt
 Available Quantity   : 12
-Product Unit Price   : € 120.0
+Product Unit Price   : € 12.0
 Product Brand        : ree
-Warranty Period      : 12 Months
+Warranty Period      : 18 Months
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 

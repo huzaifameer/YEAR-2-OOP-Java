@@ -132,6 +132,7 @@ public class Main{
                 String newPassword=input.next();
                 User newUser=new User(newUsername,newPassword);//sending through the User constructor
                 commonUserList.add(newUser);//adding the new customer to the list
+                System.out.println("User added successfully !");
                 currentUser = newUser;
                 return true;
             default:
