@@ -301,6 +301,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 case "S":break;
                 case "M":break;
                 case "XL":break;
+                case "L":break;
                 case "XXL": break;
                 case "XXXL": break;
                 default:

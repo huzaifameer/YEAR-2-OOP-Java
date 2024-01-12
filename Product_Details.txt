@@ -4,10 +4,10 @@
 Product Type         : Electronic
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Product ID           : PC001
-Product Name         : qwwwwww
+Product Name         : Iron
 Available Quantity   : 125
-Product Unit Price   : € 50.0
-Product Brand        : qw
+Product Unit Price   : € 450.0
+Product Brand        : qwe
 Warranty Period      : 12 Months
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
@@ -15,10 +15,54 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Product Type         : Clothing
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Product ID           : PC002
-Product Name         : ew
-Available Quantity   : 12
-Product Unit Price   : € 43.0
+Product Name         : T-Shirt
+Available Quantity   : 125
+Product Unit Price   : € 50.0
+Product Size         : XXL
+Product Color        : Grey
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+3).
+Product Type         : Clothing
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Product ID           : PC003
+Product Name         : Skirt
+Available Quantity   : 45
+Product Unit Price   : € 50.0
 Product Size         : S
-Product Color        : 2wwww
+Product Color        : Blue
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+4).
+Product Type         : Clothing
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Product ID           : PC004
+Product Name         : Shirt
+Available Quantity   : 120
+Product Unit Price   : € 40.0
+Product Size         : M
+Product Color        : White
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+5).
+Product Type         : Electronic
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Product ID           : PC005
+Product Name         : Fridge
+Available Quantity   : 15
+Product Unit Price   : € 1250.0
+Product Brand        : Beko
+Warranty Period      : 24 Months
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+6).
+Product Type         : Electronic
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Product ID           : PC010
+Product Name         : Fan
+Available Quantity   : 120
+Product Unit Price   : € 400.0
+Product Brand        : KdK
+Warranty Period      : 12 Months
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
